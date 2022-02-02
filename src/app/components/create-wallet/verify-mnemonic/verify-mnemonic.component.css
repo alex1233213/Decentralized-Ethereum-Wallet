@@ -1,0 +1,14 @@
+#words-container, #mixed-words-container {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: 20% 20% 20% 20%;
+  min-height: 200px;
+}
+
+
+.word {
+  border: 1px solid black;
+  max-height: 30px;
+  text-align: center;
+  padding: 5px;
+}

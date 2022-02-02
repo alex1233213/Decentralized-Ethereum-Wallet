@@ -1,1 +1,50 @@
-<p>verify-mnemonic works!</p>
+<nb-card>
+  <nb-card-body>
+    <h1>Verify recovery phrase</h1>
+    <p>Select the words of your recovery phrase in the right order</p>
+
+
+    <nb-card>
+      <nb-card-body>
+        <div id="words-container">
+          <div class="word"
+               *ngFor="let word of re_entered_mnemonic; let i = index"
+               (click)="undoSelection(word, i)">{{ (i + 1) + ". " + word }}</div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+
+
+
+    <div id="mixed-words-container">
+      <div
+        class="word"
+        *ngFor="let word of randomisedMnemonic; let i = index;"
+        (click)="selectWord(word, i)"> {{ word }}
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <button nbButton (click)="verifyWallet()">
+      Verify Phrase
+    </button>
+
+
+    <br>
+    <br>
+    <button nbButton nbStepperPrevious>
+      Back
+    </button>
+
+    <br>
+    <br>
+    <div *ngIf="mnemonic_verified == false">
+      The mnemonic phrase you entered is not in the right order, check the previous step and note the mnemonic phrase again
+    </div>
+  </nb-card-body>
+</nb-card>
+
+

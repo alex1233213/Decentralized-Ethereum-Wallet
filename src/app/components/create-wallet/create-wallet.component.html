@@ -13,12 +13,13 @@
       <nb-step label="Recovery Phrase">
         <app-display-mnemonic [mnemonic]="this.mnemonic"
                               (backupConfirmEvent)="nextStep()">>
-
         </app-display-mnemonic>
       </nb-step>
 
       <nb-step label="Verify Phrase">
-        <p>4</p>
+        <app-verify-mnemonic [mnemonic]="this.mnemonic"
+                             (mnemonic_verification_event)="navigateToDashboard()">
+        </app-verify-mnemonic>
       </nb-step>
     </nb-stepper>
 

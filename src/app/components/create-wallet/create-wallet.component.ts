@@ -13,7 +13,7 @@ import { WalletService } from "../../services/wallet.service";
 export class CreateWalletComponent implements OnInit {
   wallet: Wallet;
   mnemonic: string[] = "tomato snack album rule blush pistol shoulder pole ship design inhale suffer".split(" ");
-  stepIndex: number = 2;
+  stepIndex: number = 3;
   password: string;
 
 
