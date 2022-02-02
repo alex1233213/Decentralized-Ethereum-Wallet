@@ -25,6 +25,8 @@ export class CreateWalletComponent implements OnInit {
 
 
 
+
+
   createWallet() {
     //only create the wallet if it hasn't already been created
     if(this.wallet == undefined) {

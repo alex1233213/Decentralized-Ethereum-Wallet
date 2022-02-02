@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {  FormControl, FormGroup, Validators } from "@angular/forms";
 import { passwordMatchValidator } from "../../../shared/passwordMatch";
 
 @Component({
@@ -9,6 +9,8 @@ import { passwordMatchValidator } from "../../../shared/passwordMatch";
 })
 export class CreatePasswordComponent implements OnInit {
   @Output() passwordSubmitEvent = new EventEmitter<string>();
+
+  formSubmitted: boolean = false;
 
   passwordForm = new FormGroup({
     password: new FormControl('', [
@@ -29,8 +31,10 @@ export class CreatePasswordComponent implements OnInit {
   onContinue() {
     if(this.passwordForm.valid) {
       this.passwordSubmitEvent.emit(this.passwordForm.get('password')?.value);
+      console.log('inside if')
     }
   }
+
 
 
 
