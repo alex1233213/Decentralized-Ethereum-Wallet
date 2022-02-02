@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component , Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-display-mnemonic',
@@ -7,7 +7,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class DisplayMnemonicComponent implements OnInit {
   @Input() mnemonic: string[];
-  @Output() backupConfirmEvent = new EventEmitter<null>();
 
   user_confirmation: boolean = false;
 
@@ -20,11 +19,6 @@ export class DisplayMnemonicComponent implements OnInit {
 
   toggleUserConfirmation(checked: boolean) {
     this.user_confirmation = checked;
-  }
-
-
-  emitBackupConfirm() {
-    this.backupConfirmEvent.emit(null);
   }
 
 }
