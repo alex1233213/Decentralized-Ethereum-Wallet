@@ -10,7 +10,7 @@ import {
   NbCardModule,
   NbButtonModule,
   NbInputModule,
-  NbStepperModule, NbCheckboxModule
+  NbStepperModule, NbCheckboxModule, NbAlertModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreateWalletComponent } from './components/create-wallet/create-wallet.component';
@@ -41,7 +41,8 @@ import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemo
     NbCardModule,
     NbButtonModule,
     NbStepperModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbAlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]

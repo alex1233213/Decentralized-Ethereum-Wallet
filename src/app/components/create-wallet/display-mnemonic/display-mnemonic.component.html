@@ -1,1 +1,48 @@
-<p>display-mnemonic works!</p>
+<nb-card>
+  <nb-card-body>
+    <div>
+      <h1>Your recovery phrase</h1>
+      <p>
+        Write down your recovery phrase in the exact order displayed and store it
+        somewhere safe. The recovery phrase is the only way to transfer the wallet
+        to another device or restore the wallet if the device is lost.
+      </p>
+
+      <nb-alert outline="danger" id="warning-msg">Warning: never share your recovery phrase. Anyone who has
+        access to the recovery phrase can take your funds.</nb-alert>
+      <br>
+      <br>
+
+      <nb-card>
+        <nb-card-body>
+          <div class="word" *ngFor="let word of mnemonic; let i = index"> {{ (i + 1) + ". " + word }} </div>
+        </nb-card-body>
+      </nb-card>
+
+      <br>
+      <br>
+      <nb-checkbox id="confirm-checkbox" (checkedChange)="toggleUserConfirmation($event)"></nb-checkbox>
+      <label for="confirm-checkbox">I have backed up my phrase</label>
+
+      <br>
+      <br>
+      <button
+        nbButton
+        nbStepperNext
+        [disabled]="user_confirmation == false">
+        Continue
+      </button>
+
+
+      <br>
+      <br>
+      <button
+        nbButton nbStepperPrevious>Back</button>
+
+    </div>
+
+    <br>
+
+  </nb-card-body>
+</nb-card>
+
