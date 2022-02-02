@@ -3,18 +3,11 @@
 
     <nb-stepper orientation="horizontal" linear="false" disableStepNavigation="true" [selectedIndex]="stepIndex">
       <nb-step label="Create Password">
-        <app-create-password (passwordSubmitEvent)="onPasswordSubmit($event)">
-
-        </app-create-password>
+        <app-create-password (passwordSubmitEvent)="onPasswordSubmit($event)"></app-create-password>
       </nb-step>
 
       <nb-step label="Confirm">
-        <ng-template #stepLabel>
-          <div>
-            step number two
-          </div>
-        </ng-template>
-        // ... step content here
+        <app-wallet-confirmation (confirmEvent)="createWallet()"></app-wallet-confirmation>
       </nb-step>
 
       <nb-step label="Recovery Phrase">

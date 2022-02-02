@@ -31,7 +31,6 @@ export class CreatePasswordComponent implements OnInit {
   onContinue() {
     if(this.passwordForm.valid) {
       this.passwordSubmitEvent.emit(this.passwordForm.get('password')?.value);
-      console.log('inside if')
     }
   }
 

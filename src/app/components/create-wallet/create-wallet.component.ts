@@ -13,7 +13,7 @@ import { WalletService } from "../../services/wallet.service";
 export class CreateWalletComponent implements OnInit {
   wallet: Wallet;
   mnemonic: string[];
-  stepIndex: number = 0;
+  stepIndex: number = 1;
   password: string;
 
 
@@ -29,14 +29,14 @@ export class CreateWalletComponent implements OnInit {
 
   createWallet() {
     //only create the wallet if it hasn't already been created
-    if(this.wallet == undefined) {
-      this.wallet = this.walletService.createNewWallet();
-      this.mnemonic = this.wallet.mnemonic.phrase.split(' ');
+    // if(this.wallet == undefined) {
+    //   this.wallet = this.walletService.createNewWallet();
+    //   this.mnemonic = this.wallet.mnemonic.phrase.split(' ');
+    // }
 
-      this.encryptWallet();
-    }
+    // this.encryptWallet();
 
-
+    console.log('create wallet function');
   }
 
   //encrypts wallet using password provided by the user and saves it in local storage
@@ -50,7 +50,6 @@ export class CreateWalletComponent implements OnInit {
 
   onPasswordSubmit(password: string) {
     this.password = password;
-    this.nextStep();
   }
 
 

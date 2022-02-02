@@ -10,18 +10,24 @@ import {
   NbCardModule,
   NbButtonModule,
   NbInputModule,
-  NbStepperModule
+  NbStepperModule, NbCheckboxModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreateWalletComponent } from './components/create-wallet/create-wallet.component';
 import { CreatePasswordComponent } from './components/create-wallet/create-password/create-password.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { WalletConfirmationComponent } from './components/create-wallet/wallet-confirmation/wallet-confirmation.component';
+import { DisplayMnemonicComponent } from './components/create-wallet/display-mnemonic/display-mnemonic.component';
+import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemonic/verify-mnemonic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateWalletComponent,
-    CreatePasswordComponent
+    CreatePasswordComponent,
+    WalletConfirmationComponent,
+    DisplayMnemonicComponent,
+    VerifyMnemonicComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     NbCardModule,
     NbButtonModule,
-    NbStepperModule
+    NbStepperModule,
+    NbCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,42 @@
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+<nb-card>
+  <nb-card-body>
+    <h1>Backup your wallet</h1>
+    <p>
+      In the next step, a 12 word mnemonic phrase will be shown.
+      Make sure to store the mnemonic phrase in a safe place. The mnemonic phrase is
+      the only way to backup the wallet if the password is forgotten, the device is
+      stolen or if the wallet is recovered on another device.
+    </p>
+
+    <nb-checkbox id="confirm-checkbox" (checkedChange)="toggleUserConfirmation($event)"></nb-checkbox>
+    <label for="confirm-checkbox">I understand the risks of losing the mnemonic phrase</label>
+
+
+    <br>
+    <br>
+    <button
+      nbButton
+      nbStepperNext
+      [disabled]="user_confirmation == false"
+      (click)="emitConfirmEvent()">Continue</button>
+
+
+    <br>
+    <br>
+    <button
+      nbButton nbStepperPrevious>Back</button>
+
+  </nb-card-body>
+
+</nb-card>
