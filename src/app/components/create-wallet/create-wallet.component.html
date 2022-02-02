@@ -17,7 +17,7 @@
 
       <nb-step label="Verify Phrase">
         <app-verify-mnemonic [mnemonic]="this.mnemonic"
-                             (mnemonic_verification_event)="navigateToDashboard()">
+                             (mnemonic_verification_event)="complete_wallet_setup()">
         </app-verify-mnemonic>
       </nb-step>
     </nb-stepper>

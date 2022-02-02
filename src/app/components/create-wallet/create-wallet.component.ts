@@ -55,17 +55,15 @@ export class CreateWalletComponent implements OnInit {
 
 
 
-  navigateToDashboard() {
+  complete_wallet_setup() {
+    localStorage.setItem('wallet_verified', 'true');
+    this.nextStep();
     console.log('navigating');
   }
 
 
   nextStep() {
     this.stepIndex++;
-  }
-
-  previousStep() {
-    this.stepIndex--;
   }
 
 }
