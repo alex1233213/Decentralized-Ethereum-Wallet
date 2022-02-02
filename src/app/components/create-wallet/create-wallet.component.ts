@@ -15,6 +15,7 @@ export class CreateWalletComponent implements OnInit {
   mnemonic: string[] = "tomato snack album rule blush pistol shoulder pole ship design inhale suffer".split(" ");
   stepIndex: number = 3;
   password: string;
+  walllet_verified: boolean;
 
 
   constructor(private walletService: WalletService) { }
