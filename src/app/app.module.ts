@@ -10,7 +10,7 @@ import {
   NbCardModule,
   NbButtonModule,
   NbInputModule,
-  NbStepperModule, NbCheckboxModule, NbAlertModule
+  NbStepperModule, NbCheckboxModule, NbAlertModule, NbSpinnerModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreateWalletComponent } from './components/create-wallet/create-wallet.component';
@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { WalletConfirmationComponent } from './components/create-wallet/wallet-confirmation/wallet-confirmation.component';
 import { DisplayMnemonicComponent } from './components/create-wallet/display-mnemonic/display-mnemonic.component';
 import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemonic/verify-mnemonic.component';
+import { AccessWalletComponent } from './components/access-wallet/access-wallet.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemo
     CreatePasswordComponent,
     WalletConfirmationComponent,
     DisplayMnemonicComponent,
-    VerifyMnemonicComponent
+    VerifyMnemonicComponent,
+    AccessWalletComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemo
     NbButtonModule,
     NbStepperModule,
     NbCheckboxModule,
-    NbAlertModule
+    NbAlertModule,
+    NbSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

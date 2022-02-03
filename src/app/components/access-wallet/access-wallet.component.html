@@ -1,0 +1,34 @@
+<nb-card [nbSpinner]="loadingWallet"
+         nbSpinnerSize="giant"
+         nbSpinnerMessage="Unlocking wallet"
+         nbSpinnerStatus="success">
+  <nb-card-body>
+    <h1>Access wallet</h1>
+
+      <input nbInput
+             type="password"
+             [formControl]="password"
+             placeholder="Password"/>
+      <br>
+      <br>
+
+
+      <button
+        nbButton
+        [disabled]="password.value == '' || loadingWallet == true"
+        (click)="accessWallet()">
+        Open Wallet
+      </button>
+
+
+<!--    <p *ngIf="login_error"> {{ login_error }} </p>-->
+
+    <br>
+    <br>
+
+  </nb-card-body>
+</nb-card>
+
+<br>
+<br>
+<nb-alert class="login_err_msg" status="danger" *ngIf="login_error">{{ login_error }}</nb-alert>
