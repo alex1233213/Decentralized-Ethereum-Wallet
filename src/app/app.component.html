@@ -1,13 +1,17 @@
 <nb-layout>
-
 <!--  <nb-layout-header fixed>-->
 <!--  &lt;!&ndash; Insert header here &ndash;&gt;-->
 <!--  </nb-layout-header>-->
 
+
+  <nb-sidebar *ngIf="wallet_accessed"></nb-sidebar>
+
   <nb-layout-column>
-<!--    <app-create-wallet></app-create-wallet>-->
-<!--    <app-access-wallet></app-access-wallet>-->
+    <app-dashboard></app-dashboard>
   </nb-layout-column>
+
+
+
 
 <!--  <nb-layout-footer fixed>-->
 <!--  &lt;!&ndash; Insert footer here &ndash;&gt;-->

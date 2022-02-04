@@ -10,7 +10,7 @@ import {
   NbCardModule,
   NbButtonModule,
   NbInputModule,
-  NbStepperModule, NbCheckboxModule, NbAlertModule, NbSpinnerModule
+  NbStepperModule, NbCheckboxModule, NbAlertModule, NbSpinnerModule, NbSidebarModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreateWalletComponent } from './components/create-wallet/create-wallet.component';
@@ -20,7 +20,7 @@ import { WalletConfirmationComponent } from './components/create-wallet/wallet-c
 import { DisplayMnemonicComponent } from './components/create-wallet/display-mnemonic/display-mnemonic.component';
 import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemonic/verify-mnemonic.component';
 import { AccessWalletComponent } from './components/access-wallet/access-wallet.component';
-import { WalletDashboardModule } from "./wallet-dashboard/wallet-dashboard.module";
+import { WalletModule } from "./wallet/wallet.module";
 
 
 @NgModule({
@@ -48,7 +48,8 @@ import { WalletDashboardModule } from "./wallet-dashboard/wallet-dashboard.modul
     NbCheckboxModule,
     NbAlertModule,
     NbSpinnerModule,
-    WalletDashboardModule
+    WalletModule,
+    NbSidebarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
