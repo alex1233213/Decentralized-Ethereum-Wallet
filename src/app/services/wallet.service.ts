@@ -24,6 +24,7 @@ export class WalletService {
 
       if(keystore) {
         this.wallet = await Wallet.fromEncryptedJson(keystore, password);
+        console.log(this.wallet);
       }
 
     } catch (err: any) {

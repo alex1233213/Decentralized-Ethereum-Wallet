@@ -1,13 +1,14 @@
 <nb-layout>
 
-<!--  <nb-layout-header fixed>-->
+  <nb-layout-header fixed *ngIf="">
 <!--  &lt;!&ndash; Insert header here &ndash;&gt;-->
-<!--  </nb-layout-header>-->
+  </nb-layout-header>
 
   <nb-layout-column>
-    <app-create-wallet></app-create-wallet>
+<!--    <app-create-wallet></app-create-wallet>-->
 <!--    <app-access-wallet></app-access-wallet>-->
-
+<!--    <app-home-page></app-home-page>-->
+    <router-outlet></router-outlet>
   </nb-layout-column>
 
 <!--  <nb-layout-footer fixed>-->

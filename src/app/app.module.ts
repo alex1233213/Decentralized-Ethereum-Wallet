@@ -21,6 +21,8 @@ import { DisplayMnemonicComponent } from './components/create-wallet/display-mne
 import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemonic/verify-mnemonic.component';
 import { AccessWalletComponent } from './components/access-wallet/access-wallet.component';
 import { WalletComponent } from './components/wallet/wallet.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { WalletComponent } from './components/wallet/wallet.component';
     VerifyMnemonicComponent,
     AccessWalletComponent,
     WalletComponent,
+    HomePageComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
