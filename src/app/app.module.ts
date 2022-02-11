@@ -20,7 +20,7 @@ import { WalletConfirmationComponent } from './components/create-wallet/wallet-c
 import { DisplayMnemonicComponent } from './components/create-wallet/display-mnemonic/display-mnemonic.component';
 import { VerifyMnemonicComponent } from './components/create-wallet/verify-mnemonic/verify-mnemonic.component';
 import { AccessWalletComponent } from './components/access-wallet/access-wallet.component';
-import { WalletDashboardModule } from "./wallet-dashboard/wallet-dashboard.module";
+import { WalletComponent } from './components/wallet/wallet.component';
 
 
 @NgModule({
@@ -32,6 +32,7 @@ import { WalletDashboardModule } from "./wallet-dashboard/wallet-dashboard.modul
     DisplayMnemonicComponent,
     VerifyMnemonicComponent,
     AccessWalletComponent,
+    WalletComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,6 @@ import { WalletDashboardModule } from "./wallet-dashboard/wallet-dashboard.modul
     NbCheckboxModule,
     NbAlertModule,
     NbSpinnerModule,
-    WalletDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
