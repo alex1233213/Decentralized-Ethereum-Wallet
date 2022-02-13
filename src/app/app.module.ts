@@ -10,7 +10,7 @@ import {
   NbCardModule,
   NbButtonModule,
   NbInputModule,
-  NbStepperModule, NbCheckboxModule, NbAlertModule, NbSpinnerModule
+  NbStepperModule, NbCheckboxModule, NbAlertModule, NbSpinnerModule, NbSidebarModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreateWalletComponent } from './components/create-wallet/create-wallet.component';
@@ -23,7 +23,6 @@ import { AccessWalletComponent } from './components/access-wallet/access-wallet.
 import { WalletComponent } from './components/wallet/wallet.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 
 @NgModule({
   declarations: [
@@ -53,6 +52,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NbCheckboxModule,
     NbAlertModule,
     NbSpinnerModule,
+    NbSidebarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
