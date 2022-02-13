@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'crypto-wallet';
-
-  wallet_accessed: boolean = false;
 }
