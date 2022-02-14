@@ -31,7 +31,7 @@ import { LayoutModule } from "./layout/layout.module";
     WalletConfirmationComponent,
     DisplayMnemonicComponent,
     VerifyMnemonicComponent,
-    AccessWalletComponent,
+    AccessWalletComponent
   ],
   imports: [
     BrowserModule,
