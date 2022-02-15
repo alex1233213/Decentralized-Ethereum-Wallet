@@ -25,36 +25,39 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CreateWalletComponent,
-    CreatePasswordComponent,
-    WalletConfirmationComponent,
-    DisplayMnemonicComponent,
-    VerifyMnemonicComponent,
-    AccessWalletComponent,
-    WalletComponent,
-    HomePageComponent,
-    DashboardComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbInputModule,
-    ReactiveFormsModule,
-    NbCardModule,
-    NbButtonModule,
-    NbStepperModule,
-    NbCheckboxModule,
-    NbAlertModule,
-    NbSpinnerModule,
-    NbSidebarModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CreateWalletComponent,
+        CreatePasswordComponent,
+        WalletConfirmationComponent,
+        DisplayMnemonicComponent,
+        VerifyMnemonicComponent,
+        AccessWalletComponent,
+        WalletComponent,
+        HomePageComponent,
+        DashboardComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NbThemeModule.forRoot({name: 'default'}),
+        NbLayoutModule,
+        NbEvaIconsModule,
+        NbInputModule,
+        ReactiveFormsModule,
+        NbCardModule,
+        NbButtonModule,
+        NbStepperModule,
+        NbCheckboxModule,
+        NbAlertModule,
+        NbSpinnerModule,
+        NbSidebarModule.forRoot()
+    ],
+    providers: [],
+    exports: [
+        AccessWalletComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
