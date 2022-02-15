@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
+  keystore: string | null;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.checkKeyStore();
   }
 
+  checkKeyStore() {
+    this.keystore = localStorage.getItem('keystore');
+  }
 }
