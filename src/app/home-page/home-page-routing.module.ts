@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page.component';
-import {CreateWalletComponent} from "../components/create-wallet/create-wallet.component";
+import { CreateWalletComponent } from "../components/create-wallet/create-wallet.component";
 
 const routes: Routes = [
   {
