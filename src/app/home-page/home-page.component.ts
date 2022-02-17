@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
   }
 
   unlockWallet() {
-    this.router.navigate(['/access']);
+    this.router.navigate(['/unlock']);
   }
 
   createWallet() {
