@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UnlockWalletRoutingModule } from './unlock-wallet-routing.module';
 import { UnlockWalletComponent } from './unlock-wallet.component';
-import { NbAlertModule, NbCardModule, NbInputModule, NbSpinnerModule } from "@nebular/theme";
+import { NbAlertModule, NbButtonModule, NbCardModule, NbInputModule, NbSpinnerModule } from "@nebular/theme";
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
@@ -15,9 +15,10 @@ import { ReactiveFormsModule } from "@angular/forms";
     UnlockWalletRoutingModule,
     NbAlertModule,
     ReactiveFormsModule,
-    NbCardModule,
     NbSpinnerModule,
-    NbInputModule
+    NbInputModule,
+    NbCardModule,
+    NbButtonModule
   ]
 })
 export class UnlockWalletModule { }
