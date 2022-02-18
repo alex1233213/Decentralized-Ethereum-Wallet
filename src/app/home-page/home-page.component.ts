@@ -27,6 +27,10 @@ export class HomePageComponent implements OnInit {
   }
 
   createWallet() {
-    this.router.navigate(['/create'])
+    this.router.navigate(['/create']);
   }
+
+  // restoreWallet() {
+  //   this.router.navigate(['/restore']);
+  // }
 }
