@@ -20,7 +20,12 @@ const routes: Routes = [
       {
         path: 'create',
         loadChildren: () => import('../create-wallet/create-wallet.module').then(m => m.CreateWalletModule)
-      }
+      },
+
+      {
+        path: 'restore',
+        loadChildren: () => import('../restore-wallet/restore-wallet.module').then(m => m.RestoreWalletModule)
+      },
     ]
   },
 
@@ -36,6 +41,7 @@ const routes: Routes = [
       },
     ]
   },
+
 
 ];
 
