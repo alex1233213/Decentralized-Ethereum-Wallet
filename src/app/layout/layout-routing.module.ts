@@ -14,9 +14,15 @@ const routes: Routes = [
       {
         path: 'unlock',
         loadChildren: () => import('../unlock-wallet/unlock-wallet.module').then( m => m.UnlockWalletModule)
+      },
+
+      {
+        path: 'create',
+        loadChildren: () => import('../create-wallet/create-wallet.module').then(m => m.CreateWalletModule)
       }
     ]
   },
+
 
   // wallet routes
   // {
