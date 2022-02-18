@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageLayoutComponent } from "./home-page-layout/home-page-layout.component";
-import { TestComponent } from "../components/test/test.component";
 
 const routes: Routes = [
   {
@@ -10,7 +9,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: TestComponent
+        loadChildren: () => import('../home-page/home-page.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'unlock',
+        loadChildren: () => import('../unlock-wallet/unlock-wallet.module').then( m => m.UnlockWalletModule)
       }
     ]
   },

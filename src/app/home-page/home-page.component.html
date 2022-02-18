@@ -1,25 +1,8 @@
-<nb-layout>
-  <nb-layout-header>
-    <h5>Decentralized Ethereum Wallet</h5>
-  </nb-layout-header>
-
-  <nb-layout-column class="colored-column-basic">
-    <h6>Home page content</h6>
-
-<!--    <nb-card>-->
-<!--      <nb-card-body>-->
-        <button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
-        <br>
-        <br>
-        <button nbButton (click)="restoreWallet()">Restore Wallet</button>
-        <br>
-        <br>
-        <button nbButton (click)="createWallet()">Create Wallet</button>
-<!--      </nb-card-body>-->
-<!--    </nb-card>-->
-
-    <router-outlet></router-outlet>
-  </nb-layout-column>
-
-
-</nb-layout>
+<h6>Home page content</h6>
+<button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
+<br>
+<br>
+<button nbButton>Restore Wallet</button>
+<br>
+<br>
+<button nbButton (click)="createWallet()">Create Wallet</button>
