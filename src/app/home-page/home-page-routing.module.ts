@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomePageComponent } from './home-page.component';
+import { CreateWalletComponent } from "../components/create-wallet/create-wallet.component";
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomePageComponent,
+    children: [
+      {
+        path: 'unlock',
+        loadChildren: () => import('../unlock-wallet/unlock-wallet.module').then(m => m.UnlockWalletModule)
+      },
+      {
+        path: 'create',
+        component: CreateWalletComponent
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class HomePageRoutingModule { }
