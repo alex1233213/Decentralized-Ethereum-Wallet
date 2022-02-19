@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { RestoreWalletRoutingModule } from './restore-wallet-routing.module';
 import { RestoreWalletComponent } from './restore-wallet.component';
+import { NbButtonModule, NbCardModule, NbInputModule, NbStepperModule} from "@nebular/theme";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CreateWalletModule } from "../create-wallet/create-wallet.module";
 
 
 @NgModule({
@@ -11,7 +14,13 @@ import { RestoreWalletComponent } from './restore-wallet.component';
   ],
   imports: [
     CommonModule,
-    RestoreWalletRoutingModule
+    RestoreWalletRoutingModule,
+    NbStepperModule,
+    NbCardModule,
+    ReactiveFormsModule,
+    NbInputModule,
+    NbButtonModule,
+    CreateWalletModule
   ]
 })
 export class RestoreWalletModule { }

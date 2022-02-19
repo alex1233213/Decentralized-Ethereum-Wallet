@@ -33,9 +33,7 @@ export class CreateWalletComponent implements OnInit {
     //   this.mnemonic = this.wallet.mnemonic.phrase.split(' ');
     // }
 
-    // this.encryptWallet();
-
-    console.log('create wallet function');
+    this.encryptWallet();
   }
 
   //encrypts wallet using password provided by the user and saves it in local storage

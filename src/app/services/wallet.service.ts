@@ -18,6 +18,12 @@ export class WalletService {
 
 
 
+  restoreFromMnemonic(mnemonic: string) {
+      return ethers.Wallet.fromMnemonic(mnemonic);
+  }
+
+
+
   async accessWallet(password: string) {
     try {
       const keystore = localStorage.getItem('keystore');

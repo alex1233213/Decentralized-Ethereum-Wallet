@@ -19,23 +19,26 @@ import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
-  declarations: [
-    CreateWalletComponent,
-    CreatePasswordComponent,
-    DisplayMnemonicComponent,
-    VerifyMnemonicComponent,
-    WalletConfirmationComponent
-  ],
-  imports: [
-    CommonModule,
-    CreateWalletRoutingModule,
-    NbCardModule,
-    NbStepperModule,
-    ReactiveFormsModule,
-    NbAlertModule,
-    NbCheckboxModule,
-    NbButtonModule,
-    NbInputModule
-  ]
+    declarations: [
+        CreateWalletComponent,
+        CreatePasswordComponent,
+        DisplayMnemonicComponent,
+        VerifyMnemonicComponent,
+        WalletConfirmationComponent
+    ],
+    exports: [
+        CreatePasswordComponent
+    ],
+    imports: [
+        CommonModule,
+        CreateWalletRoutingModule,
+        NbCardModule,
+        NbStepperModule,
+        ReactiveFormsModule,
+        NbAlertModule,
+        NbCheckboxModule,
+        NbButtonModule,
+        NbInputModule
+    ]
 })
 export class CreateWalletModule { }

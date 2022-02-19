@@ -1,1 +1,20 @@
-<p>restore-wallet works!</p>
+<nb-card>
+  <nb-stepper orientation="horizontal" linear="false" disableStepNavigation="true" [selectedIndex]="index">
+    <nb-step label="Enter mnemonic">
+        <label for="mnemonic-input"></label>
+        <input nbInput
+               fullWidth
+               type="text"
+               id="mnemonic-input"
+               [formControl]="mnemonic"
+               placeholder="Mnemonic phrase"/>
+        <br><br>
+        <button nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
+        <p> {{ mnemonic_err }} </p>
+    </nb-step>
+
+    <nb-step label="Password">
+      <app-create-password (passwordSubmitEvent)="encryptWallet($event)"></app-create-password>
+    </nb-step>
+  </nb-stepper>
+</nb-card>
