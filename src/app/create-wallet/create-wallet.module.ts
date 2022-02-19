@@ -8,12 +8,12 @@ import { DisplayMnemonicComponent } from "./display-mnemonic/display-mnemonic.co
 import { VerifyMnemonicComponent } from "./verify-mnemonic/verify-mnemonic.component";
 import { WalletConfirmationComponent } from "./wallet-confirmation/wallet-confirmation.component";
 import {
-  NbAlertModule,
-  NbButtonModule,
-  NbCardModule,
-  NbCheckboxModule,
-  NbInputModule,
-  NbStepperModule
+    NbAlertModule,
+    NbButtonModule,
+    NbCardModule,
+    NbCheckboxModule,
+    NbInputModule, NbSpinnerModule,
+    NbStepperModule
 } from "@nebular/theme";
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -38,7 +38,8 @@ import { ReactiveFormsModule } from "@angular/forms";
         NbAlertModule,
         NbCheckboxModule,
         NbButtonModule,
-        NbInputModule
+        NbInputModule,
+        NbSpinnerModule
     ]
 })
 export class CreateWalletModule { }

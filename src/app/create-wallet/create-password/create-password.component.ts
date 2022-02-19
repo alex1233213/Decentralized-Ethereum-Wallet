@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from "@angular/forms";
 import { passwordMatchValidator} from "../../shared/passwordMatch";
 
@@ -9,6 +9,7 @@ import { passwordMatchValidator} from "../../shared/passwordMatch";
 })
 export class CreatePasswordComponent implements OnInit {
   @Output() passwordSubmitEvent = new EventEmitter<string>();
+  @Input() loading: boolean = false;
 
   formSubmitted: boolean = false;
 

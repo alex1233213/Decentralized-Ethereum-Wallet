@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RestoreWalletRoutingModule } from './restore-wallet-routing.module';
 import { RestoreWalletComponent } from './restore-wallet.component';
-import { NbButtonModule, NbCardModule, NbInputModule, NbStepperModule} from "@nebular/theme";
+import { NbButtonModule, NbCardModule, NbInputModule, NbSpinnerModule, NbStepperModule } from "@nebular/theme";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CreateWalletModule } from "../create-wallet/create-wallet.module";
 
@@ -20,7 +20,8 @@ import { CreateWalletModule } from "../create-wallet/create-wallet.module";
     ReactiveFormsModule,
     NbInputModule,
     NbButtonModule,
-    CreateWalletModule
+    CreateWalletModule,
+    NbSpinnerModule
   ]
 })
 export class RestoreWalletModule { }

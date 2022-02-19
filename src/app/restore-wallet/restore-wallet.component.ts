@@ -15,6 +15,7 @@ export class RestoreWalletComponent {
   index: number = 0;
   wallet: Wallet;
   mnemonic_err: string;
+  loading: boolean;
 
   constructor(private walletService: WalletService,
               private router: Router) { }
@@ -32,11 +33,11 @@ export class RestoreWalletComponent {
 
 
   async encryptWallet(password: string) {
-    console.log(password);
-    console.log('submit')
+    this.loading = true;
     const keystore = await this.wallet.encrypt(password);
     localStorage.setItem('keystore', keystore);
 
+    this.loading = false;
     this.router.navigate(['/wallet/dashboard']);
   }
 

@@ -13,8 +13,8 @@
         <p> {{ mnemonic_err }} </p>
     </nb-step>
 
-    <nb-step label="Password">
-      <app-create-password (passwordSubmitEvent)="encryptWallet($event)"></app-create-password>
+    <nb-step label="Password" [nbSpinner]="loading">
+      <app-create-password (passwordSubmitEvent)="encryptWallet($event)" [loading]="loading"></app-create-password>
     </nb-step>
   </nb-stepper>
 </nb-card>
