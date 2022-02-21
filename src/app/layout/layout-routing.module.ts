@@ -36,9 +36,9 @@ const routes: Routes = [
     component: WalletLayoutComponent,
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
+        path: '',
+        loadChildren: () => import('../wallet/wallet.module').then(m => m.WalletModule)
+      }
     ]
   },
 
