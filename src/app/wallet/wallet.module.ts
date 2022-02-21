@@ -11,9 +11,12 @@ import { WalletRoutingModule } from "./wallet-routing.module";
     DashboardComponent,
     MenuComponent
   ],
+  exports: [
+    MenuComponent
+  ],
   imports: [
     CommonModule,
-    WalletRoutingModule
+    // WalletRoutingModule
   ]
 })
 export class WalletModule { }

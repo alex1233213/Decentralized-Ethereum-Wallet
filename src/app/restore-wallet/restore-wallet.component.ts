@@ -38,7 +38,7 @@ export class RestoreWalletComponent {
     localStorage.setItem('keystore', keystore);
 
     this.loading = false;
-    this.router.navigate(['/wallet/dashboard']);
+    this.router.navigate(['/wallet']);
   }
 
   nextStep() {
