@@ -8,14 +8,12 @@ import { WalletService } from "./services/wallet.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  wallet: Wallet;
-  title = 'crypto-wallet';
 
-  constructor(private walletService: WalletService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.wallet = this.walletService.wallet;
+
   }
 
 }
