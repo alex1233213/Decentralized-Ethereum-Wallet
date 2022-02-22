@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Wallet } from "ethers";
-import { WalletService } from "./services/wallet.service";
 
 @Component({
   selector: 'app-root',

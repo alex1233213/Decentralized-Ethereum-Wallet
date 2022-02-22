@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MenuComponent } from './menu/menu.component';
-import { WalletRoutingModule } from "./wallet-routing.module";
-
-
+import { SendTransactionComponent } from './send-transaction/send-transaction.component';
+import { SwapComponent } from './swap/swap.component';
+import { DappsComponent } from './dapps/dapps.component';
+import { NbMenuModule } from "@nebular/theme";
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    MenuComponent
-  ],
-  exports: [
-    MenuComponent
+    SendTransactionComponent,
+    SwapComponent,
+    DappsComponent
   ],
   imports: [
     CommonModule,
-    // WalletRoutingModule
+    NbMenuModule
   ]
 })
 export class WalletModule { }

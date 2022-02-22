@@ -1,7 +1,27 @@
 <nb-layout>
 
   <nb-sidebar>
-      <app-menu></app-menu>
+<!--    <nb-list>-->
+<!--      <nb-list-item>-->
+<!--        <a routerLink="/wallet/dashboard">Dashboard</a>-->
+<!--      </nb-list-item>-->
+<!--      <nb-list-item>-->
+<!--        <a routerLink="/wallet/send-transaction">Send Transaction</a>-->
+<!--      </nb-list-item>-->
+<!--      <nb-list-item>-->
+<!--        <a routerLink="/wallet/swap">Swap</a>-->
+<!--      </nb-list-item>-->
+<!--      <nb-list-item>-->
+<!--        <a routerLink="/wallet/dapps">Dapps</a>-->
+<!--      </nb-list-item>-->
+<!--      <nb-list-item>-->
+<!--        <a routerLink="">Logout</a>-->
+<!--      </nb-list-item>-->
+<!--    </nb-list>-->
+
+    <nb-menu [items]="menu_items">
+    </nb-menu>
+
   </nb-sidebar>
 
   <nb-layout-column>
