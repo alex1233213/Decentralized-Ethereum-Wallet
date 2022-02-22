@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NbMenuItem} from "@nebular/theme";
 
 @Component({
   selector: 'app-wallet-layout',
@@ -7,25 +6,6 @@ import {NbMenuItem} from "@nebular/theme";
   styleUrls: ['./wallet-layout.component.css']
 })
 export class WalletLayoutComponent implements OnInit {
-
-  menu_items: NbMenuItem[] = [
-    {
-      title: 'Dashboard',
-      link: '/wallet/dashboard'
-    },
-    {
-      title: 'Send Transaction',
-      link: '/wallet/send-transaction'
-    },
-    {
-      title: 'Swap',
-      link: '/wallet/swap'
-    },
-    {
-      title: 'Logout',
-      link: ''
-    },
-  ];
 
   constructor() { }
 
