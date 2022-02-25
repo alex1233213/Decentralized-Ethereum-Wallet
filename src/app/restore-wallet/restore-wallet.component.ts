@@ -13,7 +13,6 @@ export class RestoreWalletComponent {
 
   mnemonic = new FormControl('', [Validators.required]);
   index: number = 0;
-  wallet: Wallet;
   mnemonic_err: string;
   loading: boolean;
 
