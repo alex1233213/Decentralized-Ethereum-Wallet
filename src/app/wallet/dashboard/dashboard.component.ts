@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Network } from '@ethersproject/networks';
+import { WalletService } from "../../services/wallet.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  address: string;
+  network: Network;
+
+  constructor(private walletService: WalletService) { }
 
   ngOnInit(): void {
+    this.address = this.walletService.wallet.address;
+    this.walletService.wallet.provider.getNetwork().then( network => this.network = network);
   }
 
 }

@@ -21,12 +21,14 @@ export class RestoreWalletComponent {
               private router: Router) { }
 
 
+  //method verifies mnemonic entered by the user
   verifyMnemonic() {
-    try {
-      this.wallet = this.walletService.restoreFromMnemonic(this.mnemonic.value);
+    const error = this.walletService.restoreFromMnemonic(this.mnemonic.value);
+
+    if(error != undefined) {
+      this.mnemonic_err = error;
+    } else {
       this.nextStep();
-    } catch (err: any) {
-      this.mnemonic_err = err.message;
     }
   }
 
@@ -37,8 +39,11 @@ export class RestoreWalletComponent {
     const keystore = await this.wallet.encrypt(password);
     localStorage.setItem('keystore', keystore);
 
-    this.loading = false;
+    //after the wallet is encrypted,
+    // redirect to the dashboard with the restored wallet
+    this.walletService.setWallet(this.wallet);
     this.router.navigate(['/wallet']);
+    this.loading = false;
   }
 
   nextStep() {

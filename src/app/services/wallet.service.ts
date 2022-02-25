@@ -8,6 +8,7 @@ import { ethers, Wallet } from 'ethers';
 export class WalletService {
 
   wallet: Wallet;
+  provider: ethers.providers.BaseProvider;
 
   constructor() { }
 
@@ -17,19 +18,30 @@ export class WalletService {
   }
 
 
-
+  //method restores wallet from mnemonic if valid mnemonic
+  //if invalid mnemonic returns error message
   restoreFromMnemonic(mnemonic: string) {
-      return ethers.Wallet.fromMnemonic(mnemonic);
+    try {
+      this.wallet = ethers.Wallet.fromMnemonic(mnemonic);
+    } catch (err: any) {
+      return err.message;
+    }
   }
 
+
+  setWallet(wallet: Wallet) {
+    this.wallet = wallet;
+  }
 
 
   async accessWallet(password: string) {
     try {
       const keystore = localStorage.getItem('keystore');
+      this.provider = ethers.getDefaultProvider('ropsten');
 
       if(keystore) {
-        this.wallet = await Wallet.fromEncryptedJson(keystore, password);
+        const wallet = await Wallet.fromEncryptedJson(keystore, password);
+        this.wallet = wallet.connect(this.provider);
         console.log(this.wallet);
       }
 
