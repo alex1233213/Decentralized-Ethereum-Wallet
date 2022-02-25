@@ -29,10 +29,6 @@ export class WalletService {
   }
 
 
-  setWallet(wallet: Wallet) {
-    this.wallet = wallet;
-  }
-
 
   async accessWallet(password: string) {
     try {
@@ -48,6 +44,12 @@ export class WalletService {
     } catch (err: any) {
       throw new Error(err);
     }
+  }
+
+
+  async encryptWallet(password: string) {
+    const keystore = await this.wallet.encrypt(password);
+    localStorage.setItem('keystore', keystore);
   }
 
 }

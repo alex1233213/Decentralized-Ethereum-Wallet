@@ -36,12 +36,9 @@ export class RestoreWalletComponent {
 
   async encryptWallet(password: string) {
     this.loading = true;
-    const keystore = await this.wallet.encrypt(password);
-    localStorage.setItem('keystore', keystore);
+    await this.walletService.encryptWallet(password);
 
-    //after the wallet is encrypted,
-    // redirect to the dashboard with the restored wallet
-    this.walletService.setWallet(this.wallet);
+    //after the wallet is encrypted, redirect user to dashboard
     this.router.navigate(['/wallet']);
     this.loading = false;
   }
