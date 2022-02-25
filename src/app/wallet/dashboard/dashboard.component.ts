@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.address = this.walletService.wallet.address;
-    this.walletService.wallet.provider.getNetwork().then( network => this.network = network);
   }
 
 }
