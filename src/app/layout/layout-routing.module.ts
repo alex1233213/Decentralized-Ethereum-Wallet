@@ -6,7 +6,7 @@ import { DashboardComponent } from "../wallet/dashboard/dashboard.component";
 import { SendTransactionComponent } from "../wallet/send-transaction/send-transaction.component";
 import { SwapComponent } from "../wallet/swap/swap.component";
 import { DappsComponent } from "../wallet/dapps/dapps.component";
-import {WalletGuard} from "../guards/dashboard/wallet-guard.service";
+// import {WalletGuard} from "../guards/dashboard/wallet-guard.service";
 
 const routes: Routes = [
   {
@@ -30,10 +30,6 @@ const routes: Routes = [
       {
         path: 'restore',
         loadChildren: () => import('../restore-wallet/restore-wallet.module').then(m => m.RestoreWalletModule)
-      },
-      {
-        path: '**',
-        redirectTo: ''
       }
     ]
   },
@@ -43,7 +39,7 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletLayoutComponent,
-    canActivate: [WalletGuard],
+    // canActivate: [WalletGuard],
     children: [
       {
         path: '',
@@ -69,7 +65,11 @@ const routes: Routes = [
     ]
   },
 
-
+  //all unknown paths redirect to the home page
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 
