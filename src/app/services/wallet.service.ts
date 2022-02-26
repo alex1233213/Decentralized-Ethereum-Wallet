@@ -10,7 +10,7 @@ import { filter } from "rxjs";
 export class WalletService {
 
   wallet: Wallet | null;
-  provider: ethers.providers.BaseProvider;
+  infuraProvider: ethers.providers.InfuraProvider;
 
   constructor(private router: Router) {
     router.events.pipe(
@@ -45,11 +45,16 @@ export class WalletService {
   async accessWallet(password: string) {
     try {
       const keystore = localStorage.getItem('keystore');
-      this.provider = ethers.getDefaultProvider('ropsten');
+      // this.infuraProvider = ethers.getDefaultProvider(, {
+      //   infura: 'https://mainnet.infura.io/v3/50b428ebbcf94488bb99440fc44e6c08'
+      // });
+
+      this.infuraProvider = new ethers.providers.InfuraProvider('homestead',
+        'https://mainnet.infura.io/v3/50b428ebbcf94488bb99440fc44e6c08');
 
       if(keystore) {
         const wallet = await Wallet.fromEncryptedJson(keystore, password);
-        this.wallet = wallet.connect(this.provider);
+        this.wallet = wallet.connect(this.infuraProvider);
         console.log(this.wallet);
       }
 

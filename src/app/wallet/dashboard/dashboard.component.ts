@@ -9,14 +9,14 @@ import { WalletService } from "../../services/wallet.service";
 })
 export class DashboardComponent implements OnInit {
 
-  address: string;
+  address: string | undefined;
   network: Network;
 
   constructor(private walletService: WalletService) { }
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.address = this.walletService.wallet.address;
+    this.address = this.walletService.wallet?.address;
+    this.walletService.wallet?.provider.getNetwork().then( n => console.log(n));
   }
 
 }
