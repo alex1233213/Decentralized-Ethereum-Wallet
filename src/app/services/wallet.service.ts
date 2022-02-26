@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ethers, Wallet } from 'ethers';
+import { NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +9,20 @@ import { ethers, Wallet } from 'ethers';
 
 export class WalletService {
 
-  wallet: Wallet;
+  wallet: Wallet | null;
   provider: ethers.providers.BaseProvider;
 
-  constructor() { }
+  constructor(private router: Router) {
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    )
+      .subscribe((event) => {
+        // @ts-ignore
+        if( !(event.url.includes('/wallet/')) ) {
+          this.wallet = null;
+        }
+    });
+  }
 
 
   createNewWallet(): Wallet {
@@ -48,8 +60,10 @@ export class WalletService {
 
 
   async encryptWallet(password: string) {
-    const keystore = await this.wallet.encrypt(password);
-    localStorage.setItem('keystore', keystore);
+    if(this.wallet != null) {
+      const keystore = await this.wallet.encrypt(password);
+      localStorage.setItem('keystore', keystore);
+    }
   }
 
 }

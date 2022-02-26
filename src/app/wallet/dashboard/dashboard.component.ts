@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(private walletService: WalletService) { }
 
   ngOnInit(): void {
+    // @ts-ignore
     this.address = this.walletService.wallet.address;
   }
 

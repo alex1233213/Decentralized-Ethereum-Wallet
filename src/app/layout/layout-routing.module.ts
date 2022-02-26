@@ -6,7 +6,7 @@ import { DashboardComponent } from "../wallet/dashboard/dashboard.component";
 import { SendTransactionComponent } from "../wallet/send-transaction/send-transaction.component";
 import { SwapComponent } from "../wallet/swap/swap.component";
 import { DappsComponent } from "../wallet/dapps/dapps.component";
-import {DashboardGuard} from "../guards/dashboard/dashboard.guard";
+import {WalletGuard} from "../guards/dashboard/wallet-guard.service";
 
 const routes: Routes = [
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletLayoutComponent,
-    canActivate: [DashboardGuard],
+    canActivate: [WalletGuard],
     children: [
       {
         path: '',
