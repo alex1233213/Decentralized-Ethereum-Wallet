@@ -31,6 +31,10 @@ const routes: Routes = [
         path: 'restore',
         loadChildren: () => import('../restore-wallet/restore-wallet.module').then(m => m.RestoreWalletModule)
       },
+      {
+        path: '**',
+        redirectTo: ''
+      }
     ]
   },
 
