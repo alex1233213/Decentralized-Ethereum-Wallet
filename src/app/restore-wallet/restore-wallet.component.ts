@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { WalletService } from "../services/wallet.service";
+import { WalletService } from "../services/wallet/wallet.service";
 import { Wallet } from "ethers";
 import { Router } from "@angular/router";
 

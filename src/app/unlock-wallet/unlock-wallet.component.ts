@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { WalletService } from "../services/wallet.service";
+import { WalletService } from "../services/wallet/wallet.service";
 import { Router } from "@angular/router";
 
 @Component({

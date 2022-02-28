@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { WalletService } from "../../services/wallet.service";
+import { WalletService } from "../../services/wallet/wallet.service";
 
 @Injectable({
   providedIn: 'root'

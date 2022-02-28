@@ -81,4 +81,9 @@ export class WalletService {
     }
   }
 
+
+  connectToProvider(provider: ethers.providers.InfuraProvider) {
+    this.wallet.connect(provider);
+    console.log(this.wallet);
+  }
 }

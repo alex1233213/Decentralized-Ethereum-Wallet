@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Network } from '@ethersproject/networks';
-import { WalletService } from "../../services/wallet.service";
+import { WalletService } from "../../services/wallet/wallet.service";
 import { ethers, Wallet} from "ethers";
 import { config } from "../../shared/utils/config";
 

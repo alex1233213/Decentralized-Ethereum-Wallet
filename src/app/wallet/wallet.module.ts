@@ -4,18 +4,24 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SendTransactionComponent } from './send-transaction/send-transaction.component';
 import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
-import { NbMenuModule } from "@nebular/theme";
+import { NbMenuModule, NbSelectModule } from "@nebular/theme";
+import { SelectNetworkComponent } from './select-network/select-network.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     SendTransactionComponent,
     SwapComponent,
-    DappsComponent
+    DappsComponent,
+    SelectNetworkComponent
+  ],
+  exports: [
+    SelectNetworkComponent
   ],
   imports: [
     CommonModule,
-    NbMenuModule
+    NbMenuModule,
+    NbSelectModule
   ]
 })
 export class WalletModule { }
