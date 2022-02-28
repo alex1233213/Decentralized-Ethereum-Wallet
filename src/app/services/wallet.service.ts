@@ -9,7 +9,7 @@ import { filter } from "rxjs";
 
 export class WalletService {
 
-  wallet: Wallet | null;
+  wallet: any;
   infuraProvider: ethers.providers.InfuraProvider;
 
   constructor(private router: Router) {
@@ -22,6 +22,12 @@ export class WalletService {
           this.wallet = null;
         }
     });
+
+    const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
+    this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+      '50b428ebbcf94488bb99440fc44e6c08');
+
+    this.wallet = wallet.connect(this.infuraProvider);
   }
 
 
@@ -34,7 +40,11 @@ export class WalletService {
   //if invalid mnemonic returns error message
   restoreFromMnemonic(mnemonic: string) {
     try {
-      this.wallet = ethers.Wallet.fromMnemonic(mnemonic);
+      // ***** final code *****
+      // this.wallet = ethers.Wallet.fromMnemonic(mnemonic);
+      // **********************
+      return ethers.Wallet.fromMnemonic(mnemonic);
+
     } catch (err: any) {
       return err.message;
     }
@@ -49,13 +59,13 @@ export class WalletService {
       //   infura: 'https://mainnet.infura.io/v3/50b428ebbcf94488bb99440fc44e6c08'
       // });
 
-      this.infuraProvider = new ethers.providers.InfuraProvider('homestead',
-        'https://mainnet.infura.io/v3/50b428ebbcf94488bb99440fc44e6c08');
+      this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+        '50b428ebbcf94488bb99440fc44e6c08');
 
       if(keystore) {
         const wallet = await Wallet.fromEncryptedJson(keystore, password);
         this.wallet = wallet.connect(this.infuraProvider);
-        console.log(this.wallet);
+        // console.log(this.wallet);
       }
 
     } catch (err: any) {

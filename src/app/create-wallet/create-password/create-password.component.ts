@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from "@angular/forms";
-import { passwordMatchValidator} from "../../shared/passwordMatch";
+import { passwordMatchValidator} from "../../shared/validators/passwordMatch";
 
 @Component({
   selector: 'app-create-password',
