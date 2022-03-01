@@ -6,6 +6,7 @@ import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
 import { NbMenuModule, NbSelectModule } from "@nebular/theme";
 import { SelectNetworkComponent } from './select-network/select-network.component';
+import { TokensComponent } from './tokens/tokens.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SelectNetworkComponent } from './select-network/select-network.componen
     SendTransactionComponent,
     SwapComponent,
     DappsComponent,
-    SelectNetworkComponent
+    SelectNetworkComponent,
+    TokensComponent
   ],
   exports: [
     SelectNetworkComponent
