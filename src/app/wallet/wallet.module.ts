@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SendTransactionComponent } from './send-transaction/send-transaction.component';
 import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
-import { NbMenuModule, NbSelectModule } from "@nebular/theme";
+import { NbCardModule, NbMenuModule, NbSelectModule } from "@nebular/theme";
 import { SelectNetworkComponent } from './select-network/select-network.component';
 import { TokensComponent } from './tokens/tokens.component';
 
@@ -23,7 +23,8 @@ import { TokensComponent } from './tokens/tokens.component';
   imports: [
     CommonModule,
     NbMenuModule,
-    NbSelectModule
+    NbSelectModule,
+    NbCardModule
   ]
 })
 export class WalletModule { }

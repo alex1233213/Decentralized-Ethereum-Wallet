@@ -18,6 +18,7 @@ export class SelectNetworkComponent implements OnInit {
 
   onNetworkSelect(network: string) {
     console.log(network);
+    this.selectedNetwork = network;
     this.providerService.changeProvider(network);
   }
 }
