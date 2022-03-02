@@ -24,11 +24,13 @@ export class WalletService {
         }
     });
 
+    // **************************** TO BE REMOVED ****************************
     const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
     this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
       '50b428ebbcf94488bb99440fc44e6c08');
 
     this.wallet = wallet.connect(this.infuraProvider);
+    // ***********************************************************************
   }
 
 

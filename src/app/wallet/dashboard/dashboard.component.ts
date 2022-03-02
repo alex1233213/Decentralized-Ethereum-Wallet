@@ -4,6 +4,9 @@ import { WalletService } from "../../services/wallet/wallet.service";
 import { ethers, Wallet} from "ethers";
 import { config } from "../../shared/utils/config";
 
+
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,7 +19,9 @@ export class DashboardComponent implements OnInit {
   wallet: Wallet;
   balance: string;
 
-  constructor(private walletService: WalletService) { }
+  constructor(private walletService: WalletService) {
+
+  }
 
   ngOnInit(): void {
     this.wallet = this.walletService.wallet;

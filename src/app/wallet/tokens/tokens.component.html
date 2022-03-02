@@ -1,1 +1,20 @@
-<p>tokens works!</p>
+<nb-card>
+  <nb-card-body>
+    <table [nbTreeGrid]="dataSource">
+
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns" style="font-size: 12px;"></tr>
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+
+      <ng-container *ngFor="let column of columns; let index = index"
+                    [nbTreeGridColumnDef]="column">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+          {{column}}
+        </th>
+        <td style="border: none;" nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
+      </ng-container>
+
+    </table>
+
+  </nb-card-body>
+</nb-card>
