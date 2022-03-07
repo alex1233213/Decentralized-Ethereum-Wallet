@@ -1,0 +1,4 @@
+nb-layout-column:last-child {
+  border: 1px solid black;
+  max-width: 30%;
+}
