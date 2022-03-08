@@ -1,0 +1,15 @@
+th {
+  font-size: 11px;
+  width: 25%;
+}
+
+img {
+  height: 25px;
+}
+
+
+.logo, .symbol {
+  display: inline-block;
+}
+
+

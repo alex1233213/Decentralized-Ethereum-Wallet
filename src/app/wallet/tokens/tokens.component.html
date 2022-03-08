@@ -1,20 +1,20 @@
 <nb-card>
   <nb-card-body>
-    <table [nbTreeGrid]="dataSource">
-
-      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns" style="font-size: 12px;"></tr>
-      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
-
-
-      <ng-container *ngFor="let column of columns; let index = index"
-                    [nbTreeGridColumnDef]="column">
-        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
-          {{column}}
-        </th>
-        <td style="border: none;" nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
-      </ng-container>
-
+    <table>
+      <tr>
+        <th>TOKEN</th>
+        <th>PRICE</th>
+        <th>MARKET CAP</th>
+        <th>24H</th>
+        <th>BALANCE</th>
+      </tr>
+      <tr *ngFor="let token of testData">
+        <td><div><img src="{{ token.image }}" alt="{{ token.symbol }}"> <span>{{ token.symbol.toUpperCase() }}</span> </div></td>
+        <td>{{ token.current_price }}</td>
+        <td>{{ token.market_cap }}</td>
+        <td>{{ token.price_change_percentage_24h }}</td>
+        <td>{{ "token.balance" }}</td>
+      </tr>
     </table>
-
   </nb-card-body>
 </nb-card>

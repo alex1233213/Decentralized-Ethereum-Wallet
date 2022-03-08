@@ -7,6 +7,7 @@ import { DappsComponent } from './dapps/dapps.component';
 import { NbCardModule, NbMenuModule, NbSelectModule, NbTreeGridModule } from "@nebular/theme";
 import { SelectNetworkComponent } from './select-network/select-network.component';
 import { TokensComponent } from './tokens/tokens.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TokensComponent } from './tokens/tokens.component';
     NbMenuModule,
     NbSelectModule,
     NbCardModule,
-    NbTreeGridModule
+    NbTreeGridModule,
+    HttpClientModule
   ]
 })
 export class WalletModule { }
