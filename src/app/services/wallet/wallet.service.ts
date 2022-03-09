@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ethers, Wallet } from 'ethers';
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs";
-import {Network} from "@ethersproject/networks";
+import { Network } from "@ethersproject/networks";
 
 @Injectable({
   providedIn: 'root'

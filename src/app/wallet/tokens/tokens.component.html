@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="network">
   <nb-card-body>
     <table>
       <tr>
@@ -8,13 +8,26 @@
         <th>24H</th>
         <th>BALANCE</th>
       </tr>
-      <tr *ngFor="let token of testData">
-        <td><div><img src="{{ token.image }}" alt="{{ token.symbol }}"> <span>{{ token.symbol.toUpperCase() }}</span> </div></td>
-        <td>{{ token.current_price }}</td>
-        <td>{{ token.market_cap }}</td>
-        <td>{{ token.price_change_percentage_24h }}</td>
-        <td>{{ "token.balance" }}</td>
-      </tr>
+
+      <ng-container *ngIf="network.name == 'ropsten'">
+        <tr>
+          <td>ROP</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{ ethBalance }}</td>
+        </tr>
+      </ng-container>
+
+
+<!--      <tr *ngFor="let token of tokensData">-->
+<!--        <td><div><span><img src="{{ token.image }}" alt="{{ token.symbol }}"> {{ token.symbol.toUpperCase() }}</span> </div></td>-->
+<!--        <td>{{ token.current_price }}</td>-->
+<!--        <td>{{ token.market_cap }}</td>-->
+<!--        <td>{{ token.price_change_percentage_24h }}</td>-->
+<!--        <td>{{ "token.balance" }}</td>-->
+<!--      </tr>-->
+
     </table>
   </nb-card-body>
 </nb-card>
