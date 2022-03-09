@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ethers, Wallet } from 'ethers';
 import { NavigationEnd, Router } from "@angular/router";
-import {BehaviorSubject, filter, Observable} from "rxjs";
+import { BehaviorSubject, filter, Observable } from "rxjs";
 import { ProviderService } from "../provider/provider.service";
 
 @Injectable({
@@ -46,8 +46,6 @@ export class WalletService {
     this.providerService.getProvider().subscribe( (provider) => {
       this.infuraProvider = provider;
       this.wallet.next(wallet.connect(this.infuraProvider));
-      // console.log(this.infuraProvider);
-      console.log(this.wallet);
     });
   }
 

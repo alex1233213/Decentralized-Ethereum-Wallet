@@ -20,6 +20,17 @@
       </ng-container>
 
 
+      <ng-container *ngIf="network.name == 'rinkeby'">
+        <tr>
+          <td>RIN</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{ ethBalance }}</td>
+        </tr>
+      </ng-container>
+
+
 <!--      <tr *ngFor="let token of tokensData">-->
 <!--        <td><div><span><img src="{{ token.image }}" alt="{{ token.symbol }}"> {{ token.symbol.toUpperCase() }}</span> </div></td>-->
 <!--        <td>{{ token.current_price }}</td>-->

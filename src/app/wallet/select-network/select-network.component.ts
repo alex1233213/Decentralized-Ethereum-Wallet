@@ -13,11 +13,10 @@ export class SelectNetworkComponent implements OnInit {
   constructor(private providerService: ProviderService) { }
 
   ngOnInit(): void {
-    // setInterval( () => console.log(this.selectedNetwork), 3000)
+
   }
 
   onNetworkSelect(network: string) {
-    console.log(network);
     this.selectedNetwork = network;
     this.providerService.changeProvider(network);
   }
