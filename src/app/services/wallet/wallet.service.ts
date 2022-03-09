@@ -3,6 +3,7 @@ import { ethers, Wallet } from 'ethers';
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs";
 import { Network } from "@ethersproject/networks";
+import {ProviderService} from "../provider/provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class WalletService {
   wallet: any;
   infuraProvider: ethers.providers.InfuraProvider;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private providerService: ProviderService) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     )
@@ -26,11 +28,23 @@ export class WalletService {
 
     // **************************** TO BE REMOVED ****************************
     const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
-    this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
-      '50b428ebbcf94488bb99440fc44e6c08');
+    // this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+    //   '50b428ebbcf94488bb99440fc44e6c08');
 
-    this.wallet = wallet.connect(this.infuraProvider);
+    this.connectToProvider(wallet);
+
+
     // ***********************************************************************
+  }
+
+
+  connectToProvider(wallet: Wallet) {
+    this.providerService.getProvider().subscribe( (provider) => {
+      this.infuraProvider = provider;
+      console.log(this.infuraProvider);
+      this.wallet = wallet.connect(this.infuraProvider);
+      console.log(this.wallet);
+    });
   }
 
 
@@ -85,8 +99,8 @@ export class WalletService {
   }
 
 
-  connectToProvider(provider: ethers.providers.InfuraProvider) {
-    this.wallet = this.wallet.connect(provider);
-    this.wallet.provider.getNetwork().then( (n: Network) => console.log(n));
-  }
+  // connectToProvider(provider: ethers.providers.InfuraProvider) {
+  //   this.wallet = this.wallet.connect(provider);
+  //   this.wallet.provider.getNetwork().then( (n: Network) => console.log(n));
+  // }
 }

@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
 
     this.walletService.wallet.provider.getNetwork().then( (n: Network) => {this.network = n; console.log(this.network)});
     console.log(this.network);
+
+    // setInterval(() => this.wallet.provider.getNetwork().then( (n) => console.log(n)), 6000);
   }
 
 
