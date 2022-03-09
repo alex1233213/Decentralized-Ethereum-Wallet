@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ethers, Wallet } from 'ethers';
 import { NavigationEnd, Router } from "@angular/router";
-import { filter } from "rxjs";
-import { Network } from "@ethersproject/networks";
-import {ProviderService} from "../provider/provider.service";
+import {BehaviorSubject, filter, Observable} from "rxjs";
+import { ProviderService } from "../provider/provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ import {ProviderService} from "../provider/provider.service";
 
 export class WalletService {
 
-  wallet: any;
+  private wallet: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   infuraProvider: ethers.providers.InfuraProvider;
 
   constructor(private router: Router,
@@ -22,7 +21,7 @@ export class WalletService {
       .subscribe((event) => {
         // @ts-ignore
         if( !(event.url.includes('/wallet/')) ) {
-          this.wallet = null;
+          this.wallet.next(null);
         }
     });
 
@@ -38,11 +37,16 @@ export class WalletService {
   }
 
 
+  getWallet(): Observable<Wallet> {
+    return this.wallet.asObservable();
+  }
+
+
   connectToProvider(wallet: Wallet) {
     this.providerService.getProvider().subscribe( (provider) => {
       this.infuraProvider = provider;
-      console.log(this.infuraProvider);
-      this.wallet = wallet.connect(this.infuraProvider);
+      this.wallet.next(wallet.connect(this.infuraProvider));
+      // console.log(this.infuraProvider);
       console.log(this.wallet);
     });
   }
@@ -81,7 +85,7 @@ export class WalletService {
 
       if(keystore) {
         const wallet = await Wallet.fromEncryptedJson(keystore, password);
-        this.wallet = wallet.connect(this.infuraProvider);
+        this.wallet.next(wallet.connect(this.infuraProvider));
         // console.log(this.wallet);
       }
 
@@ -92,10 +96,10 @@ export class WalletService {
 
 
   async encryptWallet(password: string) {
-    if(this.wallet != null) {
-      const keystore = await this.wallet.encrypt(password);
-      localStorage.setItem('keystore', keystore);
-    }
+    // if(this.wallet != null) {
+    //   const keystore = await this.wallet.encrypt(password);
+    //   localStorage.setItem('keystore', keystore);
+    // }
   }
 
 

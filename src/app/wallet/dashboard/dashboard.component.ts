@@ -25,14 +25,20 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wallet = this.walletService.wallet;
-    this.address = this.walletService.wallet?.address;
+    this.walletService.getWallet().subscribe( (wallet) => {
+      this.wallet = wallet;
+      this.address = wallet.address;
+      wallet.provider.getNetwork().then( (n: Network) => {this.network = n; console.log(this.network)});
+      console.log(this.network);
+    });
 
-    this.walletService.wallet.provider.getNetwork().then( (n: Network) => {this.network = n; console.log(this.network)});
-    console.log(this.network);
+
+
+
 
     // setInterval(() => this.wallet.provider.getNetwork().then( (n) => console.log(n)), 6000);
   }
+
 
 
 
