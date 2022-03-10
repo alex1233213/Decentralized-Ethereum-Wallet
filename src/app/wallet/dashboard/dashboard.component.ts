@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     this.walletService.getWallet().subscribe( (wallet) => {
       this.wallet = wallet;
       this.address = wallet.address;
-      wallet.provider.getNetwork().then( (n: Network) => {this.network = n; console.log(this.network)});
+      wallet.provider.getNetwork().then( (n: Network) => this.network = n);
     });
   }
 

@@ -16,6 +16,7 @@ export class TokensComponent implements OnInit {
 
   tokensData: any [];
   ethBalance: string;
+  erc_20_tokens_balances: {};
   wallet: Wallet;
   network: any;
 
@@ -40,7 +41,8 @@ export class TokensComponent implements OnInit {
     });
 
     this.tokensData = testData;
-    this.ethBalance = await this.balanceService.readBalance(this.wallet);
+    this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
+    console.log(this.erc_20_tokens_balances);
   }
 
 }
