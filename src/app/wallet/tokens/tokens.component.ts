@@ -16,7 +16,7 @@ export class TokensComponent implements OnInit {
 
   tokensData: any [];
   ethBalance: string;
-  erc_20_tokens_balances: {};
+  coin_balances: any = {};
   wallet: Wallet;
   network: any;
 
@@ -32,17 +32,40 @@ export class TokensComponent implements OnInit {
     //******************** RELEASE ***********************
     // this.coinGeckoService.getTokensData().subscribe(
     //   (data) => console.log(data));
+
+    //get the balances of the other tokens
+    //this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
     //****************************************************
 
     this.walletService.getWallet().subscribe( async (wallet) => {
       this.wallet = wallet;
-      this.ethBalance = await this.balanceService.readBalance(this.wallet);
-      wallet.provider.getNetwork().then((n: Network) => this.network = n);
+      this.ethBalance = await this.balanceService.readEtherBalance(this.wallet);
+      this.coin_balances['ethereum'] = this.ethBalance;
+      wallet.provider.getNetwork().then((n: Network) => {
+        this.network = n
+        this.getERC20Balances();
+      });
     });
 
     this.tokensData = testData;
-    this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
-    console.log(this.erc_20_tokens_balances);
+  }
+
+
+  //retrieve the ERC-20 tokens balances if the wallet is connected to the main net
+  getERC20Balances() {
+    if(this.network.name == "homestead") {
+      // **** /// ***/// // **** /// ***///
+      const erc_20_tokens_balances = {
+        "basic-attention-token": "0.0",
+        "the-sandbox": "0.0",
+        "usd-coin": "15.0"
+      } //******
+      // **** /// ***/// // **** /// ***///
+
+      for (const [coin, balance] of Object.entries(erc_20_tokens_balances)) {
+        this.coin_balances[coin] = balance;
+      }
+    }
   }
 
 }
