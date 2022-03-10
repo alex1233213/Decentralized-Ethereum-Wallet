@@ -1,0 +1,9 @@
+img {
+  height: 25px;
+}
+
+
+nb-select {
+  width: 60% !important;
+  max-width: 100% !important;
+}

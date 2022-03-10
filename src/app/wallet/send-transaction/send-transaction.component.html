@@ -1,10 +1,18 @@
 <nb-card>
   <nb-card-body>
     <h5>Send</h5>
-
-<!--    <nb-select [placeholder]="selected_token" [(selected)]="selected_token">-->
-<!--      <nb-option value="0">Option 0</nb-option>-->
-<!--      <nb-option value="1">Option 1</nb-option>-->
-<!--    </nb-select>-->
+    <nb-select [(selected)]="selected_token_id" (selectedChange)="onSelectToken($event)">
+      <nb-select-label>
+        <img [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
+      </nb-select-label>
+      <nb-option *ngFor="let token of tokensData" [value]="token.id">
+        <div>
+          <span>
+            <img src="{{ token.image }}" alt="{{ token.symbol }}">
+            {{ token.symbol + " - " +  token.name }}
+          </span>
+        </div>
+      </nb-option>
+    </nb-select>
   </nb-card-body>
 </nb-card>
