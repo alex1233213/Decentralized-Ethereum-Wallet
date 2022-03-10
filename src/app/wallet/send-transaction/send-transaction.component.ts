@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { WalletService } from "../../services/wallet/wallet.service";
+import { Network } from "@ethersproject/networks";
+import { Wallet } from "ethers";
+import {BalanceService} from "../../services/balance/balance.service";
+import {CoinGeckoService} from "../../services/coinGecko/coin-gecko.service";
 
 @Component({
   selector: 'app-send-transaction',
@@ -7,9 +12,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendTransactionComponent implements OnInit {
 
-  constructor() { }
+  selected_token: string;
+  wallet: Wallet;
+  coin_balances = {};
+
+  constructor(private walletService: WalletService,
+              private balanceService: BalanceService,
+              private coinGeckoService: CoinGeckoService) { }
 
   ngOnInit(): void {
+    this.walletService.getWallet().subscribe( (wallet: Wallet) => {
+      this.wallet = wallet;
+
+      this.balanceService.getWalletFunds(this.wallet)
+        .then( (funds: any) => {
+          this.coin_balances = funds;
+        });
+    });
+
   }
 
 }

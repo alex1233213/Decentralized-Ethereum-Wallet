@@ -20,7 +20,6 @@ export class TokensComponent implements OnInit {
   wallet: Wallet;
   network: any;
 
-  columns = ['TOKEN', 'PRICE', 'MARKET CAP', '24H', 'BALANCE'];
 
   constructor(private coinGeckoService: CoinGeckoService,
               private balanceService: BalanceService,
@@ -34,17 +33,15 @@ export class TokensComponent implements OnInit {
     //   (data) => console.log(data));
 
     //get the balances of the other tokens
-    //this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
+
     //****************************************************
 
-    this.walletService.getWallet().subscribe( async (wallet) => {
+    this.walletService.getWallet().subscribe( async (wallet: Wallet) => {
       this.wallet = wallet;
       this.ethBalance = await this.balanceService.readEtherBalance(this.wallet);
       this.coin_balances['ethereum'] = this.ethBalance;
-      wallet.provider.getNetwork().then((n: Network) => {
-        this.network = n
-        this.getERC20Balances();
-      });
+      this.getERC20Balances();
+      wallet.provider.getNetwork().then((n: Network) => this.network = n);
     });
 
     this.tokensData = testData;
@@ -53,18 +50,21 @@ export class TokensComponent implements OnInit {
 
   //retrieve the ERC-20 tokens balances if the wallet is connected to the main net
   getERC20Balances() {
-    if(this.network.name == "homestead") {
-      // **** /// ***/// // **** /// ***///
-      const erc_20_tokens_balances = {
-        "basic-attention-token": "0.0",
-        "the-sandbox": "0.0",
-        "usd-coin": "15.0"
-      } //******
-      // **** /// ***/// // **** /// ***///
 
-      for (const [coin, balance] of Object.entries(erc_20_tokens_balances)) {
-        this.coin_balances[coin] = balance;
-      }
+    /// ***** /// *****/// ***** RELEASE /// *****/// *****
+    //this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
+    /// *****/// *****/// *****/// *****/// *****/// *****
+
+    // **** /// ***//TEST DATA// **** /// ***//
+    const erc_20_tokens_balances = {
+      "basic-attention-token": "0.0",
+      "the-sandbox": "0.0",
+      "usd-coin": "15.0"
+    } //******
+    // **** /// ***/// // **** /// ***///
+
+    for (const [coin, balance] of Object.entries(erc_20_tokens_balances)) {
+      this.coin_balances[coin] = balance;
     }
   }
 

@@ -8,7 +8,21 @@ import { tokenAddresses } from '../../shared/utils/token-addresses';
 })
 export class BalanceService {
 
-  constructor() { }
+  ethBalance: string;
+  wallet: Wallet;
+
+  constructor() {}
+
+
+  //method gets the balance of ether and other erc-20 tokens
+  async getWalletFunds(wallet: Wallet)  {
+    let walletFunds: any = {};
+
+    walletFunds = await this.readErc20TokensBalance(wallet);
+    walletFunds.ethereum = await this.readEtherBalance(wallet);
+
+    return walletFunds;
+  }
 
   /*
     method returns the ether balance of a wallet address - 4 decimal places,
@@ -22,16 +36,20 @@ export class BalanceService {
   }
 
 
-  async readErc20TokensBalance(wallet: Wallet): Promise<{}> {
+  async readErc20TokensBalance(wallet: Wallet) {
+
+    const network = await wallet.provider.getNetwork();
+
+    //erc-20 tokens are only displayed on the main net
+    if(network == undefined || network.name != "homestead") {
+      return {};
+    }
 
     let tokenBalances: any = {};
 
     for (const token of Object.keys(tokenAddresses)) {
       const contract = new ethers.Contract(tokenAddresses[token], abi, wallet);
-
       const balance = await contract['balanceOf'](wallet.address);
-      // console.log(`${token} Balance: ${ethers.utils.formatUnits(balance, 6)}`);
-
       tokenBalances[token] = ethers.utils.formatUnits(balance, 6);
     }
 
