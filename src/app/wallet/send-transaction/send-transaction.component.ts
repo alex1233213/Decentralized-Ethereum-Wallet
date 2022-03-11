@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {WalletService} from "../../services/wallet/wallet.service";
-import {Wallet} from "ethers";
-import {BalanceService} from "../../services/balance/balance.service";
-import {CoinGeckoService} from "../../services/coinGecko/coin-gecko.service";
-import {testData} from "../../shared/utils/cgTestData";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { WalletService } from "../../services/wallet/wallet.service";
+import { Wallet } from "ethers";
+import { BalanceService } from "../../services/balance/balance.service";
+import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
+import { testData } from "../../shared/utils/cgTestData";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {sendAmountValidator} from "../../shared/validators/sendAmountValidator";
 
 @Component({
   selector: 'app-send-transaction',
@@ -15,14 +17,20 @@ export class SendTransactionComponent implements OnInit {
   selected_token_id: string = "basic-attention-token";
   selected_token: any;
   wallet: Wallet;
-  coin_balances = {};
+  coin_balances: any = {};
   tokensData: any;
+  loadingData: boolean;
+  send_transaction_form: FormGroup;
+
+
 
   constructor(private walletService: WalletService,
               private balanceService: BalanceService,
               private coinGeckoService: CoinGeckoService) { }
 
   ngOnInit(): void {
+    this.loadingData = true;
+
     // ******************  ******************DEVELOPMENT ****************** ******************
     this.selected_token = testData.find( (token: any) => token.id == this.selected_token_id);
   // ************************************// ****************** **********  ******************
@@ -51,6 +59,11 @@ export class SendTransactionComponent implements OnInit {
       this.balanceService.getWalletFunds(this.wallet)
         .then( (funds: any) => {
           this.coin_balances = funds;
+          console.log(this.coin_balances);
+
+          this.loadingData = false;
+
+          this.initialiseForm();
         });
     });
 
@@ -58,9 +71,32 @@ export class SendTransactionComponent implements OnInit {
 
 
 
+  initialiseForm() {
+    this.send_transaction_form = new FormGroup({
+      selected_token: new FormControl(this.selected_token_id),
+      send_amount: new FormControl('',
+        [Validators.required]),
+      receiving_address: new FormControl('')
+    }, { validators: sendAmountValidator(this.coin_balances) });
+
+  }
+
+
   onSelectToken(selectedId: string) {
     this.selected_token_id = selectedId;
     this.selected_token = testData.find((token: any) => token.id == this.selected_token_id);
+  }
+
+
+  next() {
+    console.log(this.send_transaction_form.value);
+  }
+
+
+  get send_amount_edited() {
+    return this.send_transaction_form.get('send_amount')?.touched
+      ||
+      this.send_transaction_form.get('send_amount')?.dirty;
   }
 
 }

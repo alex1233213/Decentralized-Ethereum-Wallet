@@ -4,6 +4,12 @@ img {
 
 
 nb-select {
-  width: 60% !important;
+  width: 40% !important;
   max-width: 100% !important;
+}
+
+
+.token-balance {
+  position: relative;
+  left: 10px;
 }
