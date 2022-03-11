@@ -6,6 +6,7 @@ import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { testData } from "../../shared/utils/cgTestData";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {sendAmountValidator} from "../../shared/validators/sendAmountValidator";
+import {addressValidator} from "../../shared/validators/addressValidator";
 
 @Component({
   selector: 'app-send-transaction',
@@ -76,7 +77,7 @@ export class SendTransactionComponent implements OnInit {
       selected_token: new FormControl(this.selected_token_id),
       send_amount: new FormControl('',
         [Validators.required]),
-      receiving_address: new FormControl('')
+      receiving_address: new FormControl('', [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator(this.coin_balances) });
 
   }
@@ -97,6 +98,11 @@ export class SendTransactionComponent implements OnInit {
     return this.send_transaction_form.get('send_amount')?.touched
       ||
       this.send_transaction_form.get('send_amount')?.dirty;
+  }
+
+
+  get receiving_address() {
+    return this.send_transaction_form.get('receiving_address')!;
   }
 
 }

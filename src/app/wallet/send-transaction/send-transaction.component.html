@@ -45,6 +45,11 @@
       <br>
       <br>
       <input type="text" nbInput placeholder="Receiving Address" formControlName="receiving_address">
+      <div *ngIf="receiving_address.invalid && (receiving_address.touched || receiving_address.dirty)">
+        <div *ngIf="receiving_address.hasError('invalidAddress')">
+          Invalid address entered
+        </div>
+      </div>
       <br>
       <br>
       <button nbButton (click)="next()" [disabled]="send_transaction_form.invalid">Next</button>
