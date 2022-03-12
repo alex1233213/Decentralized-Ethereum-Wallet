@@ -9,10 +9,11 @@
         <th>BALANCE</th>
       </tr>
 
-      <!--      display ropsten test net ether-->
-      <ng-container *ngIf="network.name == 'ropsten'">
+      <!-- display test net ether-->
+      <ng-container *ngIf="network.name != 'homestead'">
         <tr>
-          <td>ROP</td>
+          <td *ngIf="network.name == 'ropsten'">ROP</td>
+          <td *ngIf="network.name == 'rinkeby'">RIN</td>
           <td></td>
           <td></td>
           <td></td>
@@ -20,16 +21,6 @@
         </tr>
       </ng-container>
 
-      <!--      display rinkeby test net ether-->
-      <ng-container *ngIf="network.name == 'rinkeby'">
-        <tr>
-          <td>RIN</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>{{ ethBalance }}</td>
-        </tr>
-      </ng-container>
 
       <!--      display main net ether and other tokens-->
       <ng-container *ngIf="network.name == 'homestead'">
