@@ -24,7 +24,7 @@ export class SendTransactionComponent implements OnInit {
   send_transaction_form: FormGroup;
   coinGeckoData: Token[];
   coin_balances: any = {};
-
+  network: Network;
 
 
   constructor(private walletService: WalletService,
@@ -44,7 +44,6 @@ export class SendTransactionComponent implements OnInit {
 
 
 
-    // ****** ***** ****** RELEASE  ****** ***** ******  ****** ***** ******
     this.walletService.getWallet().subscribe( (wallet: Wallet) => {
       this.wallet = wallet;
       this.wallet.provider.getNetwork().then( (network: Network) => {
@@ -52,27 +51,43 @@ export class SendTransactionComponent implements OnInit {
         //get the funds for the wallet on the network
         this.balanceService.getWalletFunds(this.wallet).then( (funds: any) => {
           this.coin_balances = funds;
-          console.log(this.coin_balances);
-
           this.loadingData = false;
-
           this.initialiseForm();
         });
-      // ****** ***** ****** RELEASE  ****** ***** ******  ****** ***** ******
 
-
-        // ****************** DEVELOPMENT ******************
-        if(network.name == 'homestead') {
-          this.tokensData = testData;
-          this.selected_token = this.tokensData[0];
-        } else {
-          this.tokensData = [];
-        }
-        // ****************** // ******************
-
+        this.checkNetwork(network);
       });
     });
 
+  }
+
+
+  checkNetwork(network: Network) {
+    if(network.name == 'homestead') {
+      this.tokensData = testData; // ***** TODO - REPLACE WITH DATA FROM API
+
+    } else if (network.name == 'ropsten') {
+      this.tokensData = [
+        {
+          id: 'ethereum',
+          name: 'ROP Ether',
+          symbol: 'ROP',
+          balance: this.coin_balances['ethereum']
+        }
+      ];
+    } else if (network.name == 'rinkeby') {
+      this.tokensData = [
+        {
+          id: 'ethereum',
+          name: 'RIN Ether',
+          symbol: 'RIN',
+          balance: this.coin_balances['ethereum']
+        }
+      ];
+    }
+
+    //reset the selected token
+    this.selected_token = this.tokensData[0];
   }
 
 
@@ -84,19 +99,9 @@ export class SendTransactionComponent implements OnInit {
         [Validators.required]),
       receiving_address: new FormControl('', [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator(this.coin_balances) });
-
   }
 
 
-  // onSelectToken(selectedId: string) {
-  //   this.selected_token_id = selectedId;
-  //   this.selected_token = testData.find((token: any) => token.id == this.selected_token_id);
-  // }
-
-
-  onSelectToken(token: Token) {
-    this.selected_token = token;
-  }
 
 
   next() {
