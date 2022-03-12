@@ -11,7 +11,7 @@ export class CoinGeckoService {
   constructor(private http: HttpClient) { }
 
   async getTokensData() {
-    let result = await this.http.get<any>(this.coinsMarketsUrl).pipe(
+    this.http.get<any>(this.coinsMarketsUrl).pipe(
       map(response => response.map( (coin: any) => ({
         id: coin.id,
         symbol: coin.symbol,
@@ -20,6 +20,6 @@ export class CoinGeckoService {
         current_price: coin.current_price,
         market_cap: coin.market_cap,
         price_change_24h: coin.price_change_24h,
-      })))).toPromise();
+      }))));
   }
 }
