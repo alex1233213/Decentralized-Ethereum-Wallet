@@ -10,9 +10,9 @@ export class CoinGeckoService {
 
   constructor(private http: HttpClient) { }
 
-  async getTokensData() {
-    this.http.get<any>(this.coinsMarketsUrl).pipe(
-      map(response => response.map( (coin: any) => ({
+  getTokensData() {
+    return this.http.get(this.coinsMarketsUrl).pipe(
+      map( (response: any) => response.map( (coin: any) => ({
         id: coin.id,
         symbol: coin.symbol,
         name: coin.name,

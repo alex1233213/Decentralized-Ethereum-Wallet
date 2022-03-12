@@ -1,12 +1,14 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WalletService } from "../../services/wallet/wallet.service";
 import { Wallet } from "ethers";
 import { BalanceService } from "../../services/balance/balance.service";
-import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { testData } from "../../shared/utils/cgTestData";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {sendAmountValidator} from "../../shared/validators/sendAmountValidator";
-import {addressValidator} from "../../shared/validators/addressValidator";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { sendAmountValidator } from "../../shared/validators/sendAmountValidator";
+import { addressValidator } from "../../shared/validators/addressValidator";
+import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
+import { Token } from "../../shared/utils/Token";
+import {Network} from "@ethersproject/networks";
 
 @Component({
   selector: 'app-send-transaction',
@@ -18,10 +20,11 @@ export class SendTransactionComponent implements OnInit {
   selected_token_id: string = "basic-attention-token";
   selected_token: any;
   wallet: Wallet;
-  coin_balances: any = {};
   tokensData: any;
   loadingData: boolean;
   send_transaction_form: FormGroup;
+  coinGeckoData: Token[];
+  coin_balances: any = {};
 
 
 
@@ -32,33 +35,25 @@ export class SendTransactionComponent implements OnInit {
   ngOnInit(): void {
     this.loadingData = true;
 
+    // ************************ RELEASE CODE*******************************
+    //get the data from coingecko
+    // this.coinGeckoService.getTokensData().subscribe( (data: Token[]) => {
+    //   this.coinGeckoData = data
+    //   console.log(this.coinGeckoData);
+    // });
+    // ************************  RELEASE CODE************************************
+
     // ******************  ******************DEVELOPMENT ****************** ******************
     this.selected_token = testData.find( (token: any) => token.id == this.selected_token_id);
-  // ************************************// ****************** **********  ******************
+    // ************************************// ****************** **********  ******************
 
+    // ****** ***** ****** RELEASE  ****** ***** ******  ****** ***** ******
     this.walletService.getWallet().subscribe( (wallet: Wallet) => {
       this.wallet = wallet;
-      this.wallet.provider.getNetwork().then( (network) => {
+      this.wallet.provider.getNetwork().then( (network: Network) => {
 
-        // ****************** DEVELOPMENT ******************
-        if(network.name == 'homestead') {
-          this.tokensData = testData;
-
-        } else {
-          this.tokensData = {};
-        }
-        // ****************** // ******************
-
-
-
-
-        // ****************** RELEASE ******************
-        //   RETRIEVE DATA FROM API ON COMPONENT INIT
-        // ****************** // ******************
-      });
-
-      this.balanceService.getWalletFunds(this.wallet)
-        .then( (funds: any) => {
+        //get the funds for the wallet on the network
+        this.balanceService.getWalletFunds(this.wallet).then( (funds: any) => {
           this.coin_balances = funds;
           console.log(this.coin_balances);
 
@@ -66,6 +61,18 @@ export class SendTransactionComponent implements OnInit {
 
           this.initialiseForm();
         });
+      // ****** ***** ****** RELEASE  ****** ***** ******  ****** ***** ******
+
+
+        // ****************** DEVELOPMENT ******************
+        if(network.name == 'homestead') {
+          this.tokensData = testData;
+        } else {
+          this.tokensData = [];
+        }
+        // ****************** // ******************
+
+      });
     });
 
   }
