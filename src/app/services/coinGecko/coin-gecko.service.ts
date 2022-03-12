@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,16 @@ export class CoinGeckoService {
 
   constructor(private http: HttpClient) { }
 
-  getTokensData() {
-    return this.http.get(this.coinsMarketsUrl);
+  async getTokensData() {
+    let result = await this.http.get<any>(this.coinsMarketsUrl).pipe(
+      map(response => response.map( (coin: any) => ({
+        id: coin.id,
+        symbol: coin.symbol,
+        name: coin.name,
+        image: coin.image,
+        current_price: coin.current_price,
+        market_cap: coin.market_cap,
+        price_change_24h: coin.price_change_24h,
+      })))).toPromise();
   }
 }
