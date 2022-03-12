@@ -6,11 +6,11 @@
   <nb-card-body>
     <h5>Send</h5>
     <form [formGroup]="send_transaction_form">
-      <nb-select [(selected)]="selected_token_id" (selectedChange)="onSelectToken($event)" formControlName="selected_token">
+      <nb-select [(selected)]="selected_token" (selectedChange)="onSelectToken($event)" formControlName="selected_token">
         <nb-select-label>
           <img [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
         </nb-select-label>
-        <nb-option *ngFor="let token of tokensData" [value]="token.id">
+        <nb-option *ngFor="let token of tokensData" [value]="token">
           <div>
             <div>
               <span>

@@ -8,7 +8,7 @@ import { sendAmountValidator } from "../../shared/validators/sendAmountValidator
 import { addressValidator } from "../../shared/validators/addressValidator";
 import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { Token } from "../../shared/utils/Token";
-import {Network} from "@ethersproject/networks";
+import { Network } from "@ethersproject/networks";
 
 @Component({
   selector: 'app-send-transaction',
@@ -17,8 +17,7 @@ import {Network} from "@ethersproject/networks";
 })
 export class SendTransactionComponent implements OnInit {
 
-  selected_token_id: string = "basic-attention-token";
-  selected_token: any;
+  selected_token: Token;
   wallet: Wallet;
   tokensData: any;
   loadingData: boolean;
@@ -41,11 +40,9 @@ export class SendTransactionComponent implements OnInit {
     //   this.coinGeckoData = data
     //   console.log(this.coinGeckoData);
     // });
-    // ************************  RELEASE CODE************************************
+    // ************************  // // // //********************************
 
-    // ******************  ******************DEVELOPMENT ****************** ******************
-    this.selected_token = testData.find( (token: any) => token.id == this.selected_token_id);
-    // ************************************// ****************** **********  ******************
+
 
     // ****** ***** ****** RELEASE  ****** ***** ******  ****** ***** ******
     this.walletService.getWallet().subscribe( (wallet: Wallet) => {
@@ -67,6 +64,7 @@ export class SendTransactionComponent implements OnInit {
         // ****************** DEVELOPMENT ******************
         if(network.name == 'homestead') {
           this.tokensData = testData;
+          this.selected_token = this.tokensData[0];
         } else {
           this.tokensData = [];
         }
@@ -81,7 +79,7 @@ export class SendTransactionComponent implements OnInit {
 
   initialiseForm() {
     this.send_transaction_form = new FormGroup({
-      selected_token: new FormControl(this.selected_token_id),
+      selected_token: new FormControl(this.selected_token),
       send_amount: new FormControl('',
         [Validators.required]),
       receiving_address: new FormControl('', [ Validators.required, addressValidator()] )
@@ -90,9 +88,14 @@ export class SendTransactionComponent implements OnInit {
   }
 
 
-  onSelectToken(selectedId: string) {
-    this.selected_token_id = selectedId;
-    this.selected_token = testData.find((token: any) => token.id == this.selected_token_id);
+  // onSelectToken(selectedId: string) {
+  //   this.selected_token_id = selectedId;
+  //   this.selected_token = testData.find((token: any) => token.id == this.selected_token_id);
+  // }
+
+
+  onSelectToken(token: Token) {
+    this.selected_token = token;
   }
 
 

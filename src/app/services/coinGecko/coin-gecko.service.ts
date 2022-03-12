@@ -19,7 +19,7 @@ export class CoinGeckoService {
         image: coin.image,
         current_price: coin.current_price,
         market_cap: coin.market_cap,
-        price_change_24h: coin.price_change_24h,
+        price_change_percentage_24h: coin.price_change_percentage_24h,
       }))));
   }
 }
