@@ -32,8 +32,8 @@ export class SendTransactionComponent implements OnInit {
               private coinGeckoService: CoinGeckoService) { }
 
   ngOnInit(): void {
-    this.loadingData = true;
 
+    // setInterval( () => console.log(this.selected_token), 2000);
     // ************************ RELEASE CODE*******************************
     //get the data from coingecko
     // this.coinGeckoService.getTokensData().subscribe( (data: Token[]) => {
@@ -45,34 +45,32 @@ export class SendTransactionComponent implements OnInit {
 
 
     this.walletService.getWallet().subscribe( (wallet: Wallet) => {
+      this.loadingData = true;
       this.wallet = wallet;
       this.wallet.provider.getNetwork().then( (network: Network) => {
 
         //get the funds for the wallet on the network
         this.balanceService.getWalletFunds(this.wallet).then( (funds: any) => {
           this.coin_balances = funds;
+          this.checkNetwork(network);
           this.loadingData = false;
           this.initialiseForm();
         });
-
-        this.checkNetwork(network);
       });
     });
-
   }
 
 
   checkNetwork(network: Network) {
     if(network.name == 'homestead') {
       this.tokensData = testData; // ***** TODO - REPLACE WITH DATA FROM API
-
+      this.tokensData.forEach( (token: Token) => token.balance = this.coin_balances[token.id]);
     } else if (network.name == 'ropsten') {
       this.tokensData = [
         {
           id: 'ethereum',
           name: 'ROP Ether',
-          symbol: 'ROP',
-          balance: this.coin_balances['ethereum']
+          symbol: 'ROP'
         }
       ];
     } else if (network.name == 'rinkeby') {
@@ -80,14 +78,14 @@ export class SendTransactionComponent implements OnInit {
         {
           id: 'ethereum',
           name: 'RIN Ether',
-          symbol: 'RIN',
-          balance: this.coin_balances['ethereum']
+          symbol: 'RIN'
         }
       ];
     }
 
     //reset the selected token
     this.selected_token = this.tokensData[0];
+    this.selected_token.balance = this.coin_balances[this.selected_token.id];
   }
 
 
