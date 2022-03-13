@@ -7,7 +7,7 @@
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function sendAmountValidator(coin_balances: any): ValidatorFn {
+export function sendAmountValidator(): ValidatorFn {
   return (send_transaction_form: AbstractControl): ValidationErrors | null => {
 
     //get the token that was selected from the options provided
@@ -19,7 +19,9 @@ export function sendAmountValidator(coin_balances: any): ValidatorFn {
     } else {
       //get the token balance
       let selected_token_id = selected_token_control.value.id;
-      selected_token_balance = coin_balances[selected_token_id];
+      // selected_token_balance = coin_balances[selected_token_id]; //old
+      selected_token_balance = selected_token_control.value.balance;
+      console.log('balance :' + selected_token_balance );
     }
 
 

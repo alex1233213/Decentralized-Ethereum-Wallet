@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from "../../services/wallet/wallet.service";
-import { Wallet } from "ethers";
+import { BigNumber, utils, Wallet } from "ethers";
 import { BalanceService } from "../../services/balance/balance.service";
 import { testData } from "../../shared/utils/cgTestData";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { sendAmountValidator } from "../../shared/validators/sendAmountValidator";
-import { addressValidator } from "../../shared/validators/addressValidator";
 import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { Token } from "../../shared/utils/Token";
 import { Network } from "@ethersproject/networks";
@@ -17,14 +14,13 @@ import { Network } from "@ethersproject/networks";
 })
 export class SendTransactionComponent implements OnInit {
 
-  selected_token: Token;
   wallet: Wallet;
-  tokensData: any;
+  tokensData: Token[];
   loadingData: boolean;
-  send_transaction_form: FormGroup;
   coinGeckoData: Token[];
   coin_balances: any = {};
   network: Network;
+  gasPrice: any;
 
 
   constructor(private walletService: WalletService,
@@ -32,8 +28,6 @@ export class SendTransactionComponent implements OnInit {
               private coinGeckoService: CoinGeckoService) { }
 
   ngOnInit(): void {
-
-    // setInterval( () => console.log(this.selected_token), 2000);
     // ************************ RELEASE CODE*******************************
     //get the data from coingecko
     // this.coinGeckoService.getTokensData().subscribe( (data: Token[]) => {
@@ -43,25 +37,28 @@ export class SendTransactionComponent implements OnInit {
     // ************************  // // // //********************************
 
 
-
-    this.walletService.getWallet().subscribe( (wallet: Wallet) => {
+    this.walletService.getWallet().subscribe(  (wallet: Wallet) => {
       this.loadingData = true;
       this.wallet = wallet;
+      this.wallet.provider.getGasPrice().then( (gasPrice: BigNumber) => {
+        // console.log(gasPrice);
+        this.gasPrice = gasPrice;
+      });
+
       this.wallet.provider.getNetwork().then( (network: Network) => {
 
         //get the funds for the wallet on the network
         this.balanceService.getWalletFunds(this.wallet).then( (funds: any) => {
           this.coin_balances = funds;
-          this.checkNetwork(network);
+          this.formatData(network);
           this.loadingData = false;
-          this.initialiseForm();
         });
       });
     });
   }
 
 
-  checkNetwork(network: Network) {
+  formatData(network: Network) {
     if(network.name == 'homestead') {
       this.tokensData = testData; // ***** TODO - REPLACE WITH DATA FROM API
       this.tokensData.forEach( (token: Token) => token.balance = this.coin_balances[token.id]);
@@ -70,7 +67,8 @@ export class SendTransactionComponent implements OnInit {
         {
           id: 'ethereum',
           name: 'ROP Ether',
-          symbol: 'ROP'
+          symbol: 'ROP',
+          balance: this.coin_balances['ethereum']
         }
       ];
     } else if (network.name == 'rinkeby') {
@@ -78,44 +76,43 @@ export class SendTransactionComponent implements OnInit {
         {
           id: 'ethereum',
           name: 'RIN Ether',
-          symbol: 'RIN'
+          symbol: 'RIN',
+          balance: this.coin_balances['ethereum']
         }
       ];
     }
-
-    //reset the selected token
-    this.selected_token = this.tokensData[0];
-    this.selected_token.balance = this.coin_balances[this.selected_token.id];
-  }
-
-
-
-  initialiseForm() {
-    this.send_transaction_form = new FormGroup({
-      selected_token: new FormControl(this.selected_token),
-      send_amount: new FormControl('',
-        [Validators.required]),
-      receiving_address: new FormControl('', [ Validators.required, addressValidator()] )
-    }, { validators: sendAmountValidator(this.coin_balances) });
   }
 
 
 
 
-  next() {
-    console.log(this.send_transaction_form.value);
-  }
 
 
-  get send_amount_edited() {
-    return this.send_transaction_form.get('send_amount')?.touched
-      ||
-      this.send_transaction_form.get('send_amount')?.dirty;
-  }
+  // sendTransaction() {
+  //   //  **** RELEASE ****
+  //   // const recipient = this.send_transaction_form.get('receiving_address')!.value;
+  //   // const send_amount = this.send_transaction_form.get('send_amount')!.value;
+  //   // ***** // ***** // ***** //
+  //
+  //
+  //   // **** DEVELOPMENT ****
+  //   const send_amount = '0.0001';
+  //   // ***** // ***** // ***** //
+  //
+  //   const recipient = '0xb28C2c433a9831f983bbCE7312D63694A2E1E2b8';
+  //   console.log(recipient);
+  //   console.log(send_amount);
+  //
+  //   const tx = {
+  //     from: this.wallet.address,
+  //     to: recipient,
+  //     value: utils.parseUnits(send_amount, 'ether'),
+  //     gasPrice: this.gasPrice
+  //   };
+  // }
 
 
-  get receiving_address() {
-    return this.send_transaction_form.get('receiving_address')!;
-  }
+
+
 
 }

@@ -16,6 +16,7 @@ import { SelectNetworkComponent } from './select-network/select-network.componen
 import { TokensComponent } from './tokens/tokens.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     SwapComponent,
     DappsComponent,
     SelectNetworkComponent,
-    TokensComponent
+    TokensComponent,
+    SendTxFormComponent
   ],
   exports: [
     SelectNetworkComponent
