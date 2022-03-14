@@ -19,9 +19,7 @@ export function sendAmountValidator(): ValidatorFn {
     } else {
       //get the token balance
       let selected_token_id = selected_token_control.value.id;
-      // selected_token_balance = coin_balances[selected_token_id]; //old
       selected_token_balance = selected_token_control.value.balance;
-      console.log('balance :' + selected_token_balance );
     }
 
 

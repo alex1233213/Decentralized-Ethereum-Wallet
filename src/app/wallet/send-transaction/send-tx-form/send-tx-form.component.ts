@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { addressValidator } from "../../../shared/validators/addressValidator";
 import { sendAmountValidator } from "../../../shared/validators/sendAmountValidator";
 import { Token } from "../../../shared/utils/Token";
+import { TransactionService } from "../../../services/transaction/transaction.service";
+import { Wallet } from "ethers";
+
 
 @Component({
   selector: 'app-send-tx-form',
@@ -14,8 +17,10 @@ export class SendTxFormComponent implements OnInit {
   send_transaction_form: FormGroup;
   selected_token: Token;
   @Input() tokens_data: Token[];
+  @Input() wallet: Wallet;
 
-  constructor() { }
+
+  constructor(private transaction_service: TransactionService) { }
 
   ngOnInit(): void {
     this.selected_token = this.tokens_data[0];
@@ -27,7 +32,7 @@ export class SendTxFormComponent implements OnInit {
       selected_token: new FormControl(this.selected_token),
       send_amount: new FormControl('',
         [Validators.required]),
-      receiving_address: new FormControl('', [ Validators.required, addressValidator()] )
+      receiving_address: new FormControl('0xb28C2c433a9831f983bbCE7312D63694A2E1E2b8', [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator() });
   }
 
@@ -44,8 +49,9 @@ export class SendTxFormComponent implements OnInit {
   }
 
 
+  //when user clicks next, the dialog for transaction confirm is displayed
   next() {
-    console.log(this.send_transaction_form.value);
+    this.transaction_service.send_transaction(this.send_transaction_form, this.wallet);
   }
 
 
