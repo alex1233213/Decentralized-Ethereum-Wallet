@@ -109,7 +109,7 @@ export class TransactionService {
       gasPrice = gasPrice.mul(this.gas_limit);
     }
 
-    return utils.formatEther(gasPrice).toString();
+    return parseFloat(utils.formatEther(gasPrice));
   }
 
 }

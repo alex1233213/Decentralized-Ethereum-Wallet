@@ -16,8 +16,7 @@ export class SendTxFormComponent implements OnInit {
 
   send_transaction_form: FormGroup;
   selected_token: Token;
-  transaction_fee: string;
-  gasFee: string;
+  gasFee: number;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
 
@@ -37,6 +36,27 @@ export class SendTxFormComponent implements OnInit {
         [Validators.required]),
       receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7', [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator() });
+  }
+
+
+  get send_amount() {
+    const send_amount = this.send_transaction_form.get('send_amount')!.value;
+
+    if(send_amount == null) {
+      return 0;
+    } else {
+      return parseFloat(send_amount);
+    }
+  }
+
+  get totalFee() {
+    const total_fee = this.send_amount + this.gasFee;
+
+    if(isNaN(total_fee)) {
+      return this.gasFee;
+    } else {
+      return total_fee;
+    }
   }
 
 
