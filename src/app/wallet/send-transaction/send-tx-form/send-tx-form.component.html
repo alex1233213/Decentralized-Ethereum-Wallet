@@ -49,7 +49,10 @@
 
       <br>
       <h6>Transaction fee</h6>
-      <!--    <p> {{ 'Gas price ' + gasPrice }}</p>-->
+        <p> {{ 'Estimated gas fee: ' + gasFee }}</p>
+        <br>
+        <br>
+        <p> {{ 'Total fee: ' + transaction_fee }}</p>
       <br>
       <br>
       <button nbButton (click)="next()" [disabled]="send_transaction_form.invalid">Next</button>

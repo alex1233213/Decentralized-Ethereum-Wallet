@@ -16,6 +16,8 @@ export class SendTxFormComponent implements OnInit {
 
   send_transaction_form: FormGroup;
   selected_token: Token;
+  transaction_fee: string;
+  gasFee: string;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
 
@@ -23,6 +25,7 @@ export class SendTxFormComponent implements OnInit {
   constructor(private transaction_service: TransactionService) { }
 
   ngOnInit(): void {
+    this.transaction_service.estimateGasFee(this.wallet).then( fee => this.gasFee = fee);
     this.selected_token = this.tokens_data[0];
     this.initialiseForm();
   }
@@ -32,7 +35,7 @@ export class SendTxFormComponent implements OnInit {
       selected_token: new FormControl(this.selected_token),
       send_amount: new FormControl('',
         [Validators.required]),
-      receiving_address: new FormControl('0xb28C2c433a9831f983bbCE7312D63694A2E1E2b8', [ Validators.required, addressValidator()] )
+      receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7', [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator() });
   }
 

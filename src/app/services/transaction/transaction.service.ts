@@ -9,6 +9,8 @@ import { abi } from "../../shared/utils/erc-20-ABI";
 })
 export class TransactionService {
 
+  gas_limit = 100000;
+
   constructor() { }
 
   /*
@@ -99,5 +101,15 @@ export class TransactionService {
   }
 
 
+
+  async estimateGasFee(wallet: Wallet) {
+    let gasPrice = await wallet.provider.getGasPrice();
+
+    if(gasPrice)  {
+      gasPrice = gasPrice.mul(this.gas_limit);
+    }
+
+    return utils.formatEther(gasPrice).toString();
+  }
 
 }
