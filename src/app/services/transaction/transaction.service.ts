@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BigNumber, ethers, utils, Wallet } from "ethers";
-import {FormGroup} from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { tokenAddresses } from "../../shared/utils/token-addresses";
 import { abi } from "../../shared/utils/erc-20-ABI";
+import { NonceManager } from "@ethersproject/experimental";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,6 @@ export class TransactionService {
 
       this.send_token(send_amount, receiving_address, wallet, contract_address);
     }
-    console.log(send_token);
   }
 
 
@@ -50,6 +50,8 @@ export class TransactionService {
   )
 
   {
+    const nonce_manager = new NonceManager(wallet);
+
     wallet.provider.getGasPrice().then((currentGasPrice: BigNumber) => {
       let gas_price = ethers.utils.hexlify(currentGasPrice);
       console.log(`gas_price: ${utils.formatEther(gas_price)}`);
@@ -81,17 +83,16 @@ export class TransactionService {
           from: wallet.address,
           to: to_address,
           value: ethers.utils.parseEther(send_token_amount),
-          nonce: wallet.provider.getTransactionCount(wallet.address, "latest"),
           gasLimit: ethers.utils.hexlify(gas_limit), // 100000
           gasPrice: gas_price,
         }
 
 
         try {
-          wallet.sendTransaction(tx).then((transaction) => {
+          nonce_manager.sendTransaction(tx).then((transaction) => {
             alert('transaction has been initiated');
             console.log(transaction);
-          })
+          });
         } catch (error) {
           alert("failed to send!!")
           console.log('error sending transaction');
