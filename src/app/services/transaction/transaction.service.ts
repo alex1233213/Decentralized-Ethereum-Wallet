@@ -25,21 +25,21 @@ export class TransactionService {
   * Date accessed: 14/03/2022
   * ===============================================================================
   */
+  send_transaction(
+    send_amount: string,
+    send_token: Token,
+    receiving_address: string,
+    wallet: Wallet
+  ) {
+      const send_token_id = send_token.id;
 
-  //send transaction using data from the form
-  send_transaction(transaction_form: FormGroup, wallet: Wallet) {
-    const send_amount = transaction_form.get('send_amount')!.value.toString();
-    const send_token = transaction_form.get('selected_token')!.value.id;
-    const receiving_address = transaction_form.get('receiving_address')!.value;
+      if(send_token_id == 'ethereum') {
+        this.send_token(send_amount, receiving_address, wallet);
+      } else { //ERC-20 token
+        let contract_address = tokenAddresses[send_token_id];
 
-
-    // if(send_token == 'ethereum') {
-    //   this.send_token(send_amount, receiving_address, wallet);
-    // } else { //ERC-20 token
-    //   let contract_address = tokenAddresses[send_token];
-    //
-    //   this.send_token(send_amount, receiving_address, wallet, contract_address);
-    // }
+        this.send_token(send_amount, receiving_address, wallet, contract_address);
+      }
   }
 
 

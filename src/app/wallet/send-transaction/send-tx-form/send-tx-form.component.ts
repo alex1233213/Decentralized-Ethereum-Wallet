@@ -35,10 +35,11 @@ export class SendTxFormComponent implements OnInit {
   initialiseForm() {
     this.send_transaction_form = new FormGroup({
       selected_token: new FormControl(this.selected_token),
-      send_amount: new FormControl('')/*,
-        [Validators.required])*/,
-      receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7', [ Validators.required, addressValidator()] )
-    })//, { validators: sendAmountValidator() }); TODO - UNCOMMENT
+      send_amount: new FormControl('',
+        [Validators.required]),
+      receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7',
+        [ Validators.required, addressValidator()] )
+    }, { validators: sendAmountValidator() });
   }
 
 

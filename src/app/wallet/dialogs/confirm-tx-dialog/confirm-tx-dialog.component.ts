@@ -54,8 +54,15 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
   }
 
 
-  sendTransaction() {
+  confirmSendTx() {
+    this.txService.send_transaction(
+      this.send_amount.toString(),
+      this.send_token,
+      this.recipient_address,
+      this.wallet
+    );
 
+    this.close();
   }
 
 
