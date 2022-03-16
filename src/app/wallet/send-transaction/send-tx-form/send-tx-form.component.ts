@@ -5,6 +5,8 @@ import { sendAmountValidator } from "../../../shared/validators/sendAmountValida
 import { Token } from "../../../shared/utils/Token";
 import { TransactionService } from "../../../services/transaction/transaction.service";
 import { Wallet } from "ethers";
+import { NbDialogService } from "@nebular/theme";
+import { ConfirmTxDialogComponent } from "../../dialogs/confirm-tx-dialog/confirm-tx-dialog.component";
 
 
 @Component({
@@ -21,7 +23,8 @@ export class SendTxFormComponent implements OnInit {
   @Input() wallet: Wallet;
 
 
-  constructor(private transaction_service: TransactionService) { }
+  constructor(private transaction_service: TransactionService,
+              private dialogService: NbDialogService ) { }
 
   ngOnInit(): void {
     this.transaction_service.estimateGasFee(this.wallet).then( fee => this.gasFee = fee);
@@ -32,17 +35,17 @@ export class SendTxFormComponent implements OnInit {
   initialiseForm() {
     this.send_transaction_form = new FormGroup({
       selected_token: new FormControl(this.selected_token),
-      send_amount: new FormControl('',
-        [Validators.required]),
+      send_amount: new FormControl('')/*,
+        [Validators.required])*/,
       receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7', [ Validators.required, addressValidator()] )
-    }, { validators: sendAmountValidator() });
+    })//, { validators: sendAmountValidator() }); TODO - UNCOMMENT
   }
 
 
   get send_amount() {
     const send_amount = this.send_transaction_form.get('send_amount')!.value;
 
-    if(send_amount == null) {
+    if( send_amount == '' || send_amount == null) {
       return 0;
     } else {
       return parseFloat(send_amount);
@@ -74,7 +77,20 @@ export class SendTxFormComponent implements OnInit {
 
   //when user clicks next, the dialog for transaction confirm is displayed
   next() {
-    this.transaction_service.send_transaction(this.send_transaction_form, this.wallet);
+    // this.transaction_service.send_transaction(this.send_transaction_form, this.wallet);
+    this.open_confirm_dialogue();
+  }
+
+
+  open_confirm_dialogue() {
+    this.dialogService.open(ConfirmTxDialogComponent, {
+      context: {
+        send_token: this.selected_token,
+        send_amount: this.send_amount,
+        destination_address: this.receiving_address.value,
+        wallet: this.wallet
+      }
+    });
   }
 
 

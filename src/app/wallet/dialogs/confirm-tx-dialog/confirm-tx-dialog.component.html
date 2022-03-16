@@ -1,0 +1,28 @@
+
+<nb-card>
+  <nb-card-body>
+    <h6>Transaction Confirmation</h6>
+
+    <div class="row">
+      <div class="col">
+        <p>Sending: {{send_amount + ' ' +  send_token.name}} </p>
+      </div>
+
+      <div class="col">
+        <p>To address: {{ destination_address }}</p>
+      </div>
+    </div>
+
+    <p>Gas fee: {{ gasFee }} </p>
+    <p>Total: {{ totalFee }}</p>
+
+    <p>Warning: Make sure the information is correct.
+      Sending funds to a wrong address is irreversible and funds will be lost</p>
+
+    <button nbButton>Cancel</button>
+
+    <br>
+    <br>
+    <button nbButton>Send</button>
+  </nb-card-body>
+</nb-card>

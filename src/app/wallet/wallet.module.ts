@@ -17,6 +17,7 @@ import { TokensComponent } from './tokens/tokens.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
+import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-for
     DappsComponent,
     SelectNetworkComponent,
     TokensComponent,
-    SendTxFormComponent
+    SendTxFormComponent,
+    ConfirmTxDialogComponent
   ],
   exports: [
     SelectNetworkComponent

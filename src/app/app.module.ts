@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
-  NbSidebarModule
+  NbSidebarModule, NbDialogModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LayoutModule } from "./layout/layout.module";
@@ -23,7 +23,8 @@ import { LayoutModule } from "./layout/layout.module";
     NbThemeModule.forRoot({ name: 'default' }),
     NbEvaIconsModule,
     NbSidebarModule.forRoot(),
-    LayoutModule
+    LayoutModule,
+    NbDialogModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

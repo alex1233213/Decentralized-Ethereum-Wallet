@@ -1,0 +1,14 @@
+.row {
+  display: flex; /* equal height of the children */
+  gap: 5%;
+  overflow-wrap: break-word;
+  padding: 0;
+}
+
+.col {
+  flex: 1; /* additionally, equal width */
+  padding: 1em;
+  width: 40%;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+}
