@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { WalletLayoutComponent } from './wallet-layout/wallet-layout.component';
-import {NbLayoutModule, NbListModule, NbSidebarModule} from "@nebular/theme";
+import {NbLayoutModule, NbListModule, NbSelectModule, NbSidebarModule} from "@nebular/theme";
 import { HomePageLayoutComponent } from './home-page-layout/home-page-layout.component';
 import { WalletModule } from "../wallet/wallet.module";
 
@@ -19,7 +19,8 @@ import { WalletModule } from "../wallet/wallet.module";
         NbLayoutModule,
         NbSidebarModule,
         WalletModule,
-        NbListModule
+        NbListModule,
+        NbSelectModule
     ]
 })
 export class LayoutModule { }

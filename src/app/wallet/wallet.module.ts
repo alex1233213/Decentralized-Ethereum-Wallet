@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
+import { SelectAccountComponent } from './select-account/select-account.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +29,13 @@ import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx
     SelectNetworkComponent,
     TokensComponent,
     SendTxFormComponent,
-    ConfirmTxDialogComponent
+    ConfirmTxDialogComponent,
+    SelectAccountComponent
   ],
-  exports: [
-    SelectNetworkComponent
-  ],
+    exports: [
+        SelectNetworkComponent,
+        SelectAccountComponent
+    ],
   imports: [
     CommonModule,
     NbMenuModule,
