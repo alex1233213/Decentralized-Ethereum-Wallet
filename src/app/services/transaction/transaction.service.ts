@@ -103,14 +103,31 @@ export class TransactionService {
 
 
 
+  //estimate gas fee for ethereum transaction
   async estimateGasFee(wallet: Wallet) {
-    let gasPrice = await wallet.provider.getGasPrice();
+    // @ts-ignore
+    let gasFee = (await wallet.provider.getFeeData()).maxFeePerGas.mul(this.gas_limit);
 
-    if(gasPrice)  {
-      gasPrice = gasPrice.mul(this.gas_limit);
-    }
+    return parseFloat(utils.formatEther(gasFee));
+  }
 
-    return parseFloat(utils.formatEther(gasPrice));
+
+  //method estimates the gas fee for a erc20 token transaction
+  async estimateErc20GasFee(contract_address: string, wallet: Wallet) {
+
+    let erc20_gas_limit_wei: number = 200000;
+    let erc20_gas_limit_bn: BigNumber = BigNumber.from(erc20_gas_limit_wei);
+
+    let erc20_contract = new ethers.Contract(
+      contract_address,
+      abi,
+      wallet
+    );
+
+    // @ts-ignore
+    let gas_fee: BigNumber = (await wallet.provider.getFeeData()).maxFeePerGas.mul(erc20_gas_limit_bn);
+
+    return parseFloat(utils.formatEther(gas_fee));
   }
 
 }

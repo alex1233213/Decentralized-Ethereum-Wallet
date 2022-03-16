@@ -3,18 +3,19 @@
   <nb-card-body>
     <h6>Transaction Confirmation</h6>
 
+<!--    <p *ngIf="insufficient_funds">Not enough ether for gas</p>-->
+
     <div class="row">
       <div class="col">
         <p>Sending: {{send_amount + ' ' +  send_token.name}} </p>
       </div>
 
       <div class="col">
-        <p>To address: {{ destination_address }}</p>
+        <p>To address: {{ recipient_address }}</p>
       </div>
     </div>
 
-    <p>Gas fee: {{ gasFee }} </p>
-    <p>Total: {{ totalFee }}</p>
+    <p>Gas fee: {{ gasFee +  ' (eth)' }} </p>
 
     <p>Warning: Make sure the information is correct.
       Sending funds to a wrong address is irreversible and funds will be lost</p>

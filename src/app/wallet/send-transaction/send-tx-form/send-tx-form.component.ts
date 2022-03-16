@@ -87,7 +87,7 @@ export class SendTxFormComponent implements OnInit {
       context: {
         send_token: this.selected_token,
         send_amount: this.send_amount,
-        destination_address: this.receiving_address.value,
+        recipient_address: this.receiving_address.value,
         wallet: this.wallet
       }
     });
