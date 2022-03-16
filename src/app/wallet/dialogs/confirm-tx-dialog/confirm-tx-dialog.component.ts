@@ -4,6 +4,7 @@ import { TransactionService } from "../../../services/transaction/transaction.se
 import { Wallet } from "ethers";
 import { NbDialogRef } from "@nebular/theme";
 import Timeout = NodeJS.Timeout;
+import {BalanceService} from "../../../services/balance/balance.service";
 
 @Component({
   selector: 'app-confirm-tx-dialog',
@@ -16,17 +17,22 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
   send_amount: number;
   recipient_address: string;
   wallet: Wallet;
-  gasFee: number;
+  gas_fee: number;
+  eth_balance: string;
   interval_id: Timeout;
 
   constructor(private txService: TransactionService,
-              protected dialogRef: NbDialogRef<ConfirmTxDialogComponent>) { }
+              protected dialogRef: NbDialogRef<ConfirmTxDialogComponent>,
+              private balanceService: BalanceService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.eth_balance = await this.balanceService.readEtherBalance(this.wallet);
+    console.log('ether balance: ' + this.eth_balance);
+
     //update the gas fee every 3 seconds
     this.interval_id = setInterval( async () => {
       await this.estimateTransactionFee();
-      console.log('this.gasFee: ' + this.gasFee);
+      console.log('this.gasFee: ' + this.gas_fee);
     }, 3000);
   }
 
@@ -37,13 +43,18 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
 
 
   async estimateTransactionFee() {
-    this.gasFee = await this.txService.estimateGasFee(this.send_token, this.wallet);
+    this.gas_fee = await this.txService.estimateGasFee(this.send_token, this.wallet);
     // console.log('this.gasFee: ' + this.gasFee);
   }
 
 
   close() {
     this.dialogRef.close();
+  }
+
+
+  sendTransaction() {
+    this.txService.send_transaction();
   }
 
 

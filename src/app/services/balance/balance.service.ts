@@ -29,7 +29,7 @@ export class BalanceService {
     if the wallet is connected to test network it will return the
     test ether amount.
   */
-  async readEtherBalance(wallet: Wallet) {
+  async readEtherBalance(wallet: Wallet): Promise <string> {
     const ethBalance = await wallet.provider.getBalance(wallet.address);
     const remainder = ethBalance.mod(1e14);
     return ethers.utils.formatEther(ethBalance.sub(remainder));
