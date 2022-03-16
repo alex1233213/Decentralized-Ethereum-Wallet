@@ -27,6 +27,7 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.eth_balance = await this.balanceService.readEtherBalance(this.wallet);
+    await this.estimateTransactionFee();
     console.log('ether balance: ' + this.eth_balance);
 
     //update the gas fee every 3 seconds
@@ -54,7 +55,7 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
 
 
   sendTransaction() {
-    this.txService.send_transaction();
+
   }
 
 

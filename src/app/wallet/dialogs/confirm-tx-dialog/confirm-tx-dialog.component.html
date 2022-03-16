@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <p>Gas fee: {{ gas_fee +  ' (eth)' }} </p>
+    <p>Gas fee: {{ gas_fee ? gas_fee + ' (eth)' : '0.00 eth' }} </p>
 
     <p>Warning: Make sure the information is correct.
       Sending funds to a wrong address is irreversible and funds will be lost</p>
