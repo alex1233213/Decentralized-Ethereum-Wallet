@@ -3,7 +3,7 @@
   <nb-card-body>
     <h6>Transaction Confirmation</h6>
 
-<!--    <p *ngIf="insufficient_funds">Not enough ether for gas</p>-->
+
 
     <div class="row">
       <div class="col">
@@ -24,6 +24,8 @@
 
     <br>
     <br>
-    <button nbButton (click)="confirmSendTx()">Confirm Transaction</button>
+      <p *ngIf="!checkEnoughFunds()">Insufficient funds</p>
+    <br>
+    <button nbButton (click)="confirmSendTx()" [disabled]="!checkEnoughFunds()">Confirm Transaction</button>
   </nb-card-body>
 </nb-card>

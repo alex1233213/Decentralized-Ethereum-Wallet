@@ -19,6 +19,7 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
   wallet: Wallet;
   gas_fee: number;
   eth_balance: string;
+  // total_fee: number;
   interval_id: Timeout;
 
   constructor(private txService: TransactionService,
@@ -63,6 +64,19 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
     );
 
     this.close();
+  }
+
+
+  // @ts-ignore
+  checkEnoughFunds(): boolean {
+    if(this.send_token.id == 'ethereum') {
+      const transaction_fee = this.send_amount + this.gas_fee;
+      console.log(parseFloat(this.eth_balance) < transaction_fee);
+      return parseFloat(this.eth_balance) > transaction_fee;
+    }
+
+    //erc20 token
+    return true;
   }
 
 
