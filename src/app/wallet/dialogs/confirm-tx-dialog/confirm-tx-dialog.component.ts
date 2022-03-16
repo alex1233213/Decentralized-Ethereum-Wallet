@@ -3,6 +3,7 @@ import { Token } from "../../../shared/utils/Token";
 import { TransactionService } from "../../../services/transaction/transaction.service";
 import { Wallet } from "ethers";
 import {tokenAddresses} from "../../../shared/utils/token-addresses";
+import { NbDialogRef } from "@nebular/theme";
 
 @Component({
   selector: 'app-confirm-tx-dialog',
@@ -17,7 +18,8 @@ export class ConfirmTxDialogComponent implements OnInit {
   wallet: Wallet;
   gasFee: number;
 
-  constructor(private txService: TransactionService) { }
+  constructor(private txService: TransactionService,
+              protected dialogRef: NbDialogRef<ConfirmTxDialogComponent>) { }
 
   ngOnInit(): void {
     // setInterval( async () => {
@@ -31,15 +33,13 @@ export class ConfirmTxDialogComponent implements OnInit {
 
 
   async estimateTransactionFee() {
-    if(this.send_token.id == 'ethereum') {
+    this.gasFee = await this.txService.estimateGasFee(this.send_token, this.wallet);
+    console.log('this.gasFee: ' + this.gasFee);
+  }
 
-      this.gasFee = await this.txService.estimateGasFee(this.wallet);
 
-    } else { //estimate gas for ERC-20 token contract transaction
-      let contract_address = tokenAddresses[this.send_token.id];
-
-      this.gasFee = await this.txService.estimateErc20GasFee(contract_address, this.wallet);
-    }
+  close() {
+    this.dialogRef.close();
   }
 
 

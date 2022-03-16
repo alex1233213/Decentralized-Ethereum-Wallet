@@ -4,6 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { tokenAddresses } from "../../shared/utils/token-addresses";
 import { abi } from "../../shared/utils/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
+import { Token } from "../../shared/utils/Token";
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +105,7 @@ export class TransactionService {
 
 
   //estimate gas fee for ethereum transaction
-  async estimateGasFee(wallet: Wallet) {
+  async estimateEthTxFee(wallet: Wallet) {
     // @ts-ignore
     let gasFee = (await wallet.provider.getFeeData()).maxFeePerGas.mul(this.gas_limit);
 
@@ -128,6 +129,23 @@ export class TransactionService {
     let gas_fee: BigNumber = (await wallet.provider.getFeeData()).maxFeePerGas.mul(erc20_gas_limit_bn);
 
     return parseFloat(utils.formatEther(gas_fee));
+  }
+
+
+  async estimateGasFee(send_token: Token, wallet: Wallet) {
+    let gasFee;
+
+    if(send_token.id == 'ethereum') {
+
+      gasFee = await this.estimateEthTxFee(wallet);
+
+    } else { //estimate gas for ERC-20 token contract transaction
+      let contract_address = tokenAddresses[send_token.id];
+
+      gasFee = await this.estimateErc20GasFee(contract_address, wallet);
+    }
+
+    return gasFee;
   }
 
 }
