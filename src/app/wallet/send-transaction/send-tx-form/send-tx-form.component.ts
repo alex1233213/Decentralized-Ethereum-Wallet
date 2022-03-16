@@ -27,8 +27,8 @@ export class SendTxFormComponent implements OnInit {
               private dialogService: NbDialogService ) { }
 
   ngOnInit(): void {
-    this.transaction_service.estimateGasFee(this.wallet).then( fee => this.gasFee = fee);
     this.selected_token = this.tokens_data[0];
+    this.transaction_service.estimateGasFee(this.selected_token, this.wallet).then( fee => this.gasFee = fee);
     this.initialiseForm();
   }
 
@@ -94,5 +94,8 @@ export class SendTxFormComponent implements OnInit {
   }
 
 
+  getGasFee() {
+    this.transaction_service.estimateGasFee(this.selected_token, this.wallet).then( fee => this.gasFee = fee);
+  }
 
 }

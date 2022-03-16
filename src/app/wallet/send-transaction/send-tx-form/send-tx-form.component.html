@@ -2,7 +2,7 @@
   <nb-card-body>
     <h5>Send</h5>
     <form [formGroup]="send_transaction_form">
-      <nb-select [(selected)]="selected_token" formControlName="selected_token">
+      <nb-select [(selected)]="selected_token" formControlName="selected_token" (selectedChange)="getGasFee()">
         <nb-select-label>
           <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
         </nb-select-label>
@@ -52,7 +52,6 @@
         <p> {{ 'Estimated gas fee: ' + gasFee }}</p>
         <br>
         <br>
-        <p> {{ 'Total fee: ' + totalFee }}</p>
       <br>
       <br>
       <button nbButton (click)="next()" [disabled]="send_transaction_form.invalid">Next</button>
