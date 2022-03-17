@@ -30,6 +30,15 @@ export class CreateWalletComponent implements OnInit {
     //only create the wallet if it hasn't already been created
     // if(this.wallet == undefined) {
     //   this.wallet = this.walletService.createNewWallet();
+
+    //after creating wallet, store the first account name and
+    // HD index path in the localstorage
+    // const accounts = {
+    //   'Account 1': 0
+    // };
+
+    // localStorage.setItem('accounts', JSON.stringify(accounts));
+
     //   this.mnemonic = this.wallet.mnemonic.phrase.split(' ');
     // }
 
