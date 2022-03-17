@@ -6,8 +6,8 @@ import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
 import {
   NbButtonModule,
-  NbCardModule,
-  NbInputModule,
+  NbCardModule, NbIconModule,
+  NbInputModule, NbListModule,
   NbMenuModule,
   NbSelectModule, NbSpinnerModule,
   NbTreeGridModule
@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 import { SelectAccountComponent } from './select-account/select-account.component';
+import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SelectAccountComponent } from './select-account/select-account.componen
     TokensComponent,
     SendTxFormComponent,
     ConfirmTxDialogComponent,
-    SelectAccountComponent
+    SelectAccountComponent,
+    NewAccDialogComponent
   ],
     exports: [
         SelectNetworkComponent,
@@ -46,7 +48,9 @@ import { SelectAccountComponent } from './select-account/select-account.componen
     NbInputModule,
     ReactiveFormsModule,
     NbButtonModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    NbIconModule,
+    NbListModule
   ]
 })
 export class WalletModule { }
