@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { addressValidator } from "../../../shared/validators/addressValidator";
 import { sendAmountValidator } from "../../../shared/validators/sendAmountValidator";
-import { Token } from "../../../shared/utils/Token";
+import { Token } from "../../../shared/utils/types/Token";
 import { TransactionService } from "../../../services/transaction/transaction.service";
 import { Wallet } from "ethers";
 import { NbDialogService } from "@nebular/theme";

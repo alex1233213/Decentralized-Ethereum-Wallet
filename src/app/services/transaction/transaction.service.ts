@@ -4,7 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { tokenAddresses } from "../../shared/utils/token-addresses";
 import { abi } from "../../shared/utils/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
-import { Token } from "../../shared/utils/Token";
+import { Token } from "../../shared/utils/types/Token";
 
 @Injectable({
   providedIn: 'root'

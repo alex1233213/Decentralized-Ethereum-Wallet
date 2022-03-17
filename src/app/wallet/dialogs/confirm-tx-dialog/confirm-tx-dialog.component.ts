@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Token } from "../../../shared/utils/Token";
+import { Token } from "../../../shared/utils/types/Token";
 import { TransactionService } from "../../../services/transaction/transaction.service";
 import { Wallet } from "ethers";
 import { NbDialogRef } from "@nebular/theme";
