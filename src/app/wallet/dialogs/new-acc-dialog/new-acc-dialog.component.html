@@ -1,6 +1,14 @@
-<h6>Enter name for account</h6>
-<input type="text" nbInput>
-<button nbButton (click)="close()">Cancel</button>
-<br>
-<br>
-<button nbButton>Create</button>
+<nb-card>
+  <nb-card-body>
+    <h6>Enter name for account</h6>
+    <input type="text" nbInput [formControl]="account_name">
+    <br>
+    <br>
+    <button nbButton (click)="close()">Cancel</button>
+    <br>
+    <br>
+    <button nbButton (click)="create_account()">Create</button>
+  </nb-card-body>
+</nb-card>
+
+

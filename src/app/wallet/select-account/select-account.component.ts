@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalletService } from "../../services/wallet/wallet.service";
 import { Wallet } from "ethers";
 import {NbDialogService} from "@nebular/theme";
+import {NewAccDialogComponent} from "../dialogs/new-acc-dialog/new-acc-dialog.component";
 
 
 @Component({
@@ -39,7 +40,18 @@ export class SelectAccountComponent implements OnInit {
     const max_index = Math.max(...account_indexes);
     const new_account_index = max_index + 1;
 
+    let account_name;
     //prompt the user for the account name
+    this.dialogService.open(NewAccDialogComponent).onClose
+      .subscribe(acc_name => {
+        account_name = acc_name;
+
+
+        if(account_name != undefined) {
+          console.log(account_name);
+        }
+      });
+
 
 
     // this.walletService.switchWallet

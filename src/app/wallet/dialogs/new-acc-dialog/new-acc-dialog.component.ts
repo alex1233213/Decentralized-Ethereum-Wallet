@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NbDialogRef} from "@nebular/theme";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-new-acc-dialog',
@@ -8,6 +9,8 @@ import {NbDialogRef} from "@nebular/theme";
 })
 export class NewAccDialogComponent implements OnInit {
 
+  account_name: FormControl = new FormControl('', Validators.required);
+
   constructor(protected dialogRef: NbDialogRef<NewAccDialogComponent>) { }
 
   ngOnInit(): void {
@@ -15,5 +18,9 @@ export class NewAccDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  create_account() {
+    this.dialogRef.close(this.account_name.value);
   }
 }
