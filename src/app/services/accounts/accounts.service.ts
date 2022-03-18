@@ -3,14 +3,40 @@ import { NewAccDialogComponent } from "../../wallet/dialogs/new-acc-dialog/new-a
 import { NbDialogService } from "@nebular/theme";
 import { WalletService } from "../wallet/wallet.service";
 import { Wallet } from "ethers";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountsService {
 
+  private accounts$: BehaviorSubject<any> = new BehaviorSubject<any>(this.getAccountsLocalStorage());
+  private selected_account$: BehaviorSubject<string> =
+    new BehaviorSubject<string>(Object.keys(this.getAccountsLocalStorage())[0]);
+
   constructor(private dialogService: NbDialogService,
               private walletService: WalletService) { }
+
+
+
+  getAccounts() {
+    return this.accounts$.asObservable();
+  }
+
+
+  setAccounts(accounts: {}) {
+    this.accounts$.next(accounts);
+  }
+
+  getSelectedAccount() {
+    return this.selected_account$.asObservable();
+  }
+
+  setSelectedAccount(account: string)  {
+    this.selected_account$.next(account);
+  }
+
+
 
   addAccount(wallet: Wallet) {
     //get the accounts and their hd path index
@@ -31,6 +57,8 @@ export class AccountsService {
           //save the new account name and index to the localstorage
           accounts[account_name] = new_account_index;
           localStorage.setItem('accounts', JSON.stringify(accounts));
+          this.setAccounts(accounts);
+          this.setSelectedAccount(account_name);
 
           //derive new account
           this.deriveAccount(new_account_index.toString(), wallet.mnemonic.phrase);
@@ -47,7 +75,7 @@ export class AccountsService {
   }
 
 
-  getAccounts(){
+  getAccountsLocalStorage(){
     return JSON.parse(<string>localStorage.getItem('accounts'));
   }
 }

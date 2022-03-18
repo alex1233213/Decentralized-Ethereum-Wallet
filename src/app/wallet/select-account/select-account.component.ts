@@ -14,16 +14,22 @@ export class SelectAccountComponent implements OnInit {
   wallet: Wallet;
   accounts: any;
   selected_account: string;
-  loading_account = false;
 
   constructor(private accountsService: AccountsService,
               private walletService: WalletService) { }
 
   ngOnInit(): void {
-    this.accounts = this.getAccounts();
 
-    //selected account will be the first account
-    this.selected_account = Object.keys(this.accounts)[0];
+    this.accountsService.getAccounts().subscribe( (accounts: {}) => {
+      this.accounts = accounts;
+    });
+
+
+    this.accountsService.getSelectedAccount().subscribe( (account: string) => {
+      this.selected_account = account;
+    });
+
+
 
     this.walletService.getWallet().subscribe( (wallet) => {
       this.wallet = wallet;
@@ -31,21 +37,19 @@ export class SelectAccountComponent implements OnInit {
   }
 
 
+
+
   addAccount() {
     this.accountsService.addAccount(this.wallet);
   }
 
-
-  getAccounts() {
-    return this.accountsService.getAccounts();
-  }
 
 
   onAccountSelect() {
     setTimeout( () => {
       const selected_index = this.accounts[this.selected_account];
       const mnemonic = this.wallet.mnemonic.phrase;
-      this.accountsService.deriveAccount(selected_index.toString(), mnemonic)
+      this.accountsService.deriveAccount(selected_index.toString(), mnemonic);
     }, 100);
   }
 

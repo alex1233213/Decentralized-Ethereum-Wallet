@@ -15,7 +15,7 @@ import {
 import { SelectNetworkComponent } from './select-network/select-network.component';
 import { TokensComponent } from './tokens/tokens.component';
 import { HttpClientModule } from "@angular/common/http";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 import { SelectAccountComponent } from './select-account/select-account.component';
@@ -50,7 +50,8 @@ import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.c
     NbButtonModule,
     NbSpinnerModule,
     NbIconModule,
-    NbListModule
+    NbListModule,
+    FormsModule
   ]
 })
 export class WalletModule { }

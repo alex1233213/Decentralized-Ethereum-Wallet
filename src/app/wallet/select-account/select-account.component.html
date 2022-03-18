@@ -1,6 +1,7 @@
+
 <nb-select status="primary"
            shape="round"
-           [(selected)]="selected_account"
+           [(ngModel)]="selected_account"
            (selectedChange)="onAccountSelect()">
   <nb-select-label>
     {{ selected_account  }}
@@ -12,6 +13,7 @@
 <br>
 <br>
 <button nbButton (click)="addAccount()">Create account</button>
+
 
 
 
