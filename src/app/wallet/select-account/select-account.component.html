@@ -1,8 +1,27 @@
-<nb-select status="primary" shape="round">
-  <nb-option value="1">Option 1</nb-option>
-</nb-select>
 
-<button nbButton (click)="addAccount()">Create account</button>
+
+<!--<ng-container *ngIf="loading_data == true">-->
+<!--  <p>loading</p>-->
+<!--</ng-container>-->
+
+
+<ng-container>
+  <nb-select status="primary"
+             shape="round"
+             [(selected)]="selected_account"
+             (selectedChange)="onAccountSelect()">
+    <nb-select-label>
+      {{ selected_account  }}
+    </nb-select-label>
+
+    <nb-option *ngFor="let account of accounts | keyvalue" [value]="account.key"> {{ account.key }} </nb-option>
+  </nb-select>
+
+  <br>
+  <br>
+  <button nbButton (click)="addAccount()">Create account</button>
+</ng-container>
+
 
 
 

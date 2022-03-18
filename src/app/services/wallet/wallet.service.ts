@@ -50,6 +50,12 @@ export class WalletService {
   }
 
 
+
+  reloadWallet(wallet: Wallet) {
+    this.wallet.next(wallet.connect(this.infuraProvider));
+  }
+
+
   createNewWallet(): Wallet {
     return ethers.Wallet.createRandom();
   }

@@ -34,16 +34,21 @@ export class AccountsService {
           localStorage.setItem('accounts', JSON.stringify(accounts));
 
           //derive new account
-          this.deriveAccount(new_account_index.toString(), wallet);
+          this.deriveAccount(new_account_index.toString(), wallet.mnemonic.phrase);
         }
       });
   }
 
 
-  deriveAccount(account_index: string, wallet: Wallet) {
+  deriveAccount(account_index: string, mnemonic: string) {
     const path =  `m/44'/60'/0'/0/${ account_index }`;
 
-    const new_wallet: Wallet = Wallet.fromMnemonic(wallet.mnemonic.phrase, path);
-    this.walletService.connectToProvider(new_wallet);
+    const new_wallet: Wallet = Wallet.fromMnemonic(mnemonic, path);
+    this.walletService.reloadWallet(new_wallet);
+  }
+
+
+  getAccounts(){
+    return JSON.parse(<string>localStorage.getItem('accounts'));
   }
 }
