@@ -9,7 +9,6 @@ import { Wallet } from "ethers";
 })
 export class AccountsService {
 
-
   constructor(private dialogService: NbDialogService,
               private walletService: WalletService) { }
 

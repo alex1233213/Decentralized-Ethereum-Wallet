@@ -14,6 +14,7 @@ export class SelectAccountComponent implements OnInit {
   wallet: Wallet;
   accounts: any;
   selected_account: string;
+  loading_account = false;
 
   constructor(private accountsService: AccountsService,
               private walletService: WalletService) { }
@@ -41,10 +42,11 @@ export class SelectAccountComponent implements OnInit {
 
 
   onAccountSelect() {
-    const selected_index = this.accounts[this.selected_account];
-    // console.log(selected_index);
-    const mnemonic = this.wallet.mnemonic.phrase;
-    this.accountsService.deriveAccount(selected_index.toString(), mnemonic);
+    setTimeout( () => {
+      const selected_index = this.accounts[this.selected_account];
+      const mnemonic = this.wallet.mnemonic.phrase;
+      this.accountsService.deriveAccount(selected_index.toString(), mnemonic)
+    }, 100);
   }
 
 }
