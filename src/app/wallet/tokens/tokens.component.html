@@ -1,3 +1,8 @@
+<nb-card [nbSpinner]="loadingData" nbSpinnerStatus="danger" *ngIf="loadingData">
+  <nb-card-body><h6>Loading data</h6></nb-card-body>
+</nb-card>
+
+
 <nb-card *ngIf="network">
   <nb-card-body>
     <table>

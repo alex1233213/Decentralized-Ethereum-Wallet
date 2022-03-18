@@ -19,7 +19,7 @@ export class TokensComponent implements OnInit {
   coin_balances: any = {};
   wallet: Wallet;
   network: any;
-
+  loadingData: boolean;
 
   constructor(private coinGeckoService: CoinGeckoService,
               private balanceService: BalanceService,
@@ -27,7 +27,6 @@ export class TokensComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
-
     //******************** RELEASE ***********************
     // this.coinGeckoService.getTokensData().subscribe(
     //   (data) => console.log(data));
@@ -37,14 +36,18 @@ export class TokensComponent implements OnInit {
     //****************************************************
 
     this.walletService.getWallet().subscribe( async (wallet: Wallet) => {
+      this.loadingData = true;
+
       this.wallet = wallet;
       this.ethBalance = await this.balanceService.readEtherBalance(this.wallet);
       this.coin_balances['ethereum'] = this.ethBalance;
       this.getERC20Balances();
       wallet.provider.getNetwork().then((n: Network) => this.network = n);
+
+      this.loadingData = false;
     });
 
-    this.tokensData = testData;
+    this.tokensData = testData; // TODO - FETCH DATA FROM API
   }
 
 
