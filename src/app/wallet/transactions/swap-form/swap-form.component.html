@@ -1,37 +1,27 @@
 <nb-card>
   <nb-card-body>
-    <h5>Send</h5>
+    <h5>Swap</h5>
     <form [formGroup]="swap_form">
-      <nb-select [(selected)]="selected_token" formControlName="from_token">
-        <nb-select-label>
-          <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
-        </nb-select-label>
-        <nb-option *ngFor="let token of tokens_data" [value]="token">
-          <div>
-            <div>
-              <span>
-                <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">
-                {{ token.symbol.toUpperCase() }}
-              </span>
-            </div>
-
-            <div class="token-balance">
-              <span>
-                {{ "Balance: " + token.balance }}
-              </span>
-            </div>
-          </div>
-        </nb-option>
-      </nb-select>
+      <label for="from_token">Swap From</label>
+      <br>
+      <app-select-token id="from_token" [tokens_data]="tokens_data" [form_control]="from_token"></app-select-token>
       <br>
       <br>
-
       <input type="number" nbInput placeholder="Amount" formControlName="amount">
-
       <br>
       <br>
+      <br>
+      <br>
+      <br>
 
+      <label for="to_token">Swap To</label>
+      <br>
+      <app-select-token id="to_token" [tokens_data]="tokens_data" [form_control]="to_token"></app-select-token>
+      <br>
+      <br>
       <button nbButton [disabled]="swap_form.invalid">Review swap</button>
     </form>
   </nb-card-body>
 </nb-card>
+
+
