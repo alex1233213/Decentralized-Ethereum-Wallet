@@ -6,13 +6,14 @@ import { testData } from "../../shared/utils/test_data/cgTestData";
 import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { Token } from "../../shared/utils/types/Token";
 import { Network } from "@ethersproject/networks";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-send-transaction',
-  templateUrl: './send-transaction.component.html',
-  styleUrls: ['./send-transaction.component.css']
+  selector: 'app-transactions',
+  templateUrl: './transactions.component.html',
+  styleUrls: ['./transactions.component.css']
 })
-export class SendTransactionComponent implements OnInit {
+export class TransactionsComponent implements OnInit {
 
   wallet: Wallet;
   tokensData: Token[];
@@ -21,18 +22,24 @@ export class SendTransactionComponent implements OnInit {
   coin_balances: any = {};
   network: Network;
   gasPrice: any;
+  current_route: string;
 
 
   constructor(private walletService: WalletService,
               private balanceService: BalanceService,
-              private coinGeckoService: CoinGeckoService) { }
+              private coinGeckoService: CoinGeckoService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.current_route = this.router.url;
+
     // ************************ RELEASE CODE*******************************
     //get the data from coingecko
     // this.coinGeckoService.getTokensData().subscribe( (data: Token[]) => {
+    // this.loadingData = true;
     //   this.coinGeckoData = data
     //   console.log(this.coinGeckoData);
+    // this.loadingData = false;
     // });
     // ************************  // // // //********************************
 
@@ -82,37 +89,5 @@ export class SendTransactionComponent implements OnInit {
       ];
     }
   }
-
-
-
-
-
-
-  // sendTransaction() {
-  //   //  **** RELEASE ****
-  //   // const recipient = this.send_transaction_form.get('receiving_address')!.value;
-  //   // const send_amount = this.send_transaction_form.get('send_amount')!.value;
-  //   // ***** // ***** // ***** //
-  //
-  //
-  //   // **** DEVELOPMENT ****
-  //   const send_amount = '0.0001';
-  //   // ***** // ***** // ***** //
-  //
-  //   const recipient = '0xb28C2c433a9831f983bbCE7312D63694A2E1E2b8';
-  //   console.log(recipient);
-  //   console.log(send_amount);
-  //
-  //   const tx = {
-  //     from: this.wallet.address,
-  //     to: recipient,
-  //     value: utils.parseUnits(send_amount, 'ether'),
-  //     gasPrice: this.gasPrice
-  //   };
-  // }
-
-
-
-
 
 }

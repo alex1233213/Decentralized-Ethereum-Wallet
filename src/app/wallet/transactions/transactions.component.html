@@ -1,0 +1,11 @@
+<nb-card [nbSpinner]="loadingData" nbSpinnerStatus="danger" *ngIf="loadingData">
+  <nb-card-body><h6>Loading data</h6></nb-card-body>
+</nb-card>
+
+<ng-container *ngIf="!loadingData && current_route == '/wallet/transaction/send-tx'">
+  <app-send-tx-form [tokens_data]="tokensData" [wallet]="wallet"></app-send-tx-form>
+</ng-container>
+
+<ng-container *ngIf="!loadingData && current_route == '/wallet/transaction/swap'">
+  <app-swap-form [tokens_data]="tokensData" [wallet]="wallet"></app-swap-form>
+</ng-container>

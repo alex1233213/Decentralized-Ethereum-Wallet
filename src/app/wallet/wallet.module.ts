@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SendTransactionComponent } from './send-transaction/send-transaction.component';
-import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
 import {
   NbAlertModule,
@@ -17,24 +15,25 @@ import { SelectNetworkComponent } from './select-network/select-network.componen
 import { TokensComponent } from './tokens/tokens.component';
 import { HttpClientModule } from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-form.component';
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 import { SelectAccountComponent } from './select-account/select-account.component';
 import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.component';
-import { SwapFormComponent } from './swap/swap-form/swap-form.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { RouterModule } from "@angular/router";
+import { SendTxFormComponent } from "./transactions/send-tx-form/send-tx-form.component";
+import { SwapFormComponent } from "./transactions/swap-form/swap-form.component";
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    SendTransactionComponent,
-    SwapComponent,
     DappsComponent,
     SelectNetworkComponent,
     TokensComponent,
-    SendTxFormComponent,
     ConfirmTxDialogComponent,
     SelectAccountComponent,
     NewAccDialogComponent,
+    TransactionsComponent,
+    SendTxFormComponent,
     SwapFormComponent
   ],
     exports: [
@@ -55,7 +54,8 @@ import { SwapFormComponent } from './swap/swap-form/swap-form.component';
     NbIconModule,
     NbListModule,
     FormsModule,
-    NbAlertModule
+    NbAlertModule,
+    RouterModule
   ]
 })
 export class WalletModule { }

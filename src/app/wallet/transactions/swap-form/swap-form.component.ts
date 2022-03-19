@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Token} from "../../../shared/utils/types/Token";
-import {Wallet} from "ethers";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from "@angular/forms";
+import { Token } from "../../../shared/utils/types/Token";
+import { Wallet } from "ethers";
 
 @Component({
   selector: 'app-swap-form',
@@ -18,6 +18,7 @@ export class SwapFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    console.log(this.tokens_data);
   }
 
 
