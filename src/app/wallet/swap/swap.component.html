@@ -1,15 +1,20 @@
-<nb-card *ngIf="loading_data" [nbSpinner]="loading_data">
-  Loading data
+<nb-card [nbSpinner]="loading_data" nbSpinnerStatus="danger" *ngIf="loading_data">
+  <nb-card-body><h6>Loading data</h6></nb-card-body>
 </nb-card>
 
 
-<nb-card *ngIf="!loading_data">
-  <nb-card-body>
+<ng-container *ngIf="!loading_data">
+  <nb-card *ngIf="network.name != 'homestead'">
+    <nb-card-body>
+      <nb-alert outline="basic">
+        <nb-icon icon="alert-circle-outline"></nb-icon>
+        Swap is not available on this network
+        Please select Ethereum Mainnet network to use this feature.
+      </nb-alert>
+    </nb-card-body>
+  </nb-card>
 
-    <nb-alert outline="basic" *ngIf="network.name != 'homestead'">
-      <nb-icon icon="alert-circle-outline"></nb-icon>
-      Swap is not available on this network
-      Please select Ethereum Mainnet network to use this feature.
-    </nb-alert>
-  </nb-card-body>
-</nb-card>
+  <app-swap-form *ngIf="network.name == 'homestead'"
+                 [tokens_data]="tokens_data"
+                 [wallet]="wallet"></app-swap-form>
+</ng-container>

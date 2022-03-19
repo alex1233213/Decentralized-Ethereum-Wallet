@@ -21,6 +21,7 @@ import { SendTxFormComponent } from './send-transaction/send-tx-form/send-tx-for
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 import { SelectAccountComponent } from './select-account/select-account.component';
 import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.component';
+import { SwapFormComponent } from './swap/swap-form/swap-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.c
     SendTxFormComponent,
     ConfirmTxDialogComponent,
     SelectAccountComponent,
-    NewAccDialogComponent
+    NewAccDialogComponent,
+    SwapFormComponent
   ],
     exports: [
         SelectNetworkComponent,
