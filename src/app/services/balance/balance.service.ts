@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ethers, Wallet } from "ethers";
-import { abi } from "../../shared/utils/erc-20-ABI";
-import { tokenAddresses } from '../../shared/utils/token-addresses';
+import { abi } from "../../shared/utils/abi/erc-20-ABI";
+import { tokenAddresses } from '../../shared/utils/token_addresses/token-addresses';
 
 @Injectable({
   providedIn: 'root'

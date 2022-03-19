@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BigNumber, ethers, utils, Wallet } from "ethers";
 import { FormGroup } from "@angular/forms";
-import { tokenAddresses } from "../../shared/utils/token-addresses";
-import { abi } from "../../shared/utils/erc-20-ABI";
+import { tokenAddresses } from "../../shared/utils/token_addresses/token-addresses";
+import { abi } from "../../shared/utils/abi/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
 import { Token } from "../../shared/utils/types/Token";
 

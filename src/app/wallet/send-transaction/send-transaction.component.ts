@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalletService } from "../../services/wallet/wallet.service";
 import { BigNumber, utils, Wallet } from "ethers";
 import { BalanceService } from "../../services/balance/balance.service";
-import { testData } from "../../shared/utils/cgTestData";
+import { testData } from "../../shared/utils/test_data/cgTestData";
 import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { Token } from "../../shared/utils/types/Token";
 import { Network } from "@ethersproject/networks";
