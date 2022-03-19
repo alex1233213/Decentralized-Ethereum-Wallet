@@ -1,1 +1,15 @@
-<p>swap works!</p>
+<nb-card *ngIf="loading_data" [nbSpinner]="loading_data">
+  Loading data
+</nb-card>
+
+
+<nb-card *ngIf="!loading_data">
+  <nb-card-body>
+
+    <nb-alert outline="basic" *ngIf="network.name != 'homestead'">
+      <nb-icon icon="alert-circle-outline"></nb-icon>
+      Swap is not available on this network
+      Please select Ethereum Mainnet network to use this feature.
+    </nb-alert>
+  </nb-card-body>
+</nb-card>
