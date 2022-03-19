@@ -1,29 +1,37 @@
-<!--<nb-card>-->
-<!--  <nb-card-body>-->
-<!--    <form [formGroup]="swap_form">-->
-<!--&lt;!&ndash;      <nb-select [(selected)]="selected_token" formControlName="from_token">&ndash;&gt;-->
-<!--&lt;!&ndash;        <nb-select-label>&ndash;&gt;-->
-<!--&lt;!&ndash;          <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>&ndash;&gt;-->
-<!--&lt;!&ndash;        </nb-select-label>&ndash;&gt;-->
-<!--&lt;!&ndash;        <nb-option *ngFor="let token of tokens_data" [value]="token">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <span>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">&ndash;&gt;-->
-<!--&lt;!&ndash;                  {{ token.symbol.toUpperCase() }}&ndash;&gt;-->
-<!--&lt;!&ndash;                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<nb-card>
+  <nb-card-body>
+    <h5>Send</h5>
+    <form [formGroup]="swap_form">
+      <nb-select [(selected)]="selected_token" formControlName="from_token">
+        <nb-select-label>
+          <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
+        </nb-select-label>
+        <nb-option *ngFor="let token of tokens_data" [value]="token">
+          <div>
+            <div>
+              <span>
+                <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">
+                {{ token.symbol.toUpperCase() }}
+              </span>
+            </div>
 
-<!--&lt;!&ndash;            <div class="token-balance">&ndash;&gt;-->
-<!--&lt;!&ndash;                <span>&ndash;&gt;-->
-<!--&lt;!&ndash;                  {{ "Balance: " + token.balance }}&ndash;&gt;-->
-<!--&lt;!&ndash;                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </nb-option>&ndash;&gt;-->
-<!--&lt;!&ndash;      </nb-select>&ndash;&gt;-->
-<!--    </form>-->
-<!--  </nb-card-body>-->
-<!--</nb-card>-->
+            <div class="token-balance">
+              <span>
+                {{ "Balance: " + token.balance }}
+              </span>
+            </div>
+          </div>
+        </nb-option>
+      </nb-select>
+      <br>
+      <br>
 
-<p>swap</p>
+      <input type="number" nbInput placeholder="Amount" formControlName="amount">
+
+      <br>
+      <br>
+
+      <button nbButton [disabled]="swap_form.invalid">Review swap</button>
+    </form>
+  </nb-card-body>
+</nb-card>

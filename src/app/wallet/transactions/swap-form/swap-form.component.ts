@@ -11,12 +11,14 @@ import { Wallet } from "ethers";
 export class SwapFormComponent implements OnInit {
 
   swap_form: FormGroup;
+  selected_token: Token;
   @Input() wallet: Wallet;
   @Input() tokens_data: Token[];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.selected_token = this.tokens_data[0];
     this.initializeForm();
     console.log(this.tokens_data);
   }
