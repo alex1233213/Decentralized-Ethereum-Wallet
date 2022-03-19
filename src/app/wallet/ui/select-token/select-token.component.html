@@ -1,4 +1,4 @@
-<nb-select [(selected)]="selected_token" [formControl]="form_control">
+<nb-select  [formControl]="form_control">
   <nb-select-label>
     <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
   </nb-select-label>

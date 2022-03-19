@@ -9,15 +9,15 @@ import { FormControl } from "@angular/forms";
 })
 export class SelectTokenComponent implements OnInit {
 
-  selected_token: Token;
   @Input() tokens_data: Token[];
   @Input() form_control: FormControl;
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.selected_token = this.tokens_data[0];
-    this.form_control.setValue(this.selected_token);
-  }
+  ngOnInit(): void { }
 
+
+  get selected_token() {
+    return this.form_control.value;
+  }
 }
