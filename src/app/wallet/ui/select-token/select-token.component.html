@@ -1,0 +1,21 @@
+<nb-select [(selected)]="selected_token" [formControl]="form_control">
+  <nb-select-label>
+    <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
+  </nb-select-label>
+  <nb-option *ngFor="let token of tokens_data" [value]="token">
+    <div>
+      <div>
+        <span>
+          <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">
+          {{ token.symbol.toUpperCase() }}
+        </span>
+      </div>
+
+      <div class="token-balance">
+        <span>
+          {{ "Balance: " + token.balance }}
+        </span>
+      </div>
+    </div>
+  </nb-option>
+</nb-select>
