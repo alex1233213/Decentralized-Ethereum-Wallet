@@ -5,6 +5,7 @@ import { SendTransactionComponent } from './send-transaction/send-transaction.co
 import { SwapComponent } from './swap/swap.component';
 import { DappsComponent } from './dapps/dapps.component';
 import {
+  NbAlertModule,
   NbButtonModule,
   NbCardModule, NbIconModule,
   NbInputModule, NbListModule,
@@ -51,7 +52,8 @@ import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.c
     NbSpinnerModule,
     NbIconModule,
     NbListModule,
-    FormsModule
+    FormsModule,
+    NbAlertModule
   ]
 })
 export class WalletModule { }
