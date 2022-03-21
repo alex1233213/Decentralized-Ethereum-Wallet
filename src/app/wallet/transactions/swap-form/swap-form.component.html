@@ -4,7 +4,9 @@
     <form [formGroup]="swap_form">
       <label for="from_token">Swap From</label>
       <br>
-      <app-select-token id="from_token" [tokens_data]="tokens_data" [form_control]="from_token"></app-select-token>
+      <app-select-token id="from_token"
+                        [tokens_data]="tokens_data"
+                        [form_control]="from_token" (selected_token_event)="swap($event)"></app-select-token>
       <br>
       <br>
       <input type="number" nbInput placeholder="Amount" formControlName="amount">

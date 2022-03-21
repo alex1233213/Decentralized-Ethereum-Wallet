@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Token } from "../../../shared/utils/types/Token";
 import { Wallet } from "ethers";
+import {SwapService} from "../../../services/swap/swap.service";
 
 @Component({
   selector: 'app-swap-form',
@@ -15,12 +16,14 @@ export class SwapFormComponent implements OnInit {
   @Input() wallet: Wallet;
   @Input() tokens_data: Token[];
 
-  constructor() { }
+  constructor(private swapService: SwapService) { }
 
   ngOnInit(): void {
     this.default_selected_token = this.tokens_data[0];
     this.initializeForm();
     console.log(this.tokens_data);
+
+    this.swapService.getTokenAddress(this.default_selected_token);
   }
 
   //TODO ADD VALIDATION
@@ -39,5 +42,10 @@ export class SwapFormComponent implements OnInit {
 
   get to_token() {
     return this.swap_form.get('to_token') as FormControl;
+  }
+
+
+  swap(token: Token) {
+    this.swapService.getTokenAddress(token);
   }
 }
