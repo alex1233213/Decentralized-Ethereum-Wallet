@@ -47,13 +47,8 @@ export class TransactionsComponent implements OnInit {
     this.walletService.getWallet().subscribe(  (wallet: Wallet) => {
       this.loadingData = true;
       this.wallet = wallet;
-      this.wallet.provider.getGasPrice().then( (gasPrice: BigNumber) => {
-        // console.log(gasPrice);
-        this.gasPrice = gasPrice;
-      });
 
       this.wallet.provider.getNetwork().then( (network: Network) => {
-
         //get the funds for the wallet on the network
         this.balanceService.getWalletFunds(this.wallet).then( (funds: any) => {
           this.coin_balances = funds;

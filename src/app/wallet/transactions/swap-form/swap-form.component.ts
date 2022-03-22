@@ -5,6 +5,8 @@ import { ethers, Wallet } from "ethers";
 import { SwapService } from "../../../services/swap/swap.service";
 import { ProviderService } from "../../../services/provider/provider.service";
 import { tradeAmountValidator } from "../../../shared/validators/tradeAmountValidator";
+import { NbDialogService } from "@nebular/theme";
+import { swapTokensValidator } from "../../../shared/validators/swapTokensValidator";
 
 @Component({
   selector: 'app-swap-form',
@@ -20,7 +22,8 @@ export class SwapFormComponent implements OnInit {
   @Input() tokens_data: Token[];
 
   constructor(private swapService: SwapService,
-              private providerService: ProviderService) { }
+              private providerService: ProviderService,
+              private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
     this.default_selected_token = this.tokens_data[0];
@@ -38,7 +41,7 @@ export class SwapFormComponent implements OnInit {
       from_token: new FormControl(this.default_selected_token),
       to_token: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required)
-    }, { validators:  tradeAmountValidator()});
+    }, { validators:  [tradeAmountValidator(), swapTokensValidator()]});
   }
 
 
@@ -54,6 +57,29 @@ export class SwapFormComponent implements OnInit {
     return this.swap_form.get('amount') as FormControl;
   }
 
+
+
+  // async reviewSwap() {
+  //   if
+  //   (
+  //     this.to_token.value != ''
+  //     &&
+  //     this.to_token.value != null
+  //     &&
+  //     this.amount.value != null
+  //     &&
+  //     this.from_token.value != this.to_token.value
+  //   )
+  //   {
+  //     this.swapService.swap_tokens
+  //     (
+  //       this.from_token.value,
+  //       this.to_token.value,
+  //       this.amount.value.toString(),
+  //       this.provider
+  //     );
+  //   }
+  // }
 
 
 
