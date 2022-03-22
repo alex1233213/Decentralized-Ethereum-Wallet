@@ -6,10 +6,11 @@
       <br>
       <app-select-token id="from_token"
                         [tokens_data]="tokens_data"
-                        [form_control]="from_token" (selected_token_event)="swap($event)"></app-select-token>
+                        [form_control]="from_token">
+      </app-select-token>
       <br>
       <br>
-      <input type="number" nbInput placeholder="Amount" formControlName="amount">
+      <input type="number" nbInput placeholder="Amount" formControlName="amount" (input)="estimateSwap()">
       <br>
       <br>
       <br>
@@ -20,6 +21,7 @@
       <br>
       <app-select-token id="to_token" [tokens_data]="tokens_data" [form_control]="to_token"></app-select-token>
       <br>
+      <input type="number" nbInput placeholder="Amount" (input)="estimateSwap()">
       <br>
       <button nbButton [disabled]="swap_form.invalid">Review swap</button>
     </form>

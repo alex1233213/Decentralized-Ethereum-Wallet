@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Token } from "../../../shared/utils/types/Token";
-import { Wallet } from "ethers";
-import {SwapService} from "../../../services/swap/swap.service";
+import { ethers, Wallet } from "ethers";
+import { SwapService } from "../../../services/swap/swap.service";
+import { ProviderService } from "../../../services/provider/provider.service";
 
 @Component({
   selector: 'app-swap-form',
@@ -13,17 +14,23 @@ export class SwapFormComponent implements OnInit {
 
   swap_form: FormGroup;
   default_selected_token: Token;
+  provider: ethers.providers.InfuraProvider;
   @Input() wallet: Wallet;
   @Input() tokens_data: Token[];
 
-  constructor(private swapService: SwapService) { }
+  constructor(private swapService: SwapService,
+              private providerService: ProviderService) { }
 
   ngOnInit(): void {
     this.default_selected_token = this.tokens_data[0];
-    this.initializeForm();
-    console.log(this.tokens_data);
 
-    this.swapService.getTokenAddress(this.default_selected_token);
+    this.providerService.getProvider().subscribe( (provider) => {
+      this.provider = provider;
+      this.initializeForm();
+    });
+
+
+    // console.log(this.tokens_data);
   }
 
   //TODO ADD VALIDATION
@@ -44,8 +51,36 @@ export class SwapFormComponent implements OnInit {
     return this.swap_form.get('to_token') as FormControl;
   }
 
+  get amount() {
+    return this.swap_form.get('amount') as FormControl;
+  }
 
-  swap(token: Token) {
-    this.swapService.getTokenAddress(token);
+
+
+
+  async estimateSwap() {
+    console.log(this.from_token.value);
+    console.log(this.to_token.value);
+    console.log(this.amount.value);
+
+    if
+    (
+      this.to_token.value != ''
+      &&
+      this.to_token.value != null
+      &&
+      this.amount.value != null
+      &&
+      this.from_token.value != this.to_token.value
+    )
+    {
+      this.swapService.swap_tokens
+      (
+        this.from_token.value,
+        this.to_token.value,
+        this.amount.value.toString(),
+        this.provider
+      );
+    }
   }
 }

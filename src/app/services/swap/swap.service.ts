@@ -1,33 +1,61 @@
 import { Injectable } from '@angular/core';
-import { ChainId, Fetcher, WETH } from "@uniswap/sdk";
+import { ChainId, Fetcher, Route, TokenAmount, Trade, TradeType, WETH } from "@uniswap/sdk";
 import { tokenAddresses } from "../../shared/utils/token_addresses/token-addresses";
 import { Token } from "../../shared/utils/types/Token";
+import { ethers } from "ethers";
+import { parseUnits } from "ethers/lib/utils";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SwapService {
 
-  chain_id = ChainId.MAINNET;
+  chainId = ChainId.MAINNET;
   // token_address = ''
 
   constructor() { }
 
-  // async swap_tokens() {
-  //   const dai = await Fetcher.fetchTokenData(this.chain_id, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', customHttpProvider);
-  //   const weth = WETH[this.chain_id];
-  //   const pair = await Fetcher.fetchPairData(dai, weth, customHttpProvider);
-  //   const route = new Route([pair], weth);
-  //   const trade = new Trade(route, new TokenAmount(weth, '100000000000000000'), TradeType.EXACT_INPUT);
-  //   console.log("Mid Price WETH --> DAI:", route.midPrice.toSignificant(6));
-  //   console.log("Mid Price DAI --> WETH:", route.midPrice.invert().toSignificant(6));
-  //   console.log("-".repeat(45));
-  //   console.log("Execution Price WETH --> DAI:", trade.executionPrice.toSignificant(6));
-  //   console.log("Mid Price after trade WETH --> DAI:", trade.nextMidPrice.toSignificant(6));
-  // }
+  async swap_tokens(
+    from_token: Token,
+    to_token: Token,
+    input_amount_units: string,
+    provider: ethers.providers.InfuraProvider
+  ) {
+
+    const input_token = await this.getTokenForTrade(from_token);
+    const output_token = await this.getTokenForTrade(to_token);
+
+    const input_amount_parsed = parseUnits(input_amount_units, input_token.decimals).toString();
+    console.log(input_amount_parsed.toString());
+
+    const pair = await Fetcher.fetchPairData(input_token, output_token, provider);
+    const route = new Route([pair], input_token);
+    const trade = new Trade(route, new TokenAmount(input_token, input_amount_parsed), TradeType.EXACT_INPUT);
+
+    // console.log(`Mid Price ${ from_token.symbol } --> ${to_token.symbol}:`, route.midPrice.toSignificant(6));
+    // console.log(`Mid Price ${ to_token.symbol } --> ${from_token.symbol}:`, route.midPrice.invert().toSignificant(6));
+    // // console.log("-".repeat(45));
+    // console.log(`Execution Price ${ from_token.symbol } --> ${to_token.symbol}:`, trade.executionPrice.toSignificant(6));
+  }
 
 
-  getTokenAddress(token: Token) {
-    console.log(tokenAddresses[token.id]);
+
+
+  async getTokenForTrade(token: Token) {
+    let result;
+
+    //get the address of the token
+    const token_address = tokenAddresses[token.id];
+
+    //if the token does not have an address, then it is ethereum
+    if( tokenAddresses[token.id] == undefined ) {
+      //convert ether to wrapped ether
+      result = WETH[this.chainId];
+    } else {
+      result = await Fetcher.fetchTokenData(this.chainId, token_address);
+    }
+
+    return result;
   }
 }
