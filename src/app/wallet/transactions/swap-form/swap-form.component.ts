@@ -7,6 +7,7 @@ import { ProviderService } from "../../../services/provider/provider.service";
 import { tradeAmountValidator } from "../../../shared/validators/tradeAmountValidator";
 import { NbDialogService } from "@nebular/theme";
 import { swapTokensValidator } from "../../../shared/validators/swapTokensValidator";
+import {ReviewSwapComponent} from "../../dialogs/review-swap/review-swap.component";
 
 @Component({
   selector: 'app-swap-form',
@@ -59,7 +60,26 @@ export class SwapFormComponent implements OnInit {
 
 
 
-  // async reviewSwap() {
+  async reviewSwap() {
+
+    this.dialogService.open(ReviewSwapComponent, {
+      context: {
+        from_token: this.from_token.value,
+        to_token: this.to_token.value,
+        input_amount: this.amount.value.toString(),
+        provider: this.provider,
+        wallet: this.wallet
+      }
+    });
+  }
+
+
+
+  // async estimateSwap() {
+  //   console.log(this.from_token.value);
+  //   console.log(this.to_token.value);
+  //   console.log(this.amount.value);
+  //
   //   if
   //   (
   //     this.to_token.value != ''
@@ -80,32 +100,4 @@ export class SwapFormComponent implements OnInit {
   //     );
   //   }
   // }
-
-
-
-  async estimateSwap() {
-    console.log(this.from_token.value);
-    console.log(this.to_token.value);
-    console.log(this.amount.value);
-
-    if
-    (
-      this.to_token.value != ''
-      &&
-      this.to_token.value != null
-      &&
-      this.amount.value != null
-      &&
-      this.from_token.value != this.to_token.value
-    )
-    {
-      this.swapService.swap_tokens
-      (
-        this.from_token.value,
-        this.to_token.value,
-        this.amount.value.toString(),
-        this.provider
-      );
-    }
-  }
 }

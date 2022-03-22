@@ -25,7 +25,7 @@
       <app-select-token id="to_token" [tokens_data]="tokens_data" [form_control]="to_token"></app-select-token>
       <br>
       <br>
-      <button nbButton [disabled]="swap_form.invalid">Review swap</button>
+      <button nbButton [disabled]="swap_form.invalid" (click)="reviewSwap()">Review swap</button>
     </form>
   </nb-card-body>
 </nb-card>

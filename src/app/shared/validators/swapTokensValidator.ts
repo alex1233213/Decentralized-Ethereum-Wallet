@@ -6,10 +6,8 @@ export function swapTokensValidator(): ValidatorFn {
 
     //get the token that was selected from the options provided
     const from_token_id = swap_form.get('from_token')?.value.id;
-    console.log(from_token_id);
 
     const to_token_id = swap_form.get('to_token')?.value.id;
-    console.log(to_token_id);
 
     if(to_token_id == undefined || to_token_id == from_token_id) {
       return {invalidSelection: {value: to_token_id}};

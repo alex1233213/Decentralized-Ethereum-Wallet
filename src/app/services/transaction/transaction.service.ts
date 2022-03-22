@@ -119,11 +119,6 @@ export class TransactionService {
     let erc20_gas_limit_wei: number = 200000;
     let erc20_gas_limit_bn: BigNumber = BigNumber.from(erc20_gas_limit_wei);
 
-    let erc20_contract = new ethers.Contract(
-      contract_address,
-      abi,
-      wallet
-    );
 
     // @ts-ignore
     let gas_fee: BigNumber = (await wallet.provider.getFeeData()).maxFeePerGas.mul(erc20_gas_limit_bn);

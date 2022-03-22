@@ -23,6 +23,7 @@ import { RouterModule } from "@angular/router";
 import { SendTxFormComponent } from "./transactions/send-tx-form/send-tx-form.component";
 import { SwapFormComponent } from "./transactions/swap-form/swap-form.component";
 import { SelectTokenComponent } from './ui/select-token/select-token.component';
+import { ReviewSwapComponent } from './dialogs/review-swap/review-swap.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SelectTokenComponent } from './ui/select-token/select-token.component';
     TransactionsComponent,
     SendTxFormComponent,
     SwapFormComponent,
-    SelectTokenComponent
+    SelectTokenComponent,
+    ReviewSwapComponent
   ],
     exports: [
         SelectNetworkComponent,
