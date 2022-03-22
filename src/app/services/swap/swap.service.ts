@@ -35,8 +35,8 @@ export class SwapService {
 
     // console.log(`Mid Price ${ from_token.symbol } --> ${to_token.symbol}:`, route.midPrice.toSignificant(6));
     // console.log(`Mid Price ${ to_token.symbol } --> ${from_token.symbol}:`, route.midPrice.invert().toSignificant(6));
-    // // console.log("-".repeat(45));
-    // console.log(`Execution Price ${ from_token.symbol } --> ${to_token.symbol}:`, trade.executionPrice.toSignificant(6));
+
+    console.log(`Execution Price ${ from_token.symbol } --> ${to_token.symbol}:`, trade.executionPrice.toSignificant(6));
   }
 
 

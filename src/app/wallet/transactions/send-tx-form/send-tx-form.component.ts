@@ -37,7 +37,7 @@ export class SendTxFormComponent implements OnInit {
       selected_token: new FormControl(this.selected_token),
       send_amount: new FormControl('',
         [Validators.required]),
-      receiving_address: new FormControl('0xFdd33f5C895299867961CDb8a98f6B78Fe77Fcc7',
+      receiving_address: new FormControl('',
         [ Validators.required, addressValidator()] )
     }, { validators: sendAmountValidator() });
   }

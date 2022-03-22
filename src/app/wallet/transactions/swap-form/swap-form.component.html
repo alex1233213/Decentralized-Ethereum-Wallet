@@ -13,6 +13,9 @@
       <input type="number" nbInput placeholder="Amount" formControlName="amount" (input)="estimateSwap()">
       <br>
       <br>
+      <div *ngIf="swap_form.errors">
+        <p *ngIf="swap_form.hasError('notEnoughBalance')">Insufficient funds</p>
+      </div>
       <br>
       <br>
       <br>
@@ -21,7 +24,6 @@
       <br>
       <app-select-token id="to_token" [tokens_data]="tokens_data" [form_control]="to_token"></app-select-token>
       <br>
-      <input type="number" nbInput placeholder="Amount" (input)="estimateSwap()">
       <br>
       <button nbButton [disabled]="swap_form.invalid">Review swap</button>
     </form>

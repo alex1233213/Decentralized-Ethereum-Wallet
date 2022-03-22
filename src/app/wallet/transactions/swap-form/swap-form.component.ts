@@ -4,6 +4,7 @@ import { Token } from "../../../shared/utils/types/Token";
 import { ethers, Wallet } from "ethers";
 import { SwapService } from "../../../services/swap/swap.service";
 import { ProviderService } from "../../../services/provider/provider.service";
+import { tradeAmountValidator } from "../../../shared/validators/tradeAmountValidator";
 
 @Component({
   selector: 'app-swap-form',
@@ -29,8 +30,6 @@ export class SwapFormComponent implements OnInit {
       this.initializeForm();
     });
 
-
-    // console.log(this.tokens_data);
   }
 
   //TODO ADD VALIDATION
@@ -39,7 +38,7 @@ export class SwapFormComponent implements OnInit {
       from_token: new FormControl(this.default_selected_token),
       to_token: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required)
-    });
+    }, { validators:  tradeAmountValidator()});
   }
 
 
