@@ -1,0 +1,29 @@
+<nb-card [nbSpinner]="loading_data" nbSpinnerStatus="danger" *ngIf="loading_data">
+  <nb-card-body><h6>Fetching data</h6></nb-card-body>
+</nb-card>
+
+
+<nb-card *ngIf="!loading_data">
+  <nb-card-body>
+    <h6>
+      Swap {{ input_amount + ' ' + from_token.symbol.toUpperCase() +
+      ' to about ' + output_amount + ' ' + to_token.symbol.toUpperCase() }}
+    </h6>
+    <hr>
+    <p>
+      {{ '1 ' + from_token.symbol.toUpperCase() + ' = ' + price_output_unit
+          + ' ' + to_token.symbol.toUpperCase() }}
+    </p>
+    <br>
+    <br>
+    <p>Gas fee: {{ gas_fee ? gas_fee + ' (eth)' : '0.00 eth' }} </p>
+    <br>
+    <br>
+    <button nbButton (click)="close()">Cancel</button>
+    <br>
+    <br>
+    <button nbButton (click)="submitTrade()">Confirm</button>
+  </nb-card-body>
+</nb-card>
+
+
