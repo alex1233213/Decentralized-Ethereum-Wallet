@@ -2,12 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Token } from "../../../shared/utils/types/Token";
 import { ethers, Wallet } from "ethers";
-import { SwapService } from "../../../services/swap/swap.service";
 import { ProviderService } from "../../../services/provider/provider.service";
 import { tradeAmountValidator } from "../../../shared/validators/tradeAmountValidator";
 import { NbDialogService } from "@nebular/theme";
 import { swapTokensValidator } from "../../../shared/validators/swapTokensValidator";
-import {ReviewSwapComponent} from "../../dialogs/review-swap/review-swap.component";
 
 @Component({
   selector: 'app-swap-form',
@@ -22,8 +20,7 @@ export class SwapFormComponent implements OnInit {
   @Input() wallet: Wallet;
   @Input() tokens_data: Token[];
 
-  constructor(private swapService: SwapService,
-              private providerService: ProviderService,
+  constructor(private providerService: ProviderService,
               private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
@@ -62,15 +59,15 @@ export class SwapFormComponent implements OnInit {
 
   async reviewSwap() {
 
-    this.dialogService.open(ReviewSwapComponent, {
-      context: {
-        from_token: this.from_token.value,
-        to_token: this.to_token.value,
-        input_amount: this.amount.value.toString(),
-        provider: this.provider,
-        wallet: this.wallet
-      }
-    });
+    // this.dialogService.open(ReviewSwapComponent, {
+    //   context: {
+    //     from_token: this.from_token.value,
+    //     to_token: this.to_token.value,
+    //     input_amount: this.amount.value.toString(),
+    //     provider: this.provider,
+    //     wallet: this.wallet
+    //   }
+    // });
   }
 
 

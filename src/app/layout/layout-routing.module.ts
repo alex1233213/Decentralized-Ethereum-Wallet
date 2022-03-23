@@ -38,7 +38,7 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletLayoutComponent,
-    // TODO  ***** RELEASE *****
+    // TODO  ***** UNCOMMENT *****
     // canActivate: [WalletGuard],
     children: [
       {
@@ -55,14 +55,15 @@ const routes: Routes = [
         component: TransactionsComponent,
       },
 
-      {
-        path: 'transaction/swap',
-        component: TransactionsComponent
-      },
-      {
-        path: 'dapps',
-        component: DappsComponent
-      }
+      //NOT IMPLEMENTED
+      // {
+      //   path: 'transaction/swap',
+      //   component: TransactionsComponent
+      // },
+      // {
+      //   path: 'dapps',
+      //   component: DappsComponent
+      // }
     ]
   },
 

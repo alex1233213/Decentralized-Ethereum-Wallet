@@ -14,7 +14,7 @@ import {
 import { SelectNetworkComponent } from './select-network/select-network.component';
 import { TokensComponent } from './tokens/tokens.component';
 import { HttpClientModule } from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ConfirmTxDialogComponent } from './dialogs/confirm-tx-dialog/confirm-tx-dialog.component';
 import { SelectAccountComponent } from './select-account/select-account.component';
 import { NewAccDialogComponent } from './dialogs/new-acc-dialog/new-acc-dialog.component';
@@ -23,7 +23,6 @@ import { RouterModule } from "@angular/router";
 import { SendTxFormComponent } from "./transactions/send-tx-form/send-tx-form.component";
 import { SwapFormComponent } from "./transactions/swap-form/swap-form.component";
 import { SelectTokenComponent } from './ui/select-token/select-token.component';
-import { ReviewSwapComponent } from './dialogs/review-swap/review-swap.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +36,7 @@ import { ReviewSwapComponent } from './dialogs/review-swap/review-swap.component
     TransactionsComponent,
     SendTxFormComponent,
     SwapFormComponent,
-    SelectTokenComponent,
-    ReviewSwapComponent
+    SelectTokenComponent
   ],
     exports: [
         SelectNetworkComponent,
