@@ -1,4 +1,9 @@
-<table>
+<nb-card [nbSpinner]="loading_data" nbSpinnerStatus="danger" *ngIf="loading_data">
+  <nb-card-body><h6>Loading data</h6></nb-card-body>
+</nb-card>
+
+
+<table *ngIf="!loading_data">
   <tr>
     <th>Time</th>
     <th>Type</th>
