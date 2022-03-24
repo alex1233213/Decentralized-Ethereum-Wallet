@@ -1,1 +1,19 @@
-<p>tx-history works!</p>
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Asset</th>
+    <th>Amount</th>
+    <th>Address</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let transaction of tx_history">
+    <td> {{ transaction.time }} </td>
+    <td> {{ transaction.type }} </td>
+    <td> {{ transaction.asset }} </td>
+    <td> {{ transaction.amount }} </td>
+    <td> {{ transaction.address }} </td>
+    <td> {{ transaction.status }} </td>
+  </tr>
+</table>
+

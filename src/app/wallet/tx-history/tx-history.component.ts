@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TxHistoryService } from "../../services/tx-history/tx-history.service";
+import { Wallet } from "ethers";
+import { WalletService } from "../../services/wallet/wallet.service";
 
 @Component({
   selector: 'app-tx-history',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TxHistoryComponent implements OnInit {
 
-  constructor() { }
+  tx_history: any;
+  wallet: Wallet;
+
+  constructor(private txHistoryService: TxHistoryService,
+              private walletService: WalletService) { }
 
   ngOnInit(): void {
+    this.walletService.getWallet().subscribe( (wallet: Wallet) =>{
+      this.wallet = wallet;
+      this.txHistoryService.getTxHistory(this.wallet).then( history => {
+        this.tx_history = history;
+        console.log(this.tx_history);
+      });
+    });
   }
 
 }
