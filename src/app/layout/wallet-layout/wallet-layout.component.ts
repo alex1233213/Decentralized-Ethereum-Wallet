@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Moralis from "moralis";
+import {WalletService} from "../../services/wallet/wallet.service";
+import {Wallet} from "ethers";
 
 @Component({
   selector: 'app-wallet-layout',
@@ -8,15 +10,25 @@ import Moralis from "moralis";
 })
 export class WalletLayoutComponent implements OnInit {
 
-  constructor() { }
+  wallet_address: string;
+
+  constructor(private walletService: WalletService) { }
 
   ngOnInit(): void {
+    this.walletService.getWallet().subscribe( (wallet: Wallet) => {
+      wallet.getAddress().then( (address: string) => this.wallet_address = address);
+    });
   }
 
 
   async buyEther() {
-    // await Moralis.initPlugins();
-    //
-    // Moralis.Plugins['fiat'].buy();
+    if(this.wallet_address) {
+      await navigator.clipboard.writeText(this.wallet_address);
+
+
+      // await Moralis.initPlugins();
+      //
+      // Moralis.Plugins['fiat'].buy();
+    }
   }
 }
