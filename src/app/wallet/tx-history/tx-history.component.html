@@ -12,7 +12,7 @@
     <td> {{ transaction.type }} </td>
     <td> {{ transaction.asset }} </td>
     <td> {{ transaction.amount }} </td>
-    <td> {{ transaction.address }} </td>
+    <td> {{ transaction.type == 'Send' ? 'To ' + transaction.address : 'From ' + transaction.address }} </td>
     <td> {{ transaction.status }} </td>
   </tr>
 </table>

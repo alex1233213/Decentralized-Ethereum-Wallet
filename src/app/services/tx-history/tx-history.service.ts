@@ -11,12 +11,26 @@ export class TxHistoryService {
 
   async getTxHistory(wallet: Wallet) {
 
-    const options = {
-      // chain: "ropsten",
-      address: wallet.address,
-      order: "desc"
-    };
+    const network = await wallet.provider.getNetwork();
+    console.log(network);
 
+    let options;
+
+    if(network.name == 'homestead') {
+      options = {
+        // chain: "eth",
+        address: wallet.address,
+      };
+    } else {
+      options = {
+        chain: network.name,
+        address: wallet.address,
+      };
+    }
+
+
+
+    // @ts-ignore
     const eth_transactions = await Moralis.Web3API.account.getTransactions(options);
     // const erc_20_transactions = await Moralis.Web3API.account.getTokenTransfers(options);
     // console.log(erc_20_transactions);
