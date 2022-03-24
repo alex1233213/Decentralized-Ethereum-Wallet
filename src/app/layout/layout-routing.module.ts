@@ -5,6 +5,7 @@ import { WalletLayoutComponent } from "./wallet-layout/wallet-layout.component";
 import { DashboardComponent } from "../wallet/dashboard/dashboard.component";
 import { DappsComponent } from "../wallet/dapps/dapps.component";
 import {TransactionsComponent} from "../wallet/transactions/transactions.component";
+import {TxHistoryComponent} from "../wallet/tx-history/tx-history.component";
 // import {WalletGuard} from "../guards/dashboard/wallet-guard.service";
 
 const routes: Routes = [
@@ -54,6 +55,10 @@ const routes: Routes = [
         path: 'transaction/send-tx',
         component: TransactionsComponent,
       },
+      {
+        path: 'tx-history',
+        component: TxHistoryComponent
+      }
 
       //NOT IMPLEMENTED
       // {

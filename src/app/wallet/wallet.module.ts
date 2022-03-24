@@ -24,6 +24,7 @@ import { SendTxFormComponent } from "./transactions/send-tx-form/send-tx-form.co
 import { SwapFormComponent } from "./transactions/swap-form/swap-form.component";
 import { SelectTokenComponent } from './ui/select-token/select-token.component';
 import { BuyEthConfirmComponent } from './dialogs/buy-eth-confirm/buy-eth-confirm.component';
+import { TxHistoryComponent } from './tx-history/tx-history.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BuyEthConfirmComponent } from './dialogs/buy-eth-confirm/buy-eth-confir
     SendTxFormComponent,
     SwapFormComponent,
     SelectTokenComponent,
-    BuyEthConfirmComponent
+    BuyEthConfirmComponent,
+    TxHistoryComponent
   ],
     exports: [
         SelectNetworkComponent,
