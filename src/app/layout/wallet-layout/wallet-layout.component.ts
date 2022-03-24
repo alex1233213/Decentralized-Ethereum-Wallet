@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Moralis from "moralis";
 
 @Component({
   selector: 'app-wallet-layout',
@@ -12,4 +13,10 @@ export class WalletLayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  async buyEther() {
+    // await Moralis.initPlugins();
+    //
+    // Moralis.Plugins['fiat'].buy();
+  }
 }
