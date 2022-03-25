@@ -23,7 +23,6 @@ export class TxHistoryComponent implements OnInit {
       this.wallet = wallet;
       this.txHistoryService.getTxHistory(this.wallet).then( history => {
         this.tx_history = history;
-        console.log(this.tx_history);
         this.loading_data = false;
       });
     });
