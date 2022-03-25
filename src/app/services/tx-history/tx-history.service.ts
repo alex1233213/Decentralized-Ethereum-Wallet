@@ -29,13 +29,13 @@ export class TxHistoryService {
     // @ts-ignore
     //get the ether transactions to and from the wallet
     const eth_transactions = (await Moralis.Web3API.account.getTransactions(options)).result;
-    const eth_transactions_formatted = await this.formatTxHistory(eth_transactions, wallet.address);
+    const eth_transactions_formatted = await this.formatTxHistory(eth_transactions, wallet.address, wallet);
     all_transactions = all_transactions.concat(eth_transactions_formatted);
 
     // @ts-ignore
     //get the erc20 token transactions to and from the wallet
     const erc_20_transactions = (await Moralis.Web3API.account.getTokenTransfers(options)).result;
-    const erc_20_txs_formatted = await this.formatTxHistory(erc_20_transactions, wallet.address);
+    const erc_20_txs_formatted = await this.formatTxHistory(erc_20_transactions, wallet.address, wallet);
     all_transactions = all_transactions.concat(erc_20_txs_formatted);
 
     return all_transactions;
@@ -43,7 +43,7 @@ export class TxHistoryService {
 
 
 
-  async formatTxHistory(transactions: any, wallet_address: string) {
+  async formatTxHistory(transactions: any, wallet_address: string, wallet: Wallet) {
     for(const tx of transactions) {
       //an erc 20 transaction will have an address in its object
       if(tx.address != undefined) {
@@ -52,21 +52,26 @@ export class TxHistoryService {
         tx.asset = token_metadata.symbol;
         tx.decimals = token_metadata.decimals;
         tx.amount_formatted = ethers.utils.formatUnits(tx.value, tx.decimals);
+
+        const tx_hash = tx.transaction_hash;
+        tx.tx_receipt = await this.checkTxStatus(tx_hash, wallet);
       }
     }
 
 
 
-    return transactions.map( (transaction: any) => {
-      const transaction_sent: boolean = (transaction.from_address.toUpperCase() == wallet_address.toUpperCase());
+    return transactions.map( (tx: any) => {
+      const transaction_sent: boolean = (tx.from_address.toUpperCase() == wallet_address.toUpperCase());
+
+      console.log(tx);
 
       return {
-        time: transaction.block_timestamp,
-        asset: transaction.asset ? transaction.asset : 'ETH',
-        amount: transaction.amount_formatted ? transaction.amount_formatted : ethers.utils.formatEther(transaction.value),
+        time: tx.block_timestamp,
+        asset: tx.asset ? tx.asset : 'ETH',
+        amount: tx.amount_formatted ? tx.amount_formatted : ethers.utils.formatEther(tx.value),
         type: transaction_sent ?  'Send' : 'Receive',
-        address: transaction_sent ? transaction.to_address : transaction.from_address,
-        status: transaction.receipt_status == 1 ? 'Completed' : 'Failed'
+        address: transaction_sent ? tx.to_address : tx.from_address,
+        status: tx.receipt_status == 1 || tx.tx_receipt ? 'Completed' : 'Failed'
       }
     });
   }
@@ -79,5 +84,17 @@ export class TxHistoryService {
     };
     // @ts-ignore
     return await Moralis.Web3API.token.getTokenMetadata(options);
+  }
+
+
+
+
+  // @ts-ignore
+  async checkTxStatus(transaction_hash: string, wallet: Wallet) {
+    const tx_receipt = await wallet.provider.getTransactionReceipt(transaction_hash);
+
+    if (tx_receipt && tx_receipt.blockNumber) {
+      return tx_receipt;
+    }
   }
 }
