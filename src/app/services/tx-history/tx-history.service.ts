@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {ethers, Wallet} from "ethers";
+import { Injectable } from '@angular/core';
+import { ethers, Wallet } from "ethers";
 import Moralis from "moralis";
 
 @Injectable({
@@ -56,27 +56,17 @@ export class TxHistoryService {
     }
 
 
-    return transactions.map( (transaction: any) => {
 
-      //when the transaction is sent from the wallet
-      if(transaction.from_address.toUpperCase() == wallet_address.toUpperCase()) {
-        return {
-          time: transaction.block_timestamp,
-          asset: transaction.asset ? transaction.asset : 'ETH',
-          amount: transaction.amount_formatted ? transaction.amount_formatted : ethers.utils.formatEther(transaction.value),
-          type: 'Send',
-          address: transaction.to_address,
-          status: transaction.receipt_status == 1 ? 'Completed' : 'Failed'
-        }
-      } else { // when the transaction is received by the wallet
-        return {
-          time: transaction.block_timestamp,
-          type: 'Receive',
-          asset: transaction.asset ? transaction.asset : 'ETH',
-          amount: transaction.amount_formatted ? transaction.amount_formatted : ethers.utils.formatEther(transaction.value),
-          address: transaction.from_address,
-          status: transaction.receipt_status == 1 ? 'Completed' : 'Failed'
-        }
+    return transactions.map( (transaction: any) => {
+      const transaction_sent: boolean = (transaction.from_address.toUpperCase() == wallet_address.toUpperCase());
+
+      return {
+        time: transaction.block_timestamp,
+        asset: transaction.asset ? transaction.asset : 'ETH',
+        amount: transaction.amount_formatted ? transaction.amount_formatted : ethers.utils.formatEther(transaction.value),
+        type: transaction_sent ?  'Send' : 'Receive',
+        address: transaction_sent ? transaction.to_address : transaction.from_address,
+        status: transaction.receipt_status == 1 ? 'Completed' : 'Failed'
       }
     });
   }
