@@ -11,11 +11,16 @@ import { BehaviorSubject } from "rxjs";
 export class AccountsService {
 
   private accounts$: BehaviorSubject<any> = new BehaviorSubject<any>(this.getAccountsLocalStorage());
-  private selected_account$: BehaviorSubject<string> =
-    new BehaviorSubject<string>(Object.keys(this.getAccountsLocalStorage())[0]);
+  private selected_account$: BehaviorSubject<any>;
 
   constructor(private dialogService: NbDialogService,
-              private walletService: WalletService) { }
+              private walletService: WalletService) {
+    if( localStorage.getItem('accounts') == null ) {
+      this.selected_account$ = new BehaviorSubject<any>(null);
+    } else {
+      this.selected_account$ = new BehaviorSubject<any>(Object.keys(this.getAccountsLocalStorage())[0]);
+    }
+  }
 
 
 
@@ -26,6 +31,17 @@ export class AccountsService {
 
   setAccounts(accounts: {}) {
     this.accounts$.next(accounts);
+  }
+
+  generateFirstAccount(wallet: Wallet) {
+    const accounts = {'Account 1': 0};
+
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+    this.setAccounts(accounts);
+    this.setSelectedAccount('Account 1');
+
+    //derive new account
+    this.deriveAccount("0", wallet.mnemonic.phrase);
   }
 
   getSelectedAccount() {
@@ -76,6 +92,10 @@ export class AccountsService {
 
 
   getAccountsLocalStorage(){
-    return JSON.parse(<string>localStorage.getItem('accounts'));
+    if( localStorage.getItem('accounts') ) {
+      return JSON.parse(<string>localStorage.getItem('accounts'));
+    } else {
+      return null;
+    }
   }
 }
