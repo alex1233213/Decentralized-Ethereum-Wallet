@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ethers, Wallet } from 'ethers';
-import { NavigationEnd, Router } from "@angular/router";
-import { BehaviorSubject, filter, Observable } from "rxjs";
-import { ProviderService } from "../provider/provider.service";
+import {Injectable} from '@angular/core';
+import {ethers, Wallet} from 'ethers';
+import {NavigationEnd, Router} from "@angular/router";
+import {BehaviorSubject, filter, Observable} from "rxjs";
+import {ProviderService} from "../provider/provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +27,8 @@ export class WalletService {
 
     // **************************** TO BE REMOVED ****************************
     const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
-    // this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
-    //   '50b428ebbcf94488bb99440fc44e6c08');
+    this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+      '50b428ebbcf94488bb99440fc44e6c08');
 
     this.connectToProvider(wallet);
 
@@ -68,6 +68,7 @@ export class WalletService {
       // ***** final code *****
       // this.wallet = ethers.Wallet.fromMnemonic(mnemonic);
       // **********************
+      // this.reloadWallet()
       return ethers.Wallet.fromMnemonic(mnemonic);
 
     } catch (err: any) {
@@ -80,9 +81,6 @@ export class WalletService {
   async accessWallet(password: string) {
     try {
       const keystore = localStorage.getItem('keystore');
-      // this.infuraProvider = ethers.getDefaultProvider(, {
-      //   infura: 'https://mainnet.infura.io/v3/50b428ebbcf94488bb99440fc44e6c08'
-      // });
 
       this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
         '50b428ebbcf94488bb99440fc44e6c08');
@@ -90,7 +88,6 @@ export class WalletService {
       if(keystore) {
         const wallet = await Wallet.fromEncryptedJson(keystore, password);
         this.wallet.next(wallet.connect(this.infuraProvider));
-        // console.log(this.wallet);
       }
 
     } catch (err: any) {
@@ -99,11 +96,9 @@ export class WalletService {
   }
 
 
-  async encryptWallet(password: string) {
-    // if(this.wallet != null) {
-    //   const keystore = await this.wallet.encrypt(password);
-    //   localStorage.setItem('keystore', keystore);
-    // }
+  async encryptWallet(wallet: Wallet, password: string) {
+      const keystore = await wallet.encrypt(password);
+      localStorage.setItem('keystore', keystore);
   }
 
 

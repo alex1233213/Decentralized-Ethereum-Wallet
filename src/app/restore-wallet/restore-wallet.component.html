@@ -11,10 +11,13 @@
         <br><br>
         <button nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
         <p> {{ mnemonic_err }} </p>
+
+      <p>Note: If you have multiple accounts under your mnemonic phrase, you will need to restore them manually</p>
     </nb-step>
 
     <nb-step label="Password" [nbSpinner]="loading">
-      <app-create-password (passwordSubmitEvent)="encryptWallet($event)" [loading]="loading"></app-create-password>
+      <app-create-password (passwordSubmitEvent)="encryptWallet($event, wallet)" [loading]="loading"></app-create-password>
+      <p *ngIf="wallet_restore_err"> {{ wallet_restore_err }} </p>
     </nb-step>
   </nb-stepper>
 </nb-card>

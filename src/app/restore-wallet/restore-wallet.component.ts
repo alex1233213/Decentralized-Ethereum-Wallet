@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import { WalletService } from "../services/wallet/wallet.service";
-import { Wallet } from "ethers";
 import { Router } from "@angular/router";
+import {ethers, Wallet} from "ethers";
+import {AccountsService} from "../services/accounts/accounts.service";
 
 @Component({
   selector: 'app-restore-wallet',
@@ -14,32 +15,45 @@ export class RestoreWalletComponent {
   mnemonic = new FormControl('', [Validators.required]);
   index: number = 0;
   mnemonic_err: string;
+  wallet_restore_err: string;
   loading: boolean;
+  wallet: Wallet;
 
   constructor(private walletService: WalletService,
-              private router: Router) { }
+              private router: Router,
+              private accountsService: AccountsService) { }
 
 
   //method verifies mnemonic entered by the user
   verifyMnemonic() {
-    const error = this.walletService.restoreFromMnemonic(this.mnemonic.value);
+    const return_value =  this.walletService.restoreFromMnemonic(this.mnemonic.value);
 
-    if(error != undefined) {
-      this.mnemonic_err = error;
+    if( typeof return_value == 'string') {
+      this.mnemonic_err = return_value;
     } else {
+      this.wallet = return_value;
+      console.log(this.wallet);
       this.nextStep();
     }
   }
 
 
   //save encrypted wallet to localstorage, decrypt the wallet and navigate to dashboard
-  async encryptWallet(password: string) {
+  async encryptWallet(password: string, wallet: Wallet) {
     this.loading = true;
-    await this.walletService.encryptWallet(password);
-    await this.walletService.accessWallet(password);
 
-    //after the wallet is encrypted, redirect user to dashboard
-    this.router.navigate(['/wallet']);
+    try {
+
+      await this.walletService.encryptWallet(wallet, password);
+      await this.accountsService.generateFirstAccount(wallet);
+      await this.walletService.accessWallet(password);
+      //after the wallet is encrypted, redirect user to dashboard
+      await this.router.navigate(['/wallet/dashboard']);
+
+    } catch (err: any) {
+      this.wallet_restore_err = err.message;
+    }
+
     this.loading = false;
   }
 
