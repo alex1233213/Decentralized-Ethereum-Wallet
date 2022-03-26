@@ -105,6 +105,7 @@ export class SendTxFormComponent implements OnInit {
 
   copyAddress(account: any) {
     this.send_transaction_form.get('receiving_address')!.setValue(account.account_address);
+    this.show_accounts = false;
   }
 
 }
