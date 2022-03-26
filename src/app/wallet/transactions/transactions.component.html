@@ -3,7 +3,7 @@
 </nb-card>
 
 <ng-container *ngIf="!loadingData && current_route == '/wallet/transaction/send-tx'">
-  <app-send-tx-form [tokens_data]="tokensData" [wallet]="wallet"></app-send-tx-form>
+  <app-send-tx-form [tokens_data]="tokensData" [wallet]="wallet" [accounts]="accounts"></app-send-tx-form>
 </ng-container>
 
 <ng-container *ngIf="!loadingData && current_route == '/wallet/transaction/swap'">

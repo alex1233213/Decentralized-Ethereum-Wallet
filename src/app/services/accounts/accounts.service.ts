@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NewAccDialogComponent } from "../../wallet/dialogs/new-acc-dialog/new-acc-dialog.component";
 import { NbDialogService } from "@nebular/theme";
 import { WalletService } from "../wallet/wallet.service";
-import { Wallet } from "ethers";
+import {ethers, Wallet} from "ethers";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -97,5 +97,27 @@ export class AccountsService {
     } else {
       return null;
     }
+  }
+
+
+  getAccountsAndAddresses(wallet: Wallet) {
+    // console.log(this.accounts$.value);
+    const accounts = this.accounts$.value;
+
+    return Object.keys(accounts).map( (account_name) => {
+        const index = accounts[account_name];
+        const account_address = this.getAccountAddress(wallet, index.toString());
+        return {
+          account_name,
+          account_address
+        };
+    });
+  }
+
+
+  getAccountAddress(wallet: Wallet, account_index: string) {
+    const path =  `m/44'/60'/0'/0/${ account_index }`;
+
+    return ethers.Wallet.fromMnemonic(wallet.mnemonic.phrase, path).address;
   }
 }

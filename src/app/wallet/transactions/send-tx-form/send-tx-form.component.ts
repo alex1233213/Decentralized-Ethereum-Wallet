@@ -21,6 +21,7 @@ export class SendTxFormComponent implements OnInit {
   gasFee: number;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
+  @Input() accounts: any;
 
 
   constructor(private transaction_service: TransactionService,
