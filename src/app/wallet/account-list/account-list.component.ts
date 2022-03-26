@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Account } from "../../shared/utils/types/Account";
 
 @Component({
   selector: 'app-account-list',
@@ -7,11 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AccountListComponent implements OnInit {
 
-  @Input() accounts: any;
+  @Input() accounts: Account[];
+  @Output() account_select = new EventEmitter<Account>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+
+  onAccountSelect(account: Account) {
+    this.account_select.emit(account);
   }
 
 }

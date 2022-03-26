@@ -48,12 +48,10 @@
       </div>
 
       <div (click)="show_accounts = !show_accounts">Transfer between my accounts</div>
-      <nb-list *ngIf="show_accounts">
-        <nb-list-item *ngFor="let account of accounts" (click)="copyAddress(account)">
-          <p> {{ account.account_name + ' ' + account.account_address }} </p>
-        </nb-list-item>
-      </nb-list>
-
+      <app-account-list [accounts]="accounts"
+                        *ngIf="show_accounts"
+                        (account_select)="copyAddress($event)">
+      </app-account-list>
       <br>
       <h6>Transaction fee</h6>
         <p> {{ 'Estimated gas fee: ' + gasFee }}</p>

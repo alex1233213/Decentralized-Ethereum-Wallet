@@ -7,6 +7,7 @@ import { TransactionService } from "../../../services/transaction/transaction.se
 import { Wallet } from "ethers";
 import { NbDialogService } from "@nebular/theme";
 import { ConfirmTxDialogComponent } from "../../dialogs/confirm-tx-dialog/confirm-tx-dialog.component";
+import { Account } from "../../../shared/utils/types/Account";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SendTxFormComponent implements OnInit {
   show_accounts: boolean = false;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
-  @Input() accounts: any;
+  @Input() accounts: Account[];
 
 
   constructor(private transaction_service: TransactionService,
@@ -103,7 +104,7 @@ export class SendTxFormComponent implements OnInit {
 
 
 
-  copyAddress(account: any) {
+  copyAddress(account: Account) {
     this.send_transaction_form.get('receiving_address')!.setValue(account.account_address);
     this.show_accounts = false;
   }
