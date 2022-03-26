@@ -1,0 +1,5 @@
+<nb-list>
+  <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
+    <p> {{ account.account_name + ' ' + account.account_address }} </p>
+  </nb-list-item>
+</nb-list>
