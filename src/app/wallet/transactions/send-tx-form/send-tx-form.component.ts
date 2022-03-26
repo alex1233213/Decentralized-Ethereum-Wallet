@@ -19,6 +19,7 @@ export class SendTxFormComponent implements OnInit {
   send_transaction_form: FormGroup;
   selected_token: Token;
   gasFee: number;
+  show_accounts: boolean = false;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
   @Input() accounts: any;
