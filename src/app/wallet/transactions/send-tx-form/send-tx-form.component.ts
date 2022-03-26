@@ -101,4 +101,10 @@ export class SendTxFormComponent implements OnInit {
     this.transaction_service.estimateGasFee(this.selected_token, this.wallet).then( fee => this.gasFee = fee);
   }
 
+
+
+  copyAddress(account: any) {
+    this.send_transaction_form.get('receiving_address')!.setValue(account.account_address);
+  }
+
 }
