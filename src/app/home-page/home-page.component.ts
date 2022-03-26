@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { Router } from "@angular/router";
 import {NbDialogService, NbPopoverDirective} from "@nebular/theme";
 
@@ -10,11 +10,10 @@ import {NbDialogService, NbPopoverDirective} from "@nebular/theme";
 export class HomePageComponent implements OnInit {
 
   keystore: string | null;
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective>;
 
   constructor(
-    private router: Router,
-    private dialogService: NbDialogService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +38,6 @@ export class HomePageComponent implements OnInit {
 
 
   close() {
-    this.popover.hide();
+    this.popovers.forEach( p => p.hide() );
   }
 }

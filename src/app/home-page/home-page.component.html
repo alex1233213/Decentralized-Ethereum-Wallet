@@ -1,19 +1,27 @@
-<h6>Welcome to DE-Wallet
-  To begin, create, unlock or restore Ethereum wallet</h6>
+<h6>Welcome to DE-Wallet</h6>
+<h6> To begin, create, unlock or restore Ethereum wallet</h6>
 <button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
 <br>
 <br>
-<button nbButton *ngIf="keystore" [nbPopover]="warn_restore">Restore Wallet</button>
+<button nbButton *ngIf="keystore" [nbPopover]="warning_restore">Restore Wallet</button>
 <button nbButton *ngIf="!keystore" (click)="restoreWallet()">Restore Wallet</button>
 
 
 <br>
 <br>
-<button nbButton (click)="createWallet()">Create Wallet</button>
+<button *ngIf="keystore" nbButton [nbPopover]="warning_create">Create Wallet</button>
+<button *ngIf="!keystore" nbButton (click)="createWallet()">Create Wallet</button>
 
 
-<ng-template #warn_restore>
-  <span>Wallet will be removed from memory</span>
+<ng-template #warning_restore>
+  <span>Current wallet may be removed from memory</span>
   <button nbButton (click)="close()">Cancel</button>
   <button nbButton (click)="restoreWallet()">Confirm</button>
+</ng-template>
+
+
+<ng-template #warning_create>
+  <span>Current wallet may be removed from memory</span>
+  <button nbButton (click)="close()">Cancel</button>
+  <button nbButton (click)="createWallet()">Confirm</button>
 </ng-template>
