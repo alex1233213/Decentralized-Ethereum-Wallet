@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ethers, Wallet} from 'ethers';
-import {NavigationEnd, Router} from "@angular/router";
-import {BehaviorSubject, filter, Observable} from "rxjs";
-import {ProviderService} from "../provider/provider.service";
+import { Injectable } from '@angular/core';
+import { ethers, Wallet } from 'ethers';
+import { NavigationEnd, Router } from "@angular/router";
+import { BehaviorSubject, filter, Observable } from "rxjs";
+import { ProviderService } from "../provider/provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,7 @@ export class WalletService {
 
   private wallet: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   infuraProvider: ethers.providers.InfuraProvider;
+  default_provider: ethers.providers.InfuraProvider
 
   constructor(private router: Router,
               private providerService: ProviderService) {
@@ -26,14 +27,13 @@ export class WalletService {
     });
 
     // **************************** TO BE REMOVED ****************************
-    const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
-    this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
-      '50b428ebbcf94488bb99440fc44e6c08');
-
-    this.connectToProvider(wallet);
-
-
+    // const wallet = this.restoreFromMnemonic('tomato snack album rule blush pistol shoulder pole ship design inhale suffer');
+    // this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+    //   '50b428ebbcf94488bb99440fc44e6c08');
+    //
+    // this.connectToProvider(wallet);
     // ***********************************************************************
+
   }
 
 
@@ -99,6 +99,15 @@ export class WalletService {
   async encryptWallet(wallet: Wallet, password: string) {
       const keystore = await wallet.encrypt(password);
       localStorage.setItem('keystore', keystore);
+  }
+
+
+
+  initWallet(wallet: Wallet) {
+    const provider = new ethers.providers.InfuraProvider("homestead",
+      '50b428ebbcf94488bb99440fc44e6c08');
+
+    this.wallet.next(wallet.connect(provider));
   }
 
 

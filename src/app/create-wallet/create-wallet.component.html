@@ -11,14 +11,20 @@
       </nb-step>
 
       <nb-step label="Recovery Phrase">
-        <app-display-mnemonic [mnemonic]="this.mnemonic">
+        <app-display-mnemonic [mnemonic]="this.mnemonic"
+                              *ngIf="this.mnemonic">
         </app-display-mnemonic>
       </nb-step>
 
       <nb-step label="Verify Phrase">
         <app-verify-mnemonic [mnemonic]="this.mnemonic"
-                             (mnemonic_verification_event)="complete_wallet_setup()">
+                             (mnemonic_verification_event)="complete_wallet_setup()"
+                             *ngIf="this.mnemonic && !loading">
         </app-verify-mnemonic>
+
+        <nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" *ngIf="loading">
+          <nb-card-body><h6>Encrypting wallet</h6></nb-card-body>
+        </nb-card>
       </nb-step>
     </nb-stepper>
 

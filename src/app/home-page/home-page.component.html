@@ -3,13 +3,13 @@
 <button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
 <br>
 <br>
-<button nbButton *ngIf="keystore" [nbPopover]="warning_restore">Restore Wallet</button>
+<button nbButton *ngIf="keystore" [nbPopover]="warning_restore" nbPopoverPlacement="bottom">Restore Wallet</button>
 <button nbButton *ngIf="!keystore" (click)="restoreWallet()">Restore Wallet</button>
 
 
 <br>
 <br>
-<button *ngIf="keystore" nbButton [nbPopover]="warning_create">Create Wallet</button>
+<button *ngIf="keystore" nbButton [nbPopover]="warning_create" nbPopoverPlacement="bottom">Create Wallet</button>
 <button *ngIf="!keystore" nbButton (click)="createWallet()">Create Wallet</button>
 
 

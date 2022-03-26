@@ -16,6 +16,7 @@ export class CreatePasswordComponent implements OnInit {
   passwordForm = new FormGroup({
     password: new FormControl('', [
         Validators.required,
+        //regex pattern for password: min 7 characters with at least one number and one special character
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{7,}$/)
       ]
     ),
