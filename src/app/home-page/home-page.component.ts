@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from "@angular/router";
+import {NbDialogService, NbPopoverDirective} from "@nebular/theme";
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +10,11 @@ import { Router } from "@angular/router";
 export class HomePageComponent implements OnInit {
 
   keystore: string | null;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialogService: NbDialogService
   ) { }
 
   ngOnInit(): void {
@@ -32,5 +35,10 @@ export class HomePageComponent implements OnInit {
 
   restoreWallet() {
     this.router.navigate(['/restore']);
+  }
+
+
+  close() {
+    this.popover.hide();
   }
 }

@@ -2,7 +2,17 @@
 <button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
 <br>
 <br>
-<button nbButton (click)="restoreWallet()">Restore Wallet</button>
+<button nbButton *ngIf="keystore" [nbPopover]="warn_restore">Restore Wallet</button>
+<button nbButton *ngIf="!keystore" (click)="restoreWallet()">Restore Wallet</button>
+
+
 <br>
 <br>
 <button nbButton (click)="createWallet()">Create Wallet</button>
+
+
+<ng-template #warn_restore>
+  <span>Wallet will be removed from memory</span>
+  <button nbButton (click)="close()">Cancel</button>
+  <button nbButton (click)="restoreWallet()">Confirm</button>
+</ng-template>
