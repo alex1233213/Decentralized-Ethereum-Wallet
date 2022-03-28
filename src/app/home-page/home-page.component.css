@@ -5,11 +5,17 @@
 
 .btn-container {
   position: relative;
-  top: 15px;
+  top: 12px;
   display: flex;
   justify-content: end;
 }
 
 .btn-container > button {
   margin: 5px;
+}
+
+
+.warn-msg {
+  display: flex;
+  align-items: center;
 }

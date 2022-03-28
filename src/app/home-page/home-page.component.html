@@ -15,8 +15,10 @@
 
 <ng-template #warning_restore class="test">
   <div class="popover">
-    <nb-icon icon="alert-circle-outline"></nb-icon>
-    <span>Current wallet will be removed from memory</span>
+    <div class="warn-msg">
+      <nb-icon icon="alert-circle-outline"></nb-icon>
+      <span>Current wallet will be removed from memory</span>
+    </div>
     <br>
     <div class="btn-container">
       <button nbButton size="tiny" (click)="close()">Cancel</button>
@@ -28,8 +30,11 @@
 
 <ng-template #warning_create>
   <div class="popover">
-    <nb-icon icon="alert-circle-outline"></nb-icon>
-    <span>Current wallet will be removed from memory</span>
+    <div class="warn-msg">
+      <nb-icon icon="alert-circle-outline"></nb-icon>
+      <span>Current wallet will be removed from memory</span>
+    </div>
+
     <br>
     <div class="btn-container">
       <button nbButton size="tiny" (click)="close()">Cancel</button>
