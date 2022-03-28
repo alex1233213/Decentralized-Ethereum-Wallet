@@ -81,7 +81,7 @@ export class WalletService {
     try {
       const keystore = localStorage.getItem('keystore');
 
-      this.infuraProvider = new ethers.providers.InfuraProvider('ropsten',
+      this.infuraProvider = new ethers.providers.InfuraProvider('homestead',
         '50b428ebbcf94488bb99440fc44e6c08');
 
       if(keystore) {
