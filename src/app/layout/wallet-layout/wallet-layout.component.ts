@@ -33,11 +33,23 @@ export class WalletLayoutComponent implements OnInit {
           if(confirmed == true) {
             await Moralis.initPlugins();
 
-            Moralis.Plugins['fiat'].buy();
+            await this.openInNewTab();
           }
       });
-
-
     }
   }
+
+
+
+  async openInNewTab() {
+    const result = await Moralis.Plugins['fiat'].buy({}, {disableTriggers: true});
+    const url = result.data;
+
+    console.log(url);
+
+    // @ts-ignore
+    window.open(url, '_blank').focus();
+  }
+
+
 }
