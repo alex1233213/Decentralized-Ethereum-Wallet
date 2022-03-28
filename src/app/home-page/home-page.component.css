@@ -1,0 +1,15 @@
+.popover {
+  padding: 15px;
+}
+
+
+.btn-container {
+  position: relative;
+  top: 15px;
+  display: flex;
+  justify-content: end;
+}
+
+.btn-container > button {
+  margin: 5px;
+}

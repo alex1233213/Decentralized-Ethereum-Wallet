@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
-import { NbButtonModule, NbLayoutModule, NbPopoverModule } from "@nebular/theme";
+import {NbButtonModule, NbIconModule, NbLayoutModule, NbPopoverModule} from "@nebular/theme";
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { NbButtonModule, NbLayoutModule, NbPopoverModule } from "@nebular/theme"
     HomePageRoutingModule,
     NbLayoutModule,
     NbButtonModule,
-    NbPopoverModule
+    NbPopoverModule,
+    NbIconModule
   ]
 })
 export class HomePageModule { }
