@@ -3,10 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageLayoutComponent } from "./home-page-layout/home-page-layout.component";
 import { WalletLayoutComponent } from "./wallet-layout/wallet-layout.component";
 import { DashboardComponent } from "../wallet/dashboard/dashboard.component";
-import { DappsComponent } from "../wallet/dapps/dapps.component";
-import {TransactionsComponent} from "../wallet/transactions/transactions.component";
-import {TxHistoryComponent} from "../wallet/tx-history/tx-history.component";
-// import {WalletGuard} from "../guards/dashboard/wallet-guard.service";
+import { TransactionsComponent } from "../wallet/transactions/transactions.component";
+import { TxHistoryComponent } from "../wallet/tx-history/tx-history.component";
+import { WalletGuard } from "../guards/dashboard/wallet-guard.service";
 
 const routes: Routes = [
   {
@@ -40,7 +39,7 @@ const routes: Routes = [
     path: 'wallet',
     component: WalletLayoutComponent,
     // TODO  ***** UNCOMMENT *****
-    // canActivate: [WalletGuard],
+    canActivate: [WalletGuard],
     children: [
       {
         path: '',
@@ -60,15 +59,6 @@ const routes: Routes = [
         component: TxHistoryComponent
       }
 
-      //NOT IMPLEMENTED
-      // {
-      //   path: 'transaction/swap',
-      //   component: TransactionsComponent
-      // },
-      // {
-      //   path: 'dapps',
-      //   component: DappsComponent
-      // }
     ]
   },
 

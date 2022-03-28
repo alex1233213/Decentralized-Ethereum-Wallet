@@ -7,6 +7,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { WalletService } from "../../services/wallet/wallet.service";
+import {Wallet} from "ethers";
+import { map } from 'rxjs/operators';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +22,30 @@ export class WalletGuard implements CanActivate {
     private router: Router
   ) { }
 
+
+
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean | UrlTree {
-      if(this.walletService.wallet == undefined) {
-        return this.router.parseUrl('/');
-      } else {
-        return true;
-      }
+    state: RouterStateSnapshot): Observable<true | UrlTree> {
+
+    return this.getWallet().pipe(
+      map(wallet => {
+        if (wallet == undefined) {
+          return this.router.parseUrl('/');
+        } else {
+          return true;
+        }
+      })
+    )
   }
 
+
+
+
+
+  getWallet(): Observable<Wallet> {
+    return this.walletService.getWallet().pipe(
+      map((wallet: Wallet) => wallet)
+    );
+  }
 }

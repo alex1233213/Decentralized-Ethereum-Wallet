@@ -12,7 +12,6 @@ export class WalletService {
 
   private wallet: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   infuraProvider: ethers.providers.InfuraProvider;
-  default_provider: ethers.providers.InfuraProvider
 
   constructor(private router: Router,
               private providerService: ProviderService) {
