@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DappsComponent } from './dapps/dapps.component';
+
 import {
   NbAlertModule,
   NbButtonModule,
@@ -30,7 +30,6 @@ import { AccountListComponent } from './account-list/account-list.component';
 @NgModule({
   declarations: [
     DashboardComponent,
-    DappsComponent,
     SelectNetworkComponent,
     TokensComponent,
     ConfirmTxDialogComponent,

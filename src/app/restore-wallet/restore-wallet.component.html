@@ -1,18 +1,28 @@
-<nb-card>
+<nb-card id="main-container">
   <nb-stepper orientation="horizontal" linear="false" disableStepNavigation="true" [selectedIndex]="index">
     <nb-step label="Enter mnemonic">
-        <label for="mnemonic-input"></label>
+        <label for="mnemonic-input">Enter the mnemonic phrase for the wallet to be restored</label>
+        <br>
+        <br>
         <input nbInput
                fullWidth
                type="text"
                id="mnemonic-input"
                [formControl]="mnemonic"
                placeholder="Mnemonic phrase"/>
-        <br><br>
-        <button nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
+        <br><br><br>
+        <button id="next-btn" nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
         <p> {{ mnemonic_err }} </p>
 
-      <p>Note: If you have multiple accounts under your mnemonic phrase, you will need to restore them manually</p>
+      <br>
+      <br>
+      <br>
+
+      <nb-card>
+        <nb-card-body>
+          <p><nb-icon icon="alert-circle-outline"></nb-icon>Note: If you have multiple accounts under your mnemonic phrase, you will need to add them manually</p>
+        </nb-card-body>
+      </nb-card>
     </nb-step>
 
     <nb-step label="Password" [nbSpinner]="loading">
