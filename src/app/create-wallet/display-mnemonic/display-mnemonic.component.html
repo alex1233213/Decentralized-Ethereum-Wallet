@@ -1,48 +1,46 @@
-<nb-card>
-  <nb-card-body>
-    <div>
-      <h1>Your recovery phrase</h1>
-      <p>
-        Write down your recovery phrase in the exact order displayed and store it
-        somewhere safe. The recovery phrase is the only way to transfer the wallet
-        to another device or restore the wallet if the device is lost.
-      </p>
 
-      <nb-alert outline="danger" id="warning-msg">Warning: never share your recovery phrase. Anyone who has
-        access to the recovery phrase can take your funds.</nb-alert>
-      <br>
-      <br>
+<div>
+  <h3>Your recovery phrase</h3>
+  <p>
+    Write down your recovery phrase in the exact order displayed and store it
+    somewhere safe. The recovery phrase is the only way to transfer the wallet
+    to another device or restore the wallet if the device is lost.
+  </p>
 
-      <nb-card>
-        <nb-card-body>
-          <div class="word" *ngFor="let word of mnemonic; let i = index"> {{ (i + 1) + ". " + word }} </div>
-        </nb-card-body>
-      </nb-card>
+  <nb-alert outline="danger" id="warning-msg">Warning: never share your recovery phrase. Anyone who has
+    access to the recovery phrase can take your funds.</nb-alert>
+  <br>
+  <br>
 
-      <br>
-      <br>
-      <nb-checkbox id="confirm-checkbox" (checkedChange)="toggleUserConfirmation($event)"></nb-checkbox>
-      <label for="confirm-checkbox">I have backed up my phrase</label>
+  <nb-card>
+    <nb-card-body class="words-container">
+      <div class="word" *ngFor="let word of mnemonic; let i = index"> {{ (i + 1) + ". " + word }} </div>
+    </nb-card-body>
+  </nb-card>
 
-      <br>
-      <br>
-      <button
-        nbButton
-        nbStepperNext
-        [disabled]="user_confirmation == false">
-        Continue
-      </button>
+  <br>
+  <br>
 
+  <div id="confirm-container">
+    <nb-checkbox id="confirm-checkbox" (checkedChange)="toggleUserConfirmation($event)"></nb-checkbox>
+    <label for="confirm-checkbox">I have backed up my phrase</label>
+  </div>
 
-      <br>
-      <br>
-      <button
-        nbButton nbStepperPrevious>Back</button>
+  <br>
+  <br>
 
-    </div>
+  <div>
+    <button
+      nbButton nbStepperPrevious>Back</button>
 
-    <br>
+    <button
+      class="right-btn"
+      nbButton
+      nbStepperNext
+      [disabled]="user_confirmation == false">
+      Continue
+    </button>
+  </div>
+</div>
 
-  </nb-card-body>
-</nb-card>
 

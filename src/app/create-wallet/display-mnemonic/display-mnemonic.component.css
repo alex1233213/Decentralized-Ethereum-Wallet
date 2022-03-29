@@ -2,3 +2,41 @@
   color: #fb5050;
   font-weight: normal;
 }
+
+#confirm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+
+.right-btn {
+  margin-left: 40px;
+}
+
+
+label {
+  margin-left: 10px;
+}
+
+
+
+.words-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+
+.word {
+  border: darkorchid 1px solid;
+  padding: 5px;
+  width: 30%;
+}
+
+.word:hover {
+  cursor: default;
+}
