@@ -29,9 +29,8 @@ export class UnlockWalletComponent implements OnInit {
 
     try {
       await this.walletService.accessWallet(this.password.value);
-      this.router.navigate(['/wallet/dashboard']);
+      await this.router.navigate(['/wallet/dashboard']);
     } catch (err: any) {
-      // this.login_error = 'Error unlocking wallet - possibly wrong password';
       setTimeout( () => {
         this.login_error = '';
       }, 4000);
