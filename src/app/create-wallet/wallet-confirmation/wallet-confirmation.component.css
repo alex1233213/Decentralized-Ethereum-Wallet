@@ -1,0 +1,30 @@
+
+label {
+  margin-left: 10px;
+}
+
+
+#confirm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+
+
+.right-btn {
+  margin-left: 20px;
+}
+
+
+#p-container {
+  width: 50%;
+  margin: auto;
+}
+
+
+#p-container p {
+  font-size: 17px;
+}
