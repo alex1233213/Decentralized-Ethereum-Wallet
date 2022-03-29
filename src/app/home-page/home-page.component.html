@@ -1,16 +1,16 @@
 <h5>Welcome to DE-Wallet</h5>
 <h6> To begin, create, unlock or restore Ethereum wallet</h6>
-<button nbButton *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
+<button nbButton size="giant" hero *ngIf="keystore" (click)="unlockWallet()">Unlock Wallet</button>
 <br>
 <br>
-<button nbButton *ngIf="keystore" [nbPopover]="warning_restore" nbPopoverPlacement="bottom">Restore Wallet</button>
-<button nbButton *ngIf="!keystore" (click)="restoreWallet()">Restore Wallet</button>
+<button nbButton size="giant" hero *ngIf="keystore" [nbPopover]="warning_restore" nbPopoverPlacement="bottom">Restore Wallet</button>
+<button nbButton size="giant" hero *ngIf="!keystore" (click)="restoreWallet()">Restore Wallet</button>
 
 
 <br>
 <br>
-<button *ngIf="keystore" nbButton [nbPopover]="warning_create" nbPopoverPlacement="bottom">Create Wallet</button>
-<button *ngIf="!keystore" nbButton (click)="createWallet()">Create Wallet</button>
+<button *ngIf="keystore" nbButton size="giant" hero [nbPopover]="warning_create" nbPopoverPlacement="bottom">Create Wallet</button>
+<button *ngIf="!keystore" nbButton size="giant" hero (click)="createWallet()">Create Wallet</button>
 
 
 <ng-template #warning_restore class="test">
