@@ -13,7 +13,7 @@ export class CreateWalletComponent implements OnInit {
 
   mnemonic: string[];
   wallet: Wallet;
-  stepIndex: number = 1;
+  stepIndex: number = 0;
   password: string;
   loading: boolean;
 
