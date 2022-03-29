@@ -43,10 +43,10 @@ import { AccountListComponent } from './account-list/account-list.component';
     TxHistoryComponent,
     AccountListComponent
   ],
-    exports: [
-        SelectNetworkComponent,
-        SelectAccountComponent
-    ],
+  exports: [
+    SelectNetworkComponent,
+    SelectAccountComponent
+  ],
   imports: [
     CommonModule,
     NbMenuModule,

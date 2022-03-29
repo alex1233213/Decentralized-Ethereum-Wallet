@@ -9,7 +9,6 @@ import { passwordMatchValidator} from "../../shared/validators/passwordMatch";
 })
 export class CreatePasswordComponent implements OnInit {
   @Output() passwordSubmitEvent = new EventEmitter<string>();
-  @Input() loading: boolean = false;
 
   formSubmitted: boolean = false;
 

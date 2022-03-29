@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import { WalletService } from "../services/wallet/wallet.service";
 import { Router } from "@angular/router";
-import {ethers, Wallet} from "ethers";
-import {AccountsService} from "../services/accounts/accounts.service";
+import { Wallet } from "ethers";
+import { AccountsService } from "../services/accounts/accounts.service";
 
 @Component({
   selector: 'app-restore-wallet',
@@ -14,8 +14,8 @@ export class RestoreWalletComponent {
 
   mnemonic = new FormControl('', [Validators.required]);
   index: number = 0;
-  mnemonic_err: string;
-  wallet_restore_err: string;
+  mnemonic_err: string = '';
+  wallet_restore_err: string = '';
   loading: boolean;
   wallet: Wallet;
 
@@ -30,9 +30,13 @@ export class RestoreWalletComponent {
 
     if( typeof return_value == 'string') {
       this.mnemonic_err = return_value;
+
+      setTimeout( () => {
+        this.mnemonic_err = '';
+      }, 5000);
+
     } else {
       this.wallet = return_value;
-      console.log(this.wallet);
       this.nextStep();
     }
   }
@@ -52,12 +56,16 @@ export class RestoreWalletComponent {
 
     } catch (err: any) {
       this.wallet_restore_err = err.message;
+
+      setTimeout( () => {
+        this.wallet_restore_err = '';
+      }, 5000);
     }
 
     this.loading = false;
   }
 
   nextStep() {
-     this.index++;
+    this.index++;
   }
 }

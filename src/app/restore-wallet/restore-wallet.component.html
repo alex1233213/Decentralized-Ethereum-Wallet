@@ -1,18 +1,24 @@
-<nb-card id="main-container">
+<nb-card id="main-container" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerMessage="Loading Wallet">
   <nb-stepper orientation="horizontal" linear="false" disableStepNavigation="true" [selectedIndex]="index">
     <nb-step label="Enter mnemonic">
-        <label for="mnemonic-input">Enter the mnemonic phrase for the wallet to be restored</label>
-        <br>
-        <br>
-        <input nbInput
-               fullWidth
-               type="text"
-               id="mnemonic-input"
-               [formControl]="mnemonic"
-               placeholder="Mnemonic phrase"/>
-        <br><br><br>
-        <button id="next-btn" nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
-        <p> {{ mnemonic_err }} </p>
+      <label for="mnemonic-input">Enter the mnemonic phrase for the wallet to be restored</label>
+      <br>
+      <br>
+      <input nbInput
+             fullWidth
+             type="text"
+             id="mnemonic-input"
+             value=""
+             [formControl]="mnemonic"
+             placeholder="Mnemonic phrase"/>
+      <br><br><br>
+      <button id="next-btn" nbButton [disabled]="mnemonic.invalid" (click)="verifyMnemonic()">next</button>
+      <br>
+      <br>
+      <nb-alert status="danger" *ngIf="mnemonic_err != ''">
+        {{ mnemonic_err }}
+      </nb-alert>
+
 
       <br>
       <br>
@@ -26,8 +32,12 @@
     </nb-step>
 
     <nb-step label="Password" [nbSpinner]="loading">
-      <app-create-password (passwordSubmitEvent)="encryptWallet($event, wallet)" [loading]="loading"></app-create-password>
-      <p *ngIf="wallet_restore_err"> {{ wallet_restore_err }} </p>
+      <app-create-password (passwordSubmitEvent)="encryptWallet($event, wallet)"></app-create-password>
+
+      <nb-alert status="danger" *ngIf="wallet_restore_err != ''">
+        {{ wallet_restore_err }}
+      </nb-alert>
+
     </nb-step>
   </nb-stepper>
 </nb-card>
