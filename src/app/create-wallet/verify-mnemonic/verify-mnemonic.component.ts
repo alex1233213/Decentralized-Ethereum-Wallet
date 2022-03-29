@@ -12,7 +12,7 @@ export class VerifyMnemonicComponent implements OnInit {
 
   randomisedMnemonic: string[];
   re_entered_mnemonic: string[] = [];
-  mnemonic_verified: boolean;
+  mnemonic_error: string = '';
 
   constructor() { }
 
@@ -68,7 +68,11 @@ export class VerifyMnemonicComponent implements OnInit {
     if(this.verifyMnemonic()) {
       this.mnemonic_verification_event.emit();
     } else {
-      this.mnemonic_verified = false;
+      this.mnemonic_error = 'The mnemonic phrase you entered is not in the right order, check the previous step and note the mnemonic phrase again';
+
+      setTimeout( () => {
+        this.mnemonic_error = '';
+      }, 4000);
     }
   }
 
