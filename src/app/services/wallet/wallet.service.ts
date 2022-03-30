@@ -13,8 +13,7 @@ export class WalletService {
   private wallet: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   infuraProvider: ethers.providers.InfuraProvider;
 
-  constructor(private router: Router,
-              private providerService: ProviderService) {
+  constructor(private router: Router) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     )
@@ -40,13 +39,6 @@ export class WalletService {
     return this.wallet.asObservable();
   }
 
-
-  connectToProvider(wallet: Wallet) {
-    this.providerService.getProvider().subscribe( (provider) => {
-      this.infuraProvider = provider;
-      this.wallet.next(wallet.connect(this.infuraProvider));
-    });
-  }
 
 
 
@@ -110,8 +102,11 @@ export class WalletService {
   }
 
 
-  // connectToProvider(provider: ethers.providers.InfuraProvider) {
-  //   this.wallet = this.wallet.connect(provider);
-  //   this.wallet.provider.getNetwork().then( (n: Network) => console.log(n));
-  // }
+  // method to connect the wallet to the provider passed in
+  connectToProvider(provider: ethers.providers.InfuraProvider) {
+    const wallet = this.wallet.value.connect(provider);
+    this.wallet.next(wallet);
+    // console.log(this.wallet.value);
+  }
+
 }

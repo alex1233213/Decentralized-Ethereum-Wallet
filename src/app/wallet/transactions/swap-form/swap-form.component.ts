@@ -24,12 +24,12 @@ export class SwapFormComponent implements OnInit {
               private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
-    this.default_selected_token = this.tokens_data[0];
-
-    this.providerService.getProvider().subscribe( (provider) => {
-      this.provider = provider;
-      this.initializeForm();
-    });
+    // this.default_selected_token = this.tokens_data[0];
+    //
+    // this.providerService.getProvider().subscribe( (provider) => {
+    //   this.provider = provider;
+    //   this.initializeForm();
+    // });
 
   }
 
