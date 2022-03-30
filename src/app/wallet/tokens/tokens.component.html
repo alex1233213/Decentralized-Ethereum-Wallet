@@ -1,10 +1,10 @@
-<nb-card [nbSpinner]="loadingData" nbSpinnerStatus="danger" *ngIf="loadingData">
+<nb-card [nbSpinner]="loadingData" nbSpinnerStatus="success" *ngIf="loadingData">
   <nb-card-body><h6>Loading data</h6></nb-card-body>
 </nb-card>
 
 
 <nb-card *ngIf="!loadingData">
-  <nb-card-body>
+  <nb-card-body class="table-container">
     <table>
       <tr>
         <th>TOKEN</th>
@@ -30,7 +30,15 @@
       <!--      display main net ether and other tokens-->
       <ng-container *ngIf="network.name == 'homestead'">
         <tr *ngFor="let token of tokensData">
-          <td><div><span><img src="{{ token.image }}" alt="{{ token.symbol }}"> {{ token.symbol.toUpperCase() }}</span> </div></td>
+          <td>
+            <div class="flex-container">
+              <img src="{{ token.image }}" alt="{{ token.symbol }}">
+              <span>
+                {{ token.symbol.toUpperCase() }}
+              </span>
+            </div>
+          </td>
+
           <td>{{ token.current_price }}</td>
           <td>{{ token.market_cap }}</td>
           <td>{{ token.price_change_percentage_24h }}</td>
