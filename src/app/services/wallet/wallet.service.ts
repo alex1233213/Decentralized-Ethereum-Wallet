@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ethers, Wallet } from 'ethers';
 import { NavigationEnd, Router } from "@angular/router";
 import { BehaviorSubject, filter, Observable } from "rxjs";
-import { ProviderService } from "../provider/provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -56,12 +55,7 @@ export class WalletService {
   //if invalid mnemonic returns error message
   restoreFromMnemonic(mnemonic: string) {
     try {
-      // ***** final code *****
-      // this.wallet = ethers.Wallet.fromMnemonic(mnemonic);
-      // **********************
-      // this.reloadWallet()
       return ethers.Wallet.fromMnemonic(mnemonic);
-
     } catch (err: any) {
       return err.message;
     }
@@ -95,16 +89,17 @@ export class WalletService {
 
 
   initWallet(wallet: Wallet) {
-    const provider = new ethers.providers.InfuraProvider("homestead",
+    this.infuraProvider = new ethers.providers.InfuraProvider("homestead",
       '50b428ebbcf94488bb99440fc44e6c08');
 
-    this.wallet.next(wallet.connect(provider));
+    this.wallet.next(wallet.connect(this.infuraProvider));
   }
 
 
   // method to connect the wallet to the provider passed in
   connectToProvider(provider: ethers.providers.InfuraProvider) {
-    const wallet = this.wallet.value.connect(provider);
+    this.infuraProvider = provider;
+    const wallet = this.wallet.value.connect(this.infuraProvider);
     this.wallet.next(wallet);
     // console.log(this.wallet.value);
   }
