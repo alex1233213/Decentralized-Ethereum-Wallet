@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NewAccDialogComponent } from "../../wallet/dialogs/new-acc-dialog/new-acc-dialog.component";
 import { NbDialogService } from "@nebular/theme";
 import { WalletService } from "../wallet/wallet.service";
-import {ethers, Wallet} from "ethers";
+import { ethers, Wallet } from "ethers";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -83,11 +83,13 @@ export class AccountsService {
   }
 
 
-  deriveAccount(account_index: string, mnemonic: string) {
-    const path =  `m/44'/60'/0'/0/${ account_index }`;
+  deriveAccount(account_index: string, mnemonic: string): Promise<null> {
+    return new Promise( () => {
+      const path =  `m/44'/60'/0'/0/${ account_index }`;
 
-    const new_wallet: Wallet = Wallet.fromMnemonic(mnemonic, path);
-    this.walletService.reloadWallet(new_wallet);
+      const new_wallet: Wallet = Wallet.fromMnemonic(mnemonic, path);
+      this.walletService.reloadWallet(new_wallet);
+    });
   }
 
 
@@ -109,7 +111,8 @@ export class AccountsService {
         const account_address = this.getAccountAddress(wallet, index.toString());
         return {
           account_name,
-          account_address
+          account_address,
+          index: index.toString()
         };
     });
   }

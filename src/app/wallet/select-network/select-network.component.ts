@@ -8,7 +8,7 @@ import {ProviderService} from "../../services/provider/provider.service";
 })
 export class SelectNetworkComponent implements OnInit {
 
-  selectedNetwork: string;
+  selectedNetwork: string = 'mainnet';
 
   constructor(private providerService: ProviderService) { }
 

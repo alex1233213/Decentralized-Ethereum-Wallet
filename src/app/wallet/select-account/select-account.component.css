@@ -1,0 +1,46 @@
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+}
+
+p {
+  margin: 0;
+  width: 100%;
+}
+
+
+.create-acc-btn {
+  padding: 15px;
+}
+
+
+.create-acc-btn:hover {
+  cursor: pointer;
+  background-color: #f5f5f0;
+}
+
+
+
+.address-container:hover {
+  background-color: #f5f5f0;
+  cursor: pointer;
+}
+
+
+.address-container:hover > #clipboard-logo {
+  display: block;
+}
+
+
+.address-container {
+  display: flex;
+  align-items: center;
+  margin-top: 7px;
+}
+
+
+#clipboard-logo {
+  display: none;
+}

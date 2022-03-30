@@ -9,7 +9,6 @@
       <tr>
         <th>TOKEN</th>
         <th>PRICE</th>
-        <th>MARKET CAP</th>
         <th>24H</th>
         <th>BALANCE</th>
       </tr>
@@ -19,7 +18,6 @@
         <tr>
           <td *ngIf="network.name == 'ropsten'">ROP</td>
           <td *ngIf="network.name == 'rinkeby'">RIN</td>
-          <td></td>
           <td></td>
           <td></td>
           <td>{{ ethBalance }}</td>
@@ -40,7 +38,6 @@
           </td>
 
           <td>{{ token.current_price }}</td>
-          <td>{{ token.market_cap }}</td>
           <td>{{ token.price_change_percentage_24h }}</td>
           <td>{{ coin_balances[token.id] }}</td>
         </tr>

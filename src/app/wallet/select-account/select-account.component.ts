@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalletService } from "../../services/wallet/wallet.service";
 import { Wallet } from "ethers";
 import { AccountsService } from "../../services/accounts/accounts.service";
+import { Account } from "../../shared/utils/types/Account";
 
 
 @Component({
@@ -14,25 +15,20 @@ export class SelectAccountComponent implements OnInit {
   wallet: Wallet;
   accounts: any;
   selected_account: string;
+  show_accounts_menu: boolean = false;
+  loading: boolean;
 
   constructor(private accountsService: AccountsService,
               private walletService: WalletService) { }
 
   ngOnInit(): void {
-
-    this.accountsService.getAccounts().subscribe( (accounts: {}) => {
-      this.accounts = accounts;
-    });
-
-
     this.accountsService.getSelectedAccount().subscribe( (account: string) => {
       this.selected_account = account;
     });
 
-
-
     this.walletService.getWallet().subscribe( (wallet) => {
       this.wallet = wallet;
+      this.accounts = this.accountsService.getAccountsAndAddresses(this.wallet);
     });
   }
 
@@ -45,12 +41,18 @@ export class SelectAccountComponent implements OnInit {
 
 
 
-  onAccountSelect() {
-    setTimeout( () => {
-      const selected_index = this.accounts[this.selected_account];
-      const mnemonic = this.wallet.mnemonic.phrase;
-      this.accountsService.deriveAccount(selected_index.toString(), mnemonic);
-    }, 100);
+
+  async onAccountSelect(account: Account) {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.selected_account = account.account_name;
+      this.accountsService.setSelectedAccount(this.selected_account);
+      this.accountsService.deriveAccount(account.index, this.wallet.mnemonic.phrase);
+      this.show_accounts_menu = !this.show_accounts_menu;
+      this.loading = false;
+    }, 10);
+
   }
 
 }

@@ -26,6 +26,8 @@ import { SelectTokenComponent } from './ui/select-token/select-token.component';
 import { BuyEthConfirmComponent } from './dialogs/buy-eth-confirm/buy-eth-confirm.component';
 import { TxHistoryComponent } from './tx-history/tx-history.component';
 import { AccountListComponent } from './account-list/account-list.component';
+import { AccountComponent } from './account/account.component';
+import {PipesModule} from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AccountListComponent } from './account-list/account-list.component';
     SelectTokenComponent,
     BuyEthConfirmComponent,
     TxHistoryComponent,
-    AccountListComponent
+    AccountListComponent,
+    AccountComponent
   ],
   exports: [
     SelectNetworkComponent,
@@ -62,7 +65,8 @@ import { AccountListComponent } from './account-list/account-list.component';
     NbListModule,
     FormsModule,
     NbAlertModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ]
 })
 export class WalletModule { }

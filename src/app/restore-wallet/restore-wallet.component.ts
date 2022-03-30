@@ -50,7 +50,7 @@ export class RestoreWalletComponent {
 
       await this.walletService.encryptWallet(wallet, password);
       await this.accountsService.generateFirstAccount(wallet);
-      await this.walletService.accessWallet(password);
+      await this.walletService.initWallet(wallet);
       //after the wallet is encrypted, redirect user to dashboard
       await this.router.navigate(['/wallet/dashboard']);
 
