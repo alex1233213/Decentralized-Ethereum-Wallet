@@ -21,6 +21,7 @@ export class SendTxFormComponent implements OnInit {
   selected_token: Token;
   gasFee: number;
   show_accounts: boolean = false;
+  insufficient_funds_gas: boolean;
   @Input() tokens_data: Token[];
   @Input() wallet: Wallet;
   @Input() accounts: Account[];
@@ -81,8 +82,15 @@ export class SendTxFormComponent implements OnInit {
 
   //when user clicks next, the dialog for transaction confirm is displayed
   next() {
-    // this.transaction_service.send_transaction(this.send_transaction_form, this.wallet);
-    this.open_confirm_dialogue();
+    console.log(this.tokens_data);
+    const ether: any = this.tokens_data.find( token => token.id == 'ethereum');
+    const balance = ether.balance;
+
+    if( balance < this.gasFee) {
+      this.insufficient_funds_gas = true;
+    } else {
+      this.open_confirm_dialogue();
+    }
   }
 
 

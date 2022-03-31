@@ -34,7 +34,6 @@ export class ConfirmTxDialogComponent implements OnInit, OnDestroy {
     //update the gas fee every 3 seconds
     this.interval_id = setInterval( async () => {
       await this.estimateTransactionFee();
-      console.log('this.gasFee: ' + this.gas_fee);
     }, 3000);
   }
 

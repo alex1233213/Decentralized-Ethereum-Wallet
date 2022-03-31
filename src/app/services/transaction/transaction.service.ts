@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BigNumber, ethers, utils, Wallet } from "ethers";
-import { FormGroup } from "@angular/forms";
 import { tokenAddresses } from "../../shared/utils/token_addresses/token-addresses";
 import { abi } from "../../shared/utils/abi/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
@@ -11,7 +10,6 @@ import { Token } from "../../shared/utils/types/Token";
 })
 export class TransactionService {
 
-  gas_limit = 100000;
 
   constructor() { }
 
@@ -78,13 +76,13 @@ export class TransactionService {
 
       } else { // send ethereum
 
-        let gas_limit = 100000;
+        let gas_limit = 21000;
 
         const tx = {
           from: wallet.address,
           to: to_address,
           value: ethers.utils.parseEther(send_token_amount),
-          gasLimit: ethers.utils.hexlify(gas_limit), // 100000
+          gasLimit: ethers.utils.hexlify(gas_limit),
           gasPrice: gas_price,
         }
 
@@ -106,8 +104,9 @@ export class TransactionService {
 
   //estimate gas fee for ethereum transaction
   async estimateEthTxFee(wallet: Wallet) {
+    const eth_gas_limit = 21000;
     // @ts-ignore
-    let gasFee = (await wallet.provider.getFeeData()).maxFeePerGas.mul(this.gas_limit);
+    let gasFee = (await wallet.provider.getFeeData()).maxFeePerGas.mul(eth_gas_limit);
 
     return parseFloat(utils.formatEther(gasFee));
   }
@@ -115,7 +114,6 @@ export class TransactionService {
 
   //method estimates the gas fee for a erc20 token transaction
   async estimateErc20GasFee(contract_address: string, wallet: Wallet) {
-
     let erc20_gas_limit_wei: number = 200000;
     let erc20_gas_limit_bn: BigNumber = BigNumber.from(erc20_gas_limit_wei);
 

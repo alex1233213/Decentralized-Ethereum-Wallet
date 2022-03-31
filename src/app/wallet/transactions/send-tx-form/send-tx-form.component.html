@@ -76,6 +76,9 @@
         <p> {{ 'Estimated gas fee: ' + gasFee }}</p>
         <br>
         <br>
+      <div class="err" *ngIf="insufficient_funds_gas">
+        Insufficient ether for gas fee
+      </div>
       <br>
       <br>
       <button nbButton (click)="next()" [disabled]="send_transaction_form.invalid">Next</button>
