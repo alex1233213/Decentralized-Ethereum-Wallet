@@ -5,6 +5,11 @@
   border: 1px solid lightgrey;
 }
 
+.flex-container:hover {
+  cursor: pointer;
+  background-color: #f5f5f0;
+}
+
 p {
   margin: 0;
   width: 100%;

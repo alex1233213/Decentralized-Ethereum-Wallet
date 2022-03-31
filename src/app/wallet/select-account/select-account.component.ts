@@ -3,6 +3,7 @@ import { WalletService } from "../../services/wallet/wallet.service";
 import { Wallet } from "ethers";
 import { AccountsService } from "../../services/accounts/accounts.service";
 import { Account } from "../../shared/utils/types/Account";
+import { NbToastrService } from "@nebular/theme";
 
 
 @Component({
@@ -19,7 +20,8 @@ export class SelectAccountComponent implements OnInit {
   loading: boolean;
 
   constructor(private accountsService: AccountsService,
-              private walletService: WalletService) { }
+              private walletService: WalletService,
+              private toastrService: NbToastrService) { }
 
   ngOnInit(): void {
     this.accountsService.getSelectedAccount().subscribe( (account: string) => {
@@ -52,7 +54,21 @@ export class SelectAccountComponent implements OnInit {
       this.show_accounts_menu = !this.show_accounts_menu;
       this.loading = false;
     }, 10);
+  }
 
+
+  async copyAddress() {
+    await navigator.clipboard.writeText(this.wallet.address);
+
+    this.notifyCopy();
+  }
+
+
+  notifyCopy() {
+    this.toastrService.show(
+      this.wallet.address,
+      `Address copied to the clipboard`,
+      { duration: 3000, icon: '' });
   }
 
 }

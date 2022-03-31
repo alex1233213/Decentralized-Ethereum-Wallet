@@ -1,5 +1,3 @@
-
-
 <!--<button nbButton (click)="addAccount()">Create account</button>-->
 
 
@@ -11,7 +9,10 @@
     </div>
 
     <ng-container *ngIf="!show_accounts_menu">
-      <div class="address-container">
+      <div class="address-container"
+           (click)="copyAddress()"
+           [nbPopover]="addressPopover"
+           nbPopoverTrigger="hover">
         <p class="address">{{ wallet.address | truncateAddress }}</p>
         <nb-icon icon="copy-outline" id="clipboard-logo"></nb-icon>
       </div>
@@ -23,13 +24,14 @@
 
     <div *ngIf="show_accounts_menu">
       <app-account-list [accounts]="accounts" (account_select)="onAccountSelect($event)"></app-account-list>
-      <hr>
       <div class="create-acc-btn" (click)="addAccount()">Create new account</div>
     </div>
   </nb-card-body>
 </nb-card>
 
-
+<ng-template #addressPopover>
+  <span>{{ wallet.address }}</span>
+</ng-template>
 
 
 

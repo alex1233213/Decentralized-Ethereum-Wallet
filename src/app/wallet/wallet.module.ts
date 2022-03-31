@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import {
-  NbAlertModule,
-  NbButtonModule,
-  NbCardModule, NbIconModule,
-  NbInputModule, NbListModule,
-  NbMenuModule,
-  NbSelectModule, NbSpinnerModule,
-  NbTreeGridModule
+    NbAlertModule,
+    NbButtonModule,
+    NbCardModule, NbIconModule,
+    NbInputModule, NbListModule,
+    NbMenuModule, NbPopoverModule,
+    NbSelectModule, NbSpinnerModule,
+    NbTreeGridModule
 } from "@nebular/theme";
 import { SelectNetworkComponent } from './select-network/select-network.component';
 import { TokensComponent } from './tokens/tokens.component';
@@ -50,23 +50,24 @@ import {PipesModule} from "../pipes/pipes.module";
     SelectNetworkComponent,
     SelectAccountComponent
   ],
-  imports: [
-    CommonModule,
-    NbMenuModule,
-    NbSelectModule,
-    NbCardModule,
-    NbTreeGridModule,
-    HttpClientModule,
-    NbInputModule,
-    ReactiveFormsModule,
-    NbButtonModule,
-    NbSpinnerModule,
-    NbIconModule,
-    NbListModule,
-    FormsModule,
-    NbAlertModule,
-    RouterModule,
-    PipesModule
-  ]
+    imports: [
+        CommonModule,
+        NbMenuModule,
+        NbSelectModule,
+        NbCardModule,
+        NbTreeGridModule,
+        HttpClientModule,
+        NbInputModule,
+        ReactiveFormsModule,
+        NbButtonModule,
+        NbSpinnerModule,
+        NbIconModule,
+        NbListModule,
+        FormsModule,
+        NbAlertModule,
+        RouterModule,
+        PipesModule,
+        NbPopoverModule
+    ]
 })
 export class WalletModule { }
