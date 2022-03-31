@@ -51,7 +51,7 @@ export class TxHistoryService {
         console.log(token_metadata);
         tx.asset = token_metadata.symbol;
         tx.decimals = token_metadata.decimals;
-        tx.amount_formatted = ethers.utils.formatUnits(tx.value, tx.decimals);
+        tx.amount_formatted = this.roundTo4Decimals(ethers.utils.formatUnits(tx.value, tx.decimals));
 
         const tx_hash = tx.transaction_hash;
         tx.tx_receipt = await this.checkTxStatus(tx_hash, wallet);
@@ -68,7 +68,7 @@ export class TxHistoryService {
       return {
         time: tx.block_timestamp.split('T')[0], //get only the date from the timestamp
         asset: tx.asset ? tx.asset : 'ETH',
-        amount: tx.amount_formatted ? tx.amount_formatted : ethers.utils.formatEther(tx.value),
+        amount: tx.amount_formatted ? tx.amount_formatted : this.roundTo4Decimals(ethers.utils.formatEther(tx.value)),
         type: transaction_sent ?  'Send' : 'Receive',
         address: transaction_sent ? tx.to_address : tx.from_address,
         status: tx.receipt_status == 1 || tx.tx_receipt ? 'Completed' : 'Failed'
@@ -96,5 +96,10 @@ export class TxHistoryService {
     if (tx_receipt && tx_receipt.blockNumber) {
       return tx_receipt;
     }
+  }
+
+
+  roundTo4Decimals(float_value: string) {
+    return parseFloat(float_value).toFixed(4);
   }
 }
