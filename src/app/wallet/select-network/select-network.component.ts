@@ -13,11 +13,9 @@ export class SelectNetworkComponent implements OnInit {
   constructor(private providerService: ProviderService) { }
 
   ngOnInit(): void {
-
   }
 
   onNetworkSelect(network: string) {
-    this.selectedNetwork = network.charAt(0).toUpperCase() + network.slice(1);
     this.providerService.changeProvider(network);
     console.log(this.selectedNetwork);
   }
