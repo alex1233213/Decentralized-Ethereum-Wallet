@@ -66,7 +66,7 @@ export class TxHistoryService {
       console.log(tx);
 
       return {
-        time: tx.block_timestamp,
+        time: tx.block_timestamp.split('T')[0], //get only the date from the timestamp
         asset: tx.asset ? tx.asset : 'ETH',
         amount: tx.amount_formatted ? tx.amount_formatted : ethers.utils.formatEther(tx.value),
         type: transaction_sent ?  'Send' : 'Receive',
