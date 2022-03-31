@@ -1,11 +1,9 @@
-<nb-card>
-  <nb-card-body>
-    <h6>Network: {{ selectedNetwork == 'homestead' ? 'mainnet' : selectedNetwork }}</h6>
-    <nb-select placeholder="Network" (selectedChange)="onNetworkSelect($event)">
-      <nb-option value="homestead">Mainnet</nb-option>
-      <nb-option value="ropsten">Ropsten</nb-option>
-      <nb-option value="rinkeby">Rinkeby</nb-option>
-    </nb-select>
-  </nb-card-body>
-</nb-card>
+<nb-select placeholder="Network" (selectedChange)="onNetworkSelect($event)" selected="homestead">
+  <nb-select-label>
+    {{ selectedNetwork == 'homestead' ? 'Mainnet' : selectedNetwork }}
+  </nb-select-label>
+  <nb-option value="homestead">Mainnet</nb-option>
+  <nb-option value="ropsten">Ropsten</nb-option>
+  <nb-option value="rinkeby">Rinkeby</nb-option>
+</nb-select>
 

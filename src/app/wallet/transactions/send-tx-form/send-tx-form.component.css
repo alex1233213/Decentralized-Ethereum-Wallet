@@ -13,3 +13,9 @@ nb-select {
   position: relative;
   left: 10px;
 }
+
+
+nb-card {
+  width: 90%;
+  margin: auto;
+}

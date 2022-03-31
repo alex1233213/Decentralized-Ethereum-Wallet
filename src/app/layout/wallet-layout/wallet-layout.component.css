@@ -32,3 +32,9 @@ nb-list-item a , #but-eth {
   width: 100%;
   padding: 1.5em;
 }
+
+
+app-select-network {
+  position: absolute;
+  right: 45px;
+}

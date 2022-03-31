@@ -8,7 +8,7 @@ import {ProviderService} from "../../services/provider/provider.service";
 })
 export class SelectNetworkComponent implements OnInit {
 
-  selectedNetwork: string = 'mainnet';
+  selectedNetwork: string = 'homestead';
 
   constructor(private providerService: ProviderService) { }
 
@@ -17,7 +17,8 @@ export class SelectNetworkComponent implements OnInit {
   }
 
   onNetworkSelect(network: string) {
-    this.selectedNetwork = network;
+    this.selectedNetwork = network.charAt(0).toUpperCase() + network.slice(1);
     this.providerService.changeProvider(network);
+    console.log(this.selectedNetwork);
   }
 }
