@@ -1,24 +1,27 @@
-<nb-card [nbSpinner]="loading_data" nbSpinnerStatus="danger" *ngIf="loading_data">
+<nb-card [nbSpinner]="loading_data" nbSpinnerStatus="success" *ngIf="loading_data">
   <nb-card-body><h6>Loading data</h6></nb-card-body>
 </nb-card>
 
+<nb-card *ngIf="!loading_data">
+  <nb-card-body class="table-container">
+    <table *ngIf="!loading_data">
+      <tr>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Asset</th>
+        <th>Amount</th>
+        <th>Address</th>
+        <th>Status</th>
+      </tr>
 
-<table *ngIf="!loading_data">
-  <tr>
-    <th>Time</th>
-    <th>Type</th>
-    <th>Asset</th>
-    <th>Amount</th>
-    <th>Address</th>
-    <th>Status</th>
-  </tr>
-  <tr *ngFor="let transaction of tx_history">
-    <td> {{ transaction.time }} </td>
-    <td> {{ transaction.type }} </td>
-    <td> {{ transaction.asset }} </td>
-    <td> {{ transaction.amount }} </td>
-    <td> {{ transaction.type == 'Send' ? 'To ' + transaction.address : 'From ' + transaction.address }} </td>
-    <td> {{ transaction.status }} </td>
-  </tr>
-</table>
-
+      <tr *ngFor="let transaction of tx_history">
+        <td> {{ transaction.time }} </td>
+        <td> {{ transaction.type }} </td>
+        <td> {{ transaction.asset }} </td>
+        <td> {{ transaction.amount }} </td>
+        <td> {{ transaction.type == 'Send' ? 'To ' + transaction.address : 'From ' + transaction.address }} </td>
+        <td> {{ transaction.status }} </td>
+      </tr>
+    </table>
+  </nb-card-body>
+</nb-card>
