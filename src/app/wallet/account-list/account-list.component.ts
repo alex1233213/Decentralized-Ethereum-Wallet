@@ -9,6 +9,7 @@ import { Account } from "../../shared/utils/types/Account";
 export class AccountListComponent implements OnInit {
 
   @Input() accounts: Account[];
+  @Input() truncate: boolean;
   @Output() account_select = new EventEmitter<Account>();
 
   constructor() {

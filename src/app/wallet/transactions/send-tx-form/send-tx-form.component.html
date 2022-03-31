@@ -64,6 +64,7 @@
         </div>
 
         <app-account-list [accounts]="accounts"
+                          [truncate]="false"
                           *ngIf="show_accounts"
                           (account_select)="copyAddress($event)">
         </app-account-list>

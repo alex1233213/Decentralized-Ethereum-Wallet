@@ -1,5 +1,17 @@
-<nb-list>
+<nb-list *ngIf="truncate == undefined">
   <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
     <p> {{ account.account_name + '\n' + (account.account_address | truncateAddress) }} </p>
+  </nb-list-item>
+</nb-list>
+
+
+
+<nb-list *ngIf="truncate == false">
+  <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
+    <div class="account">
+      <p> {{ account.account_name }} </p>
+      <p> {{ account.account_address }}</p>
+    </div>
+
   </nb-list-item>
 </nb-list>

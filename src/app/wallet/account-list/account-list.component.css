@@ -6,3 +6,16 @@ nb-list-item:hover {
 nb-list-item {
   height: 66px;
 }
+
+
+.account {
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.account > * {
+  margin: 5px;
+}
