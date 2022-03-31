@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   border: 1px solid lightgrey;
+  border-radius: 2px;
+  padding: 3px 7px 3px 7px;
 }
 
 .flex-container:hover {

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
-  NbSidebarModule, NbDialogModule, NbToastrModule
+  NbSidebarModule, NbDialogModule, NbToastrModule, NbMenuModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LayoutModule } from "./layout/layout.module";
@@ -25,7 +25,7 @@ import { LayoutModule } from "./layout/layout.module";
     NbSidebarModule.forRoot(),
     LayoutModule,
     NbDialogModule.forRoot(),
-    NbToastrModule.forRoot(),
+    NbToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
