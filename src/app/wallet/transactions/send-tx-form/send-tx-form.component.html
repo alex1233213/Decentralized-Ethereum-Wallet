@@ -2,56 +2,74 @@
   <nb-card-body>
     <h5>Send</h5>
     <form [formGroup]="send_transaction_form">
-      <nb-select [(selected)]="selected_token" formControlName="selected_token" (selectedChange)="getGasFee()">
+      <label for="select-token">Select token to send</label>
+      <br>
+      <br>
+      <nb-select [(selected)]="selected_token" formControlName="selected_token" (selectedChange)="getGasFee()" id="select-token">
         <nb-select-label>
           <img *ngIf="selected_token.image" [src]="selected_token['image']" [alt]="selected_token.symbol"> <span> {{ selected_token.name }}</span>
         </nb-select-label>
         <nb-option *ngFor="let token of tokens_data" [value]="token">
-          <div>
-            <div>
+          <div class="select-option-container">
+            <div class="token-and-symbol">
+              <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">
               <span>
-                <img *ngIf="token.image" src="{{ token.image }}" alt="{{ token.symbol }}">
                 {{ token.symbol.toUpperCase() }}
               </span>
             </div>
 
-            <div class="token-balance">
-              <span>
-                {{ "Balance: " + token.balance }}
-              </span>
+            <div class="balance-container">
+              {{ "Balance: " + token.balance }}
             </div>
           </div>
         </nb-option>
       </nb-select>
-      <p> {{ 'balance: ' + selected_token.balance }}</p>
+      <p> {{ 'Balance: ' + selected_token.balance }}</p>
       <br>
       <br>
 
-      <input type="number" nbInput placeholder="Amount" formControlName="send_amount">
+      <label for="send-amount">Enter the amount to be sent</label>
+      <br>
+      <br>
+      <input type="number" nbInput placeholder="Amount" formControlName="send_amount" id="send-amount">
       <div *ngIf="send_transaction_form.invalid && send_amount_edited">
-        <div *ngIf="send_transaction_form.hasError('invalidSendAmount')">
+        <div *ngIf="send_transaction_form.hasError('invalidSendAmount')" class="err">
           Invalid send amount: enter value greater than 0
         </div>
 
-        <div *ngIf="send_transaction_form.hasError('sendAmountHigh')">
+        <div *ngIf="send_transaction_form.hasError('sendAmountHigh')" class="err">
           Not enough balance to send
         </div>
       </div>
 
       <br>
       <br>
-      <input type="text" nbInput placeholder="Receiving Address" formControlName="receiving_address">
+      <br>
+      <br>
+      <label for="recv-address">Enter the recipient address</label>
+      <br>
+      <br>
+      <input type="text" nbInput placeholder="Receiving Address" formControlName="receiving_address" id="recv-address">
       <div *ngIf="receiving_address.invalid && (receiving_address.touched || receiving_address.dirty)">
-        <div *ngIf="receiving_address.hasError('invalidAddress')">
+        <div *ngIf="receiving_address.hasError('invalidAddress')" class="err">
           Invalid address entered
         </div>
       </div>
 
-      <div (click)="show_accounts = !show_accounts">Transfer between my accounts</div>
-      <app-account-list [accounts]="accounts"
-                        *ngIf="show_accounts"
-                        (account_select)="copyAddress($event)">
-      </app-account-list>
+      <div id="transfer-between-container">
+        <div class="transfer-between" (click)="show_accounts = !show_accounts">
+          <p>Transfer between my accounts</p>
+          <nb-icon icon="chevron-down-outline"></nb-icon>
+
+        </div>
+
+        <app-account-list [accounts]="accounts"
+                          *ngIf="show_accounts"
+                          (account_select)="copyAddress($event)">
+        </app-account-list>
+      </div>
+
+
       <br>
       <h6>Transaction fee</h6>
         <p> {{ 'Estimated gas fee: ' + gasFee }}</p>

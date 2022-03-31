@@ -3,19 +3,70 @@ img {
 }
 
 
-nb-select {
-  width: 40% !important;
+nb-select, #send-amount, #recv-address {
+  width: 80% !important;
   max-width: 100% !important;
 }
 
-
-.token-balance {
-  position: relative;
-  left: 10px;
-}
 
 
 nb-card {
   width: 90%;
   margin: auto;
+}
+
+
+nb-select-label, .token-and-symbol {
+  display: flex;
+  align-items: center;
+}
+
+
+.select-option-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.balance-container {
+  width: 25%;
+}
+
+
+.err {
+  color: red;
+}
+
+label {
+  font-size: 17px;
+}
+
+.transfer-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  padding: 3px 7px 3px 7px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+
+.transfer-between:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+
+
+.transfer-between p {
+  margin: 0;
+}
+
+
+#transfer-between-container {
+  width: 80%;
 }
