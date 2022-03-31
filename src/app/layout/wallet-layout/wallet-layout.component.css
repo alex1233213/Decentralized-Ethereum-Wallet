@@ -8,6 +8,10 @@ nb-list {
   margin: -10px;
 }
 
+nb-list-item {
+  padding: 0;
+}
+
 
 nb-list-item:last-child {
   position: absolute;
@@ -21,8 +25,10 @@ nb-list-item:hover {
   cursor: pointer;
 }
 
-nb-list-item a {
+nb-list-item a , #but-eth {
   text-decoration: none;
   color: black;
+  display: block;
+  width: 100%;
+  padding: 1.5em;
 }
-
