@@ -1,8 +1,6 @@
 <nb-card>
   <nb-card-body>
     <h6>Confirm</h6>
-    <br>
-    <br>
     <p>
       You will be redirected to the payment gateway.
       Ensure that ETH is selected as the purchase asset.
@@ -11,10 +9,12 @@
     </p>
 
     <br>
-    <button nbButton (click)="close()">Cancel</button>
-    <br>
-    <br>
-    <button nbButton (click)="confirm()">I understand</button>
+
+    <div class="flex">
+      <button nbButton (click)="close()">Cancel</button>
+      <button nbButton (click)="confirm()">I understand</button>
+    </div>
+
   </nb-card-body>
 </nb-card>
 
