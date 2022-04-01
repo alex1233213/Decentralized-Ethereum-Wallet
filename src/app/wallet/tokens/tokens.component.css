@@ -48,3 +48,11 @@ img {
   width: 160px;
 }
 
+
+.increase {
+  color: #92de1f;
+}
+
+.decrease {
+  color: #ff5757;
+}
