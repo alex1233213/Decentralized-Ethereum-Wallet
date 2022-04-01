@@ -9,6 +9,7 @@ import { Account } from "../../shared/utils/types/Account";
 export class AccountListComponent implements OnInit {
 
   @Input() accounts: Account[];
+  @Input() selected_account: string;
   @Input() truncate: boolean;
   @Output() account_select = new EventEmitter<Account>();
 
@@ -17,6 +18,7 @@ export class AccountListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.accounts);
+    console.log(this.selected_account);
   }
 
 

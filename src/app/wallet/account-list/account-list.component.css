@@ -19,3 +19,8 @@ nb-list-item {
 .account > * {
   margin: 5px;
 }
+
+
+nb-icon {
+  margin-left: 10px;
+}

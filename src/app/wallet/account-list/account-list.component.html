@@ -1,6 +1,14 @@
 <nb-list *ngIf="truncate == undefined">
   <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
-    <p> {{ account.account_name + '\n' + (account.account_address | truncateAddress) }} </p>
+    <p *ngIf="selected_account != account.account_name">
+      {{ account.account_name + '\n' + (account.account_address | truncateAddress) }}
+    </p>
+
+<!--    selected account-->
+    <p *ngIf="selected_account == account.account_name">
+      {{ account.account_name + '\n' + (account.account_address | truncateAddress) }}
+      <nb-icon icon="checkmark-outline"></nb-icon>
+    </p>
   </nb-list-item>
 </nb-list>
 
@@ -8,10 +16,15 @@
 
 <nb-list *ngIf="truncate == false">
   <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
-    <div class="account">
+    <div class="account" *ngIf="selected_account != account.account_name">
       <p> {{ account.account_name }} </p>
       <p> {{ account.account_address }}</p>
     </div>
 
+    <div class="account" *ngIf="selected_account == account.account_name">
+      <p> {{ account.account_name }} </p>
+      <p> {{ account.account_address }}</p>
+      <nb-icon icon="checkmark-outline"></nb-icon>
+    </div>
   </nb-list-item>
 </nb-list>
