@@ -4,7 +4,6 @@ import { BalanceService } from "../../services/balance/balance.service";
 import { Wallet } from "ethers";
 import { Network } from "@ethersproject/networks";
 import { WalletService } from "../../services/wallet/wallet.service";
-import {testData} from "../../shared/utils/test_data/cgTestData";
 
 
 @Component({

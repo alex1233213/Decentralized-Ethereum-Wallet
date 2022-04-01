@@ -48,7 +48,6 @@ export class BalanceService {
     let tokenBalances: any = {};
 
     for (const token of tokens) {
-      console.log(token.contract_address);
       const contract = new ethers.Contract(token.contract_address, abi, wallet);
       const balance = await contract['balanceOf'](wallet.address);
       tokenBalances[token.name] = ethers.utils.formatUnits(balance, token.decimals);
