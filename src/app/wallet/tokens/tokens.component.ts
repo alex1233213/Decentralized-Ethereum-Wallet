@@ -28,12 +28,8 @@ export class TokensComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     //******************** RELEASE ***********************
-    // this.coinGeckoService.getTokensData().subscribe(
-    //   (data) => console.log(data));
-
-    //get the balances of the other tokens
-
-    //****************************************************
+    this.coinGeckoService.getTokensData().subscribe(
+      (data) => this.tokensData = data);
 
     this.walletService.getWallet().subscribe( async (wallet: Wallet) => {
       this.loadingData = true;
@@ -41,30 +37,22 @@ export class TokensComponent implements OnInit {
       this.wallet = wallet;
       this.ethBalance = await this.balanceService.readEtherBalance(this.wallet);
       this.coin_balances['ethereum'] = this.ethBalance;
-      this.getERC20Balances();
+      await this.getERC20Balances();
       wallet.provider.getNetwork().then((n: Network) => this.network = n);
 
       this.loadingData = false;
     });
 
-    this.tokensData = testData; // TODO - FETCH DATA FROM API
+    // this.tokensData = testData; // TODO - FETCH DATA FROM API
   }
 
 
   //retrieve the ERC-20 tokens balances if the wallet is connected to the main net
-  getERC20Balances() {
+  async getERC20Balances() {
 
     /// ***** /// *****/// ***** RELEASE /// *****/// *****
-    //this.erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
+    const erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
     /// *****/// *****/// *****/// *****/// *****/// *****
-
-    // **** /// ***//TEST DATA// **** /// ***//
-    const erc_20_tokens_balances = {
-      "basic-attention-token": "0.0",
-      "the-sandbox": "0.0",
-      "usd-coin": "15.0"
-    } //******
-    // **** /// ***/// // **** /// ***///
 
     for (const [coin, balance] of Object.entries(erc_20_tokens_balances)) {
       this.coin_balances[coin] = balance;

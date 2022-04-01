@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BigNumber, ethers, utils, Wallet } from "ethers";
-import { tokenAddresses } from "../../shared/utils/token_addresses/token-addresses";
+import { tokens } from "../../shared/utils/token_addresses/tokens";
 import { abi } from "../../shared/utils/abi/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
 import { Token } from "../../shared/utils/types/Token";
@@ -34,7 +34,7 @@ export class TransactionService {
       if(send_token_id == 'ethereum') {
         this.send_token(send_amount, receiving_address, wallet);
       } else { //ERC-20 token
-        let contract_address = tokenAddresses[send_token_id];
+        let contract_address = tokens[send_token_id];
 
         this.send_token(send_amount, receiving_address, wallet, contract_address);
       }
@@ -133,7 +133,7 @@ export class TransactionService {
       gasFee = await this.estimateEthTxFee(wallet);
 
     } else { //estimate gas for ERC-20 token contract transaction
-      let contract_address = tokenAddresses[send_token.id];
+      let contract_address = tokens[send_token.id];
 
       gasFee = await this.estimateErc20GasFee(contract_address, wallet);
     }

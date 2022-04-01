@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ethers, Wallet } from "ethers";
 import { abi } from "../../shared/utils/abi/erc-20-ABI";
-import { tokenAddresses } from '../../shared/utils/token_addresses/token-addresses';
+import { tokens } from '../../shared/utils/token_addresses/tokens';
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +47,11 @@ export class BalanceService {
 
     let tokenBalances: any = {};
 
-    for (const token of Object.keys(tokenAddresses)) {
-      const contract = new ethers.Contract(tokenAddresses[token], abi, wallet);
+    for (const token of tokens) {
+      console.log(token.contract_address);
+      const contract = new ethers.Contract(token.contract_address, abi, wallet);
       const balance = await contract['balanceOf'](wallet.address);
-      tokenBalances[token] = ethers.utils.formatUnits(balance, 6);
+      tokenBalances[token.name] = ethers.utils.formatUnits(balance, token.decimals);
     }
 
 
