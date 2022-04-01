@@ -29,7 +29,10 @@ export class TokensComponent implements OnInit {
   async ngOnInit(): Promise<any> {
 
     this.coinGeckoService.getTokensData().subscribe(
-      (data) => this.tokensData = data);
+      (data) => {
+        this.tokensData = data;
+        console.log(this.tokensData);
+      });
 
     this.walletService.getWallet().subscribe( async (wallet: Wallet) => {
       this.loadingData = true;
