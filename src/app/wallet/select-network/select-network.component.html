@@ -1,6 +1,6 @@
 <nb-select placeholder="Network" (selectedChange)="onNetworkSelect($event)" [(selected)]="selectedNetwork">
   <nb-select-label>
-    {{ selectedNetwork == 'homestead' ? 'mainnet' : selectedNetwork }}
+    {{ selectedNetwork == 'homestead' ? 'Mainnet' : selectedNetwork.charAt(0).toUpperCase() + selectedNetwork.slice(1) }}
   </nb-select-label>
   <nb-option value="homestead">Mainnet</nb-option>
   <nb-option value="ropsten">Ropsten</nb-option>
