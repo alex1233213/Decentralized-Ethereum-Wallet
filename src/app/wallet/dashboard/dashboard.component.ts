@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Network } from '@ethersproject/networks';
-import { WalletService } from "../../services/wallet/wallet.service";
-import { Wallet } from "ethers";
 
 
 @Component({
@@ -11,20 +8,10 @@ import { Wallet } from "ethers";
 })
 export class DashboardComponent implements OnInit {
 
-  address: string | undefined;
-  network: Network;
-  wallet: Wallet;
-  balance: string;
 
-
-  constructor(private walletService: WalletService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.walletService.getWallet().subscribe( (wallet) => {
-      this.wallet = wallet;
-      this.address = wallet.address;
-      wallet.provider.getNetwork().then( (n: Network) => this.network = n);
-    });
   }
 
 
