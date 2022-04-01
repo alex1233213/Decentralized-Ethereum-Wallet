@@ -4,8 +4,7 @@ import { Wallet } from "ethers";
 import { AccountsService } from "../../services/accounts/accounts.service";
 import { Account } from "../../shared/utils/types/Account";
 import { NbToastrService } from "@nebular/theme";
-import {BalanceService} from "../../services/balance/balance.service";
-import {Observable} from "rxjs";
+import { BalanceService } from "../../services/balance/balance.service";
 
 
 @Component({
@@ -39,7 +38,6 @@ export class SelectAccountComponent implements OnInit {
       // @ts-ignore
       this.balanceService.getOverAllBalance(this.wallet).then( value => {
         this.overall_balance = value;
-        console.log(this.overall_balance);
       });
 
     });
