@@ -48,7 +48,7 @@
           <td>{{ token.current_price }}</td>
           <td class="{{ token.price_change_percentage_24h > 0 ? 'increase' : 'decrease'}}">{{ token.price_change_percentage_24h }}%</td>
           <td>{{ coin_balances[token.id] }}</td>
-          <td>{{ coin_balances[token.id] * token.current_price }}</td>
+          <td>{{ (coin_balances[token.id] * token.current_price).toFixed(2) }}</td>
         </tr>
       </ng-container>
     </table>
