@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinGeckoService } from "../../services/coinGecko/coin-gecko.service";
 import { BalanceService } from "../../services/balance/balance.service";
-import { testData } from "../../shared/utils/test_data/cgTestData";
 import { Wallet } from "ethers";
 import { Network } from "@ethersproject/networks";
 import { WalletService } from "../../services/wallet/wallet.service";
@@ -27,7 +26,7 @@ export class TokensComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
-    //******************** RELEASE ***********************
+
     this.coinGeckoService.getTokensData().subscribe(
       (data) => this.tokensData = data);
 
@@ -43,16 +42,12 @@ export class TokensComponent implements OnInit {
       this.loadingData = false;
     });
 
-    // this.tokensData = testData; // TODO - FETCH DATA FROM API
   }
 
 
   //retrieve the ERC-20 tokens balances if the wallet is connected to the main net
   async getERC20Balances() {
-
-    /// ***** /// *****/// ***** RELEASE /// *****/// *****
     const erc_20_tokens_balances = await this.balanceService.readErc20TokensBalance(this.wallet);
-    /// *****/// *****/// *****/// *****/// *****/// *****
 
     for (const [coin, balance] of Object.entries(erc_20_tokens_balances)) {
       this.coin_balances[coin] = balance;
