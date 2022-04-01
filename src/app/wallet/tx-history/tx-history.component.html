@@ -2,7 +2,7 @@
   <nb-card-body><h6>Loading data</h6></nb-card-body>
 </nb-card>
 
-<nb-card *ngIf="!loading_data">
+<nb-card *ngIf="!loading_data && tx_history.length > 0">
   <nb-card-body class="table-container">
     <table *ngIf="!loading_data">
       <tr>
@@ -23,5 +23,11 @@
         <td> {{ transaction.status }} </td>
       </tr>
     </table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="!loading_data && tx_history.length == 0">
+  <nb-card-body>
+    <h6>There are currently no transactions to this account address.</h6>
   </nb-card-body>
 </nb-card>
