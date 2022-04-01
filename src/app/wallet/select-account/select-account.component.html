@@ -1,4 +1,4 @@
-<nb-card style="position: relative; z-index: 999;" [nbSpinner]="loading">
+<nb-card style="position: relative; z-index: 999;" [nbSpinner]="loading || overall_balance == undefined">
   <nb-card-body>
     <div class="flex-container" (click)="show_accounts_menu = !show_accounts_menu">
       <p>{{ selected_account }}</p>
@@ -9,14 +9,16 @@
       <div class="address-container"
            (click)="copyAddress()"
            [nbPopover]="addressPopover"
-           nbPopoverTrigger="hover">
+           nbPopoverTrigger="hover" *ngIf="overall_balance != undefined">
         <p class="address">{{ wallet.address | truncateAddress }}</p>
         <nb-icon icon="copy-outline" id="clipboard-logo"></nb-icon>
       </div>
 
       <br>
-      <p>€0.00</p>
+      <h6 id="overall-balance">{{ overall_balance  }}</h6>
     </ng-container>
+
+
 
 
     <div *ngIf="show_accounts_menu">

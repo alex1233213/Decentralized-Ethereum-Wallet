@@ -4,6 +4,8 @@ import { Wallet } from "ethers";
 import { AccountsService } from "../../services/accounts/accounts.service";
 import { Account } from "../../shared/utils/types/Account";
 import { NbToastrService } from "@nebular/theme";
+import {BalanceService} from "../../services/balance/balance.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -18,20 +20,31 @@ export class SelectAccountComponent implements OnInit {
   selected_account: string;
   show_accounts_menu: boolean = false;
   loading: boolean;
+  overall_balance: string;
 
   constructor(private accountsService: AccountsService,
               private walletService: WalletService,
-              private toastrService: NbToastrService) { }
+              private toastrService: NbToastrService,
+              private balanceService: BalanceService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.accountsService.getSelectedAccount().subscribe( (account: string) => {
       this.selected_account = account;
     });
 
-    this.walletService.getWallet().subscribe( (wallet) => {
+    this.walletService.getWallet().subscribe( async (wallet) => {
       this.wallet = wallet;
       this.accounts = this.accountsService.getAccountsAndAddresses(this.wallet);
+
+      // @ts-ignore
+      this.balanceService.getOverAllBalance(this.wallet).then( value => {
+        this.overall_balance = value;
+        console.log(this.overall_balance);
+      });
+
     });
+
+
   }
 
 

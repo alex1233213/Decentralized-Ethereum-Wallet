@@ -21,4 +21,18 @@ export class CoinGeckoService {
         price_change_percentage_24h: coin.price_change_percentage_24h.toFixed(2),
       }))));
   }
+
+
+  getEthPrice() {
+    return this.http
+      .get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd')
+      .toPromise();
+  }
+
+
+  getErc20TokenPrice(token_id: string) {
+    return this.http
+      .get(`https://api.coingecko.com/api/v3/simple/price?ids=${token_id}&vs_currencies=usd`)
+      .toPromise();
+  }
 }
