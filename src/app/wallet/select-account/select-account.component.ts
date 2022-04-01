@@ -39,6 +39,7 @@ export class SelectAccountComponent implements OnInit {
 
   addAccount() {
     this.accountsService.addAccount(this.wallet);
+    this.show_accounts_menu = !this.show_accounts_menu;
   }
 
 
