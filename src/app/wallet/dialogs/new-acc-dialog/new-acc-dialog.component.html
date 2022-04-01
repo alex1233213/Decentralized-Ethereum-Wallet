@@ -4,10 +4,11 @@
     <input type="text" nbInput [formControl]="account_name">
     <br>
     <br>
-    <button nbButton (click)="close()">Cancel</button>
-    <br>
-    <br>
-    <button nbButton (click)="create_account()" [disabled]="account_name.invalid">Create</button>
+
+    <div class="flex">
+      <button nbButton (click)="close()">Cancel</button>
+      <button nbButton (click)="create_account()" [disabled]="account_name.invalid">Create</button>
+    </div>
   </nb-card-body>
 </nb-card>
 
