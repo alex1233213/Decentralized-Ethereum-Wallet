@@ -6,11 +6,19 @@
 <nb-card *ngIf="!loadingData">
   <nb-card-body class="table-container">
     <table>
-      <tr>
+      <tr *ngIf="network.name != 'homestead'">
         <th>TOKEN</th>
         <th>PRICE</th>
         <th>24H</th>
         <th>BALANCE</th>
+      </tr>
+
+      <tr *ngIf="network.name == 'homestead'">
+        <th>TOKEN</th>
+        <th>PRICE</th>
+        <th>24H</th>
+        <th>BALANCE</th>
+        <th>VALUE</th>
       </tr>
 
       <!-- display test net ether-->
@@ -40,6 +48,7 @@
           <td>{{ token.current_price }}</td>
           <td class="{{ token.price_change_percentage_24h > 0 ? 'increase' : 'decrease'}}">{{ token.price_change_percentage_24h }}%</td>
           <td>{{ coin_balances[token.id] }}</td>
+          <td>{{ coin_balances[token.id] * token.current_price }}</td>
         </tr>
       </ng-container>
     </table>
