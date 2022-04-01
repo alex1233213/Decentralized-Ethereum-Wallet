@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { addressValidator } from "../../../shared/validators/addressValidator";
 import { sendAmountValidator } from "../../../shared/validators/sendAmountValidator";

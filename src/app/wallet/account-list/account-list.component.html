@@ -16,15 +16,9 @@
 
 <nb-list *ngIf="truncate == false">
   <nb-list-item *ngFor="let account of accounts" (click)="onAccountSelect(account)">
-    <div class="account" *ngIf="selected_account != account.account_name">
+    <div class="account">
       <p> {{ account.account_name }} </p>
       <p> {{ account.account_address }}</p>
-    </div>
-
-    <div class="account" *ngIf="selected_account == account.account_name">
-      <p> {{ account.account_name }} </p>
-      <p> {{ account.account_address }}</p>
-      <nb-icon icon="checkmark-outline"></nb-icon>
     </div>
   </nb-list-item>
 </nb-list>

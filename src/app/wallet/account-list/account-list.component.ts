@@ -17,8 +17,6 @@ export class AccountListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.accounts);
-    console.log(this.selected_account);
   }
 
 
