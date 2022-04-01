@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ethers, Wallet } from "ethers";
 import { abi } from "../../shared/utils/abi/erc-20-ABI";
 import { tokens } from '../../shared/utils/token_addresses/tokens';
+import { CoinGeckoService } from "../coinGecko/coin-gecko.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class BalanceService {
   ethBalance: string;
   wallet: Wallet;
 
-  constructor() {}
+  constructor(private coinGeckoService: CoinGeckoService) {}
 
 
   //method gets the balance of ether and other erc-20 tokens
@@ -55,5 +56,45 @@ export class BalanceService {
 
 
     return tokenBalances;
+  }
+
+
+
+  async getOverAllBalance(wallet: Wallet): Promise<any> {
+    let overallBalance: string;
+
+    wallet.provider.getNetwork().then(  async (network) => {
+      //if the network is mainnet then return the values of the different tokens owned by the user
+      if(network.name == 'homestead') {
+        //get the eth value
+        const eth_balance = await this.readEtherBalance(wallet);
+        const eth_price = await this.coinGeckoService.getEthPrice().then( (price: any) => price.ethereum.usd);
+        const eth_value = parseFloat((parseFloat(eth_balance) * eth_price).toFixed(2));
+        console.log(eth_value);
+
+        //get the tokens values
+        const token_balances = await this.readErc20TokensBalance(wallet);
+        let tokens_values_sum: number = 0;
+
+        for (const token of Object.keys(token_balances)) {
+          //if the token balance is not 0 then get the token price from CoinGecko API
+          if(parseFloat(token_balances[token]) != 0) {
+            const token_price = await this.coinGeckoService.getErc20TokenPrice(token)
+              .then( (price: any) => price[token].usd);
+
+            const token_value = (parseFloat(token_balances[token]) * token_price).toFixed(2);
+            tokens_values_sum += parseFloat(token_value);
+          }
+        }
+
+        const total_assets_value = tokens_values_sum + eth_value;
+
+        overallBalance = total_assets_value + '$'
+        return overallBalance;
+      } else { //the value of the tokens is the test net ether
+        overallBalance = await this.readEtherBalance(wallet) + 'ETH';
+        return overallBalance;
+      }
+    });
   }
 }
