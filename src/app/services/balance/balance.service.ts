@@ -87,7 +87,7 @@ export class BalanceService {
             }
           }
 
-          const total_assets_value = tokens_values_sum + eth_value;
+          const total_assets_value = (tokens_values_sum + eth_value).toFixed(2);
 
           overallBalance = total_assets_value + ' $'
           resolve(overallBalance);
