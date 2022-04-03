@@ -98,9 +98,13 @@ export class WalletService {
 
   // method to connect the wallet to the provider passed in
   connectToProvider(provider: ethers.providers.InfuraProvider) {
-    this.infuraProvider = provider;
-    const wallet = this.wallet.value.connect(this.infuraProvider);
-    this.wallet.next(wallet);
+    return new Promise((resolve => {
+      this.infuraProvider = provider;
+      const wallet = this.wallet.value.connect(this.infuraProvider);
+      this.wallet.next(wallet);
+      resolve(null);
+    }))
+
   }
 
 }

@@ -44,8 +44,6 @@ export class TransactionsComponent implements OnInit {
     this.walletService.getWallet().subscribe(  (wallet: Wallet) => {
       this.loadingData = true;
       this.wallet = wallet;
-      this.accounts = this.accountsService.getAccountsAndAddresses(this.wallet);
-
 
       this.wallet.provider.getNetwork().then( (network: Network) => {
         //get the funds for the wallet on the network
@@ -56,6 +54,9 @@ export class TransactionsComponent implements OnInit {
         });
       });
     });
+
+
+    this.accountsService.getAccounts(this.wallet).subscribe( (accounts) => this.accounts = accounts);
   }
 
 

@@ -19,14 +19,18 @@ export class ProviderService {
 
 
   changeProvider(provider: string) {
-    try {
-      this.provider = new ethers.providers.InfuraProvider(provider,
-        '50b428ebbcf94488bb99440fc44e6c08');
+    return new Promise( (resolve => {
+      try {
+        this.provider = new ethers.providers.InfuraProvider(provider,
+          '50b428ebbcf94488bb99440fc44e6c08');
 
-      this.walletService.connectToProvider(this.provider);
-    } catch (e) {
-      console.log(e);
-    }
+        this.walletService.connectToProvider(this.provider);
+        resolve(null);
+      } catch (e) {
+        console.log(e);
+      }
+    }));
+
 
   }
 
