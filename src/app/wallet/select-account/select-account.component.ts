@@ -15,7 +15,7 @@ import { BalanceService } from "../../services/balance/balance.service";
 export class SelectAccountComponent implements OnInit {
 
   wallet: Wallet;
-  accounts: any;
+  accounts: Account[];
   selected_account: string;
   show_accounts_menu: boolean = false;
   loading: boolean;
@@ -33,16 +33,17 @@ export class SelectAccountComponent implements OnInit {
 
     this.walletService.getWallet().subscribe( async (wallet) => {
       this.wallet = wallet;
-      this.accounts = this.accountsService.getAccountsAndAddresses(this.wallet);
 
       // @ts-ignore
       this.balanceService.getOverAllBalance(this.wallet).then( value => {
         this.overall_balance = value;
       });
-
     });
 
 
+    this.accountsService.getAccounts(this.wallet).subscribe( (accounts: Account[]) => {
+      this.accounts = accounts;
+    });
   }
 
 

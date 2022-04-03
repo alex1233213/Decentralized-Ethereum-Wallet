@@ -101,7 +101,6 @@ export class WalletService {
     this.infuraProvider = provider;
     const wallet = this.wallet.value.connect(this.infuraProvider);
     this.wallet.next(wallet);
-    // console.log(this.wallet.value);
   }
 
 }

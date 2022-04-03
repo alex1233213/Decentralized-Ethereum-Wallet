@@ -4,13 +4,14 @@ import { NbDialogService } from "@nebular/theme";
 import { WalletService } from "../wallet/wallet.service";
 import { ethers, Wallet } from "ethers";
 import { BehaviorSubject } from "rxjs";
+import { Account } from "../../shared/utils/types/Account";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountsService {
 
-  private accounts$: BehaviorSubject<any> = new BehaviorSubject<any>(this.getAccountsLocalStorage());
+  private accounts$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private selected_account$: BehaviorSubject<any>;
 
   constructor(private dialogService: NbDialogService,
@@ -24,12 +25,16 @@ export class AccountsService {
 
 
 
-  getAccounts() {
+  getAccounts(wallet: Wallet) {
+    if(this.accounts$.value == null) {
+      this.accounts$.next(this.getAccountsAndAddresses(wallet));
+    }
+
     return this.accounts$.asObservable();
   }
 
 
-  setAccounts(accounts: {}) {
+  setAccounts(accounts: Account[]) {
     this.accounts$.next(accounts);
   }
 
@@ -37,7 +42,16 @@ export class AccountsService {
     const accounts = {'Account 1': 0};
 
     localStorage.setItem('accounts', JSON.stringify(accounts));
-    this.setAccounts(accounts);
+
+    const accounts_formatted: Account[] = [
+      {
+        account_name: 'Account 1',
+        account_address: this.getAccountAddress(wallet, '0'),
+        index: '0'
+      }
+    ];
+
+    this.setAccounts(accounts_formatted);
     this.setSelectedAccount('Account 1');
 
     //derive new account
@@ -73,7 +87,18 @@ export class AccountsService {
           //save the new account name and index to the localstorage
           accounts[account_name] = new_account_index;
           localStorage.setItem('accounts', JSON.stringify(accounts));
-          this.setAccounts(accounts);
+
+          //account list for displaying in the application
+          let accounts_and_addresses: Account[] = this.accounts$.value;
+
+          const new_account: Account = {
+            account_name: account_name,
+            account_address: this.getAccountAddress(wallet, new_account_index.toString()),
+            index: new_account_index.toString()
+          }
+
+          accounts_and_addresses.push(new_account);
+          this.setAccounts(accounts_and_addresses);
           this.setSelectedAccount(account_name);
 
           //derive new account
@@ -84,11 +109,12 @@ export class AccountsService {
 
 
   deriveAccount(account_index: string, mnemonic: string): Promise<null> {
-    return new Promise( () => {
+    return new Promise( (resolve) => {
       const path =  `m/44'/60'/0'/0/${ account_index }`;
 
       const new_wallet: Wallet = Wallet.fromMnemonic(mnemonic, path);
       this.walletService.reloadWallet(new_wallet);
+      resolve(null);
     });
   }
 
@@ -103,8 +129,7 @@ export class AccountsService {
 
 
   getAccountsAndAddresses(wallet: Wallet) {
-    // console.log(this.accounts$.value);
-    const accounts = this.accounts$.value;
+    const accounts = this.getAccountsLocalStorage();
 
     return Object.keys(accounts).map( (account_name) => {
         const index = accounts[account_name];
