@@ -1,4 +1,4 @@
-<nb-card style="position: relative; z-index: 999;" [nbSpinner]="loading || overall_balance == undefined">
+<nb-card id="select-account-container" [nbSpinner]="loading || overall_balance == undefined">
   <nb-card-body>
     <div class="flex-container" (click)="show_accounts_menu = !show_accounts_menu">
       <p>{{ selected_account }}</p>
@@ -21,7 +21,7 @@
 
 
 
-    <div *ngIf="show_accounts_menu">
+    <div *ngIf="show_accounts_menu" id="account-list">
       <app-account-list [accounts]="accounts"
                         (account_select)="onAccountSelect($event)"
                         [selected_account]="selected_account"></app-account-list>

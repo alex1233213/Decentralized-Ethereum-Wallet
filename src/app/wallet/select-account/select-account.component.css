@@ -56,3 +56,14 @@ p {
 #overall-balance {
   margin: 0;
 }
+
+
+#select-account-container {
+  width: 110%;
+  padding: -20px;
+  margin: -10px;
+  position: relative;
+  z-index: 999;
+  max-height: 500px;
+  overflow-y: auto;
+}
