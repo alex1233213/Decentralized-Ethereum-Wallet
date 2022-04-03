@@ -6,7 +6,7 @@ import { map } from "rxjs";
   providedIn: 'root'
 })
 export class CoinGeckoService {
-  coinsMarketsUrl: string = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin%2C%20ethereum%2C%20basic-attention-token%2C%20the-sandbox&order=market_cap_desc&per_page=5&page=1&sparkline=false";
+  coinsMarketsUrl: string = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2Cbasic-attention-token%2Chex%2Cdai%2Cusd-coin%2Cthe-sandbox%2Cuniswap&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
   constructor(private http: HttpClient) { }
 

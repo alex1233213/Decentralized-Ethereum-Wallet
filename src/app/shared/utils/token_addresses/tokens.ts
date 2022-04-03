@@ -16,5 +16,20 @@ export const tokens: any =
       name: 'the-sandbox',
       contract_address: '0x3845badAde8e6dFF049820680d1F14bD3903a5d0',
       decimals: 18
+    },
+    {
+      name: 'hex',
+      contract_address: '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39',
+      decimals: 8
+    },
+    {
+      name: 'dai',
+      contract_address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+      decimals: 18
+    },
+    {
+      name: 'uniswap',
+      contract_address: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+      decimals: 18
     }
 ]
