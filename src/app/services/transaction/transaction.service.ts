@@ -34,9 +34,9 @@ export class TransactionService {
       if(send_token_id == 'ethereum') {
         this.send_token(send_amount, receiving_address, wallet);
       } else { //ERC-20 token
-        const contract_address = tokens.find( (token: any) => token.name == send_token_id).contract_address
+        const send_token = tokens.find( (token: any) => token.name == send_token_id);
         
-        this.send_token(send_amount, receiving_address, wallet, contract_address);
+        this.send_token(send_amount, receiving_address, wallet, send_token);
       }
   }
 
@@ -45,7 +45,7 @@ export class TransactionService {
     send_token_amount: string,
     to_address: string, // receiving address
     wallet: Wallet,
-    contract_address?: any
+    send_token?: any
   )
 
   {
@@ -56,16 +56,16 @@ export class TransactionService {
       console.log(`gas_price: ${utils.formatEther(gas_price)}`);
 
       //If sending ERC-20 token, contract_address will be supplied
-      if (contract_address) {
+      if (send_token) {
 
         let contract = new ethers.Contract(
-          contract_address,
+          send_token.contract_address,
           abi,
           wallet
         );
 
-        //convert the sending amount to wei - 1 ether represents (10 ^ 18) wei
-        let send_amount = ethers.utils.parseUnits(send_token_amount, 18);
+        //convert the sending amount based on number of decimals
+        let send_amount = ethers.utils.parseUnits(send_token_amount, send_token.decimals);
         console.log(`sending amount: ${send_amount}`);
 
         // Send tokens
