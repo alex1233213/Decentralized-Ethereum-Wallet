@@ -38,7 +38,6 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletLayoutComponent,
-    // TODO  ***** UNCOMMENT *****
     canActivate: [WalletGuard],
     children: [
       {

@@ -34,8 +34,8 @@ export class TransactionService {
       if(send_token_id == 'ethereum') {
         this.send_token(send_amount, receiving_address, wallet);
       } else { //ERC-20 token
-        let contract_address = tokens[send_token_id];
-
+        const contract_address = tokens.find( (token: any) => token.name == send_token_id).contract_address
+        
         this.send_token(send_amount, receiving_address, wallet, contract_address);
       }
   }
