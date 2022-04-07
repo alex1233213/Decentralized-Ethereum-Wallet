@@ -4,6 +4,7 @@ import { tokens } from "../../shared/utils/token_addresses/tokens";
 import { abi } from "../../shared/utils/abi/erc-20-ABI";
 import { NonceManager } from "@ethersproject/experimental";
 import { Token } from "../../shared/utils/types/Token";
+import { NbToastrService } from '@nebular/theme';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Token } from "../../shared/utils/types/Token";
 export class TransactionService {
 
 
-  constructor() { }
+  constructor(private toastrSerivce: NbToastrService) { }
 
   /*
   * method that sends ether and other ERC-20 tokens.
@@ -70,7 +71,7 @@ export class TransactionService {
 
         // Send tokens
         contract['transfer'](to_address, send_amount).then( (transferResult: any) => {
-          console.log(transferResult);
+          this.showToast(transferResult);
         });
 
 
@@ -88,10 +89,11 @@ export class TransactionService {
 
 
         try {
+          this.toastrSerivce.show('Transaction has been sent to the miner pool', 'Transaction Initiated', {duration: 3000, icon: ''});
           nonce_manager.sendTransaction(tx).then((transaction) => {
-            alert('transaction has been initiated');
-            console.log(transaction);
+            this.showToast(transaction.hash);
           });
+
         } catch (error) {
           alert("failed to send!!")
           console.log('error sending transaction');
@@ -139,6 +141,11 @@ export class TransactionService {
     }
 
     return gasFee;
+  }
+
+
+  showToast(message: any) { 
+    this.toastrSerivce.show(`${message}`, 'Transaction hash', { duration: 5000, icon: '', destroyByClick: false});
   }
 
 }
