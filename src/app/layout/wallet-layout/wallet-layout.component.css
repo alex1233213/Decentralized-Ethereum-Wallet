@@ -38,3 +38,15 @@ app-select-network {
   position: absolute;
   right: 45px;
 }
+
+
+img {
+  height: 50px;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
